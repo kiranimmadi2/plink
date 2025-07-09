@@ -232,31 +232,31 @@ const App = () => {
   const getThemeClasses = () => {
     if (isIOSGlass) {
       return {
-        background: 'bg-gradient-to-br from-blue-100/40 via-purple-50/30 to-teal-100/40',
-        container: 'bg-white/8 backdrop-blur-3xl border border-white/20 shadow-[0_8px_32px_rgba(31,38,135,0.37)] ring-1 ring-white/10',
-        header: 'bg-white/5 backdrop-blur-2xl border-b border-white/10 shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]',
+        background: 'bg-gradient-to-br from-slate-100 via-blue-50 to-purple-50',
+        container: 'bg-white/20 backdrop-blur-[40px] border border-white/30 shadow-[0_20px_60px_rgba(0,0,0,0.15),inset_0_1px_0_rgba(255,255,255,0.4)] ring-1 ring-white/20',
+        header: 'bg-white/15 backdrop-blur-[30px] border-b border-white/20 shadow-[inset_0_1px_0_rgba(255,255,255,0.3),0_1px_3px_rgba(0,0,0,0.1)]',
         content: 'bg-transparent',
-        text: 'text-slate-800 drop-shadow-sm',
-        textSecondary: 'text-slate-600 drop-shadow-sm',
-        input: 'bg-white/12 backdrop-blur-2xl border border-white/20 text-slate-800 placeholder-slate-500 shadow-[inset_0_2px_4px_rgba(0,0,0,0.06)] ring-1 ring-white/10',
-        button: 'bg-white/10 backdrop-blur-2xl hover:bg-white/20 text-slate-800 border border-white/20 shadow-[0_4px_16px_rgba(31,38,135,0.2)] ring-1 ring-white/10 hover:shadow-[0_6px_20px_rgba(31,38,135,0.3)]',
-        buttonPrimary: 'bg-gradient-to-r from-blue-500/70 to-purple-500/70 backdrop-blur-2xl hover:from-blue-600/80 hover:to-purple-600/80 text-white border border-white/30 shadow-[0_4px_16px_rgba(59,130,246,0.4)] ring-1 ring-white/20',
-        card: 'bg-white/8 backdrop-blur-2xl border border-white/15 shadow-[0_8px_32px_rgba(31,38,135,0.2)] ring-1 ring-white/10',
-        menu: 'bg-white/10 backdrop-blur-3xl border border-white/20 shadow-[0_8px_32px_rgba(31,38,135,0.37)] ring-1 ring-white/15'
+        text: 'text-slate-900 font-medium drop-shadow-[0_1px_2px_rgba(255,255,255,0.8)]',
+        textSecondary: 'text-slate-700 drop-shadow-[0_1px_1px_rgba(255,255,255,0.6)]',
+        input: 'bg-white/25 backdrop-blur-[25px] border border-white/40 text-slate-900 placeholder-slate-600 shadow-[inset_0_2px_4px_rgba(0,0,0,0.1),0_1px_0_rgba(255,255,255,0.4)] ring-1 ring-white/30 focus:ring-2 focus:ring-blue-400/50',
+        button: 'bg-white/20 backdrop-blur-[25px] hover:bg-white/30 text-slate-900 border border-white/40 shadow-[0_8px_25px_rgba(0,0,0,0.15),inset_0_1px_0_rgba(255,255,255,0.4)] ring-1 ring-white/30 hover:shadow-[0_12px_35px_rgba(0,0,0,0.2)] hover:ring-2 hover:ring-blue-400/30',
+        buttonPrimary: 'bg-gradient-to-r from-blue-500/80 to-purple-600/80 backdrop-blur-[25px] hover:from-blue-600/90 hover:to-purple-700/90 text-white font-semibold border border-white/40 shadow-[0_12px_35px_rgba(59,130,246,0.4),inset_0_1px_0_rgba(255,255,255,0.3)] ring-1 ring-white/40 hover:shadow-[0_16px_45px_rgba(59,130,246,0.5)]',
+        card: 'bg-white/18 backdrop-blur-[30px] border border-white/30 shadow-[0_15px_45px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(255,255,255,0.3)] ring-1 ring-white/25',
+        menu: 'bg-white/22 backdrop-blur-[35px] border border-white/35 shadow-[0_20px_60px_rgba(0,0,0,0.2),inset_0_1px_0_rgba(255,255,255,0.4)] ring-1 ring-white/30'
       };
     } else if (currentTheme === 'dark') {
       return {
-        background: 'bg-gradient-to-br from-slate-900 via-gray-900 to-black',
-        container: 'bg-black/20 backdrop-blur-3xl border border-cyan-500/20 shadow-[0_8px_32px_rgba(6,182,212,0.2)] ring-1 ring-cyan-400/10',
-        header: 'bg-black/10 backdrop-blur-2xl border-b border-cyan-500/20 shadow-[inset_0_1px_0_rgba(6,182,212,0.1)]',
+        background: 'bg-gradient-to-br from-slate-950 via-gray-950 to-black',
+        container: 'bg-black/40 backdrop-blur-[40px] border border-cyan-400/30 shadow-[0_20px_60px_rgba(6,182,212,0.3),inset_0_1px_0_rgba(6,182,212,0.2)] ring-1 ring-cyan-400/20',
+        header: 'bg-black/30 backdrop-blur-[30px] border-b border-cyan-400/25 shadow-[inset_0_1px_0_rgba(6,182,212,0.2),0_1px_3px_rgba(6,182,212,0.1)]',
         content: 'bg-transparent',
-        text: 'text-cyan-50 drop-shadow-[0_0_8px_rgba(6,182,212,0.3)]',
-        textSecondary: 'text-cyan-200/80 drop-shadow-[0_0_4px_rgba(6,182,212,0.2)]',
-        input: 'bg-black/20 backdrop-blur-2xl border border-cyan-500/30 text-cyan-50 placeholder-cyan-300/60 shadow-[inset_0_2px_4px_rgba(0,0,0,0.3)] ring-1 ring-cyan-400/20',
-        button: 'bg-black/20 backdrop-blur-2xl hover:bg-black/30 text-cyan-50 border border-cyan-500/30 shadow-[0_4px_16px_rgba(6,182,212,0.2)] ring-1 ring-cyan-400/20 hover:shadow-[0_6px_20px_rgba(6,182,212,0.3)]',
-        buttonPrimary: 'bg-gradient-to-r from-cyan-500/60 to-blue-500/60 backdrop-blur-2xl hover:from-cyan-400/70 hover:to-blue-400/70 text-white border border-cyan-400/40 shadow-[0_4px_16px_rgba(6,182,212,0.4)] ring-1 ring-cyan-300/30',
-        card: 'bg-black/15 backdrop-blur-2xl border border-cyan-500/20 shadow-[0_8px_32px_rgba(6,182,212,0.15)] ring-1 ring-cyan-400/10',
-        menu: 'bg-black/20 backdrop-blur-3xl border border-cyan-500/30 shadow-[0_8px_32px_rgba(6,182,212,0.25)] ring-1 ring-cyan-400/20'
+        text: 'text-cyan-50 font-medium drop-shadow-[0_0_8px_rgba(6,182,212,0.4)]',
+        textSecondary: 'text-cyan-200 drop-shadow-[0_0_4px_rgba(6,182,212,0.3)]',
+        input: 'bg-black/35 backdrop-blur-[25px] border border-cyan-400/40 text-cyan-50 placeholder-cyan-300/70 shadow-[inset_0_2px_4px_rgba(0,0,0,0.4),0_1px_0_rgba(6,182,212,0.2)] ring-1 ring-cyan-400/30 focus:ring-2 focus:ring-cyan-400/60',
+        button: 'bg-black/30 backdrop-blur-[25px] hover:bg-black/40 text-cyan-50 border border-cyan-400/40 shadow-[0_8px_25px_rgba(6,182,212,0.3),inset_0_1px_0_rgba(6,182,212,0.2)] ring-1 ring-cyan-400/30 hover:shadow-[0_12px_35px_rgba(6,182,212,0.4)] hover:ring-2 hover:ring-cyan-400/50',
+        buttonPrimary: 'bg-gradient-to-r from-cyan-500/70 to-blue-500/70 backdrop-blur-[25px] hover:from-cyan-400/80 hover:to-blue-400/80 text-white font-semibold border border-cyan-400/50 shadow-[0_12px_35px_rgba(6,182,212,0.5),inset_0_1px_0_rgba(6,182,212,0.3)] ring-1 ring-cyan-400/40 hover:shadow-[0_16px_45px_rgba(6,182,212,0.6)]',
+        card: 'bg-black/25 backdrop-blur-[30px] border border-cyan-400/30 shadow-[0_15px_45px_rgba(6,182,212,0.2),inset_0_1px_0_rgba(6,182,212,0.15)] ring-1 ring-cyan-400/25',
+        menu: 'bg-black/35 backdrop-blur-[35px] border border-cyan-400/35 shadow-[0_20px_60px_rgba(6,182,212,0.3),inset_0_1px_0_rgba(6,182,212,0.2)] ring-1 ring-cyan-400/30'
       };
     } else {
       return {
@@ -473,16 +473,16 @@ const App = () => {
               <div className={`flex rounded-full p-1 shadow-inner ${isIOSGlass ? 'bg-white/8 backdrop-blur-xl' : currentTheme === 'dark' ? 'bg-gray-700' : 'bg-gray-100'}`}>
                 <button
                   onClick={() => handleModeToggle('user')}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 transform hover:scale-105 ${
-                    isUserMode ? `${isIOSGlass ? 'bg-gradient-to-r from-blue-500/70 to-purple-500/70 backdrop-blur-xl text-white shadow-[0_4px_16px_rgba(59,130,246,0.4)] ring-1 ring-white/30' : currentTheme === 'dark' ? 'bg-gradient-to-r from-cyan-500/60 to-blue-500/60 text-white shadow-[0_4px_16px_rgba(6,182,212,0.4)]' : 'bg-blue-600 text-white shadow-md'}` : `${isIOSGlass ? 'text-slate-700 hover:bg-white/15 hover:shadow-[0_2px_8px_rgba(31,38,135,0.2)]' : currentTheme === 'dark' ? 'text-cyan-200 hover:bg-black/20 hover:shadow-[0_2px_8px_rgba(6,182,212,0.2)]' : 'text-gray-700 hover:bg-gray-200'}`
+                  className={`px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 transform hover:scale-105 ${
+                    isUserMode ? `${isIOSGlass ? 'bg-gradient-to-r from-blue-500/80 to-purple-600/80 backdrop-blur-[20px] text-white shadow-[0_8px_25px_rgba(59,130,246,0.5),inset_0_1px_0_rgba(255,255,255,0.3)] ring-1 ring-white/40' : currentTheme === 'dark' ? 'bg-gradient-to-r from-cyan-500/70 to-blue-500/70 text-white shadow-[0_8px_25px_rgba(6,182,212,0.5)]' : 'bg-blue-600 text-white shadow-md'}` : `${isIOSGlass ? 'text-slate-800 hover:bg-white/20 hover:shadow-[0_4px_12px_rgba(0,0,0,0.1)] hover:backdrop-blur-[15px]' : currentTheme === 'dark' ? 'text-cyan-200 hover:bg-black/20 hover:shadow-[0_2px_8px_rgba(6,182,212,0.2)]' : 'text-gray-700 hover:bg-gray-200'}`
                   }`}
                 >
                   User
                 </button>
                 <button
                   onClick={() => handleModeToggle('business')}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 transform hover:scale-105 ${
-                    !isUserMode ? `${isIOSGlass ? 'bg-gradient-to-r from-blue-500/70 to-purple-500/70 backdrop-blur-xl text-white shadow-[0_4px_16px_rgba(59,130,246,0.4)] ring-1 ring-white/30' : currentTheme === 'dark' ? 'bg-gradient-to-r from-cyan-500/60 to-blue-500/60 text-white shadow-[0_4px_16px_rgba(6,182,212,0.4)]' : 'bg-blue-600 text-white shadow-md'}` : `${isIOSGlass ? 'text-slate-700 hover:bg-white/15 hover:shadow-[0_2px_8px_rgba(31,38,135,0.2)]' : currentTheme === 'dark' ? 'text-cyan-200 hover:bg-black/20 hover:shadow-[0_2px_8px_rgba(6,182,212,0.2)]' : 'text-gray-700 hover:bg-gray-200'}`
+                  className={`px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 transform hover:scale-105 ${
+                    !isUserMode ? `${isIOSGlass ? 'bg-gradient-to-r from-blue-500/80 to-purple-600/80 backdrop-blur-[20px] text-white shadow-[0_8px_25px_rgba(59,130,246,0.5),inset_0_1px_0_rgba(255,255,255,0.3)] ring-1 ring-white/40' : currentTheme === 'dark' ? 'bg-gradient-to-r from-cyan-500/70 to-blue-500/70 text-white shadow-[0_8px_25px_rgba(6,182,212,0.5)]' : 'bg-blue-600 text-white shadow-md'}` : `${isIOSGlass ? 'text-slate-800 hover:bg-white/20 hover:shadow-[0_4px_12px_rgba(0,0,0,0.1)] hover:backdrop-blur-[15px]' : currentTheme === 'dark' ? 'text-cyan-200 hover:bg-black/20 hover:shadow-[0_2px_8px_rgba(6,182,212,0.2)]' : 'text-gray-700 hover:bg-gray-200'}`
                   }`}
                 >
                   Business
@@ -500,17 +500,17 @@ const App = () => {
 
               {/* Dropdown Menu */}
               {isMenuOpen && (
-                <div className={`absolute top-16 right-4 rounded-2xl py-2 w-48 z-20 animate-fade-in transform transition-all duration-300 ${themeClasses.menu}`}>
+                <div className={`absolute top-16 right-4 rounded-2xl py-2 w-48 z-20 animate-fade-in transform transition-all duration-300 ${themeClasses.menu} liquid-glass-menu`}>
                   <a
                     href="#"
-                    className={`flex items-center px-4 py-3 transition-all duration-200 transform hover:scale-105 ${themeClasses.text} ${isIOSGlass ? 'hover:bg-white/15 hover:shadow-[0_2px_8px_rgba(31,38,135,0.2)]' : currentTheme === 'dark' ? 'hover:bg-black/30 hover:shadow-[0_2px_8px_rgba(6,182,212,0.2)]' : 'hover:bg-gray-100'}`}
+                    className={`flex items-center px-4 py-3 transition-all duration-200 transform hover:scale-[1.02] ${themeClasses.text} ${isIOSGlass ? 'hover:bg-white/25 hover:shadow-[0_4px_12px_rgba(0,0,0,0.1)] hover:backdrop-blur-[20px] rounded-xl mx-1' : currentTheme === 'dark' ? 'hover:bg-black/30 hover:shadow-[0_2px_8px_rgba(6,182,212,0.2)]' : 'hover:bg-gray-100'}`}
                     onClick={openProfileScreen}
                   >
                     <User className="w-4 h-4 mr-2" /> Profile
                   </a>
                   <a
                     href="#"
-                    className={`flex items-center px-4 py-3 transition-all duration-200 transform hover:scale-105 ${themeClasses.text} ${isIOSGlass ? 'hover:bg-white/15 hover:shadow-[0_2px_8px_rgba(31,38,135,0.2)]' : currentTheme === 'dark' ? 'hover:bg-black/30 hover:shadow-[0_2px_8px_rgba(6,182,212,0.2)]' : 'hover:bg-gray-100'}`}
+                    className={`flex items-center px-4 py-3 transition-all duration-200 transform hover:scale-[1.02] ${themeClasses.text} ${isIOSGlass ? 'hover:bg-white/25 hover:shadow-[0_4px_12px_rgba(0,0,0,0.1)] hover:backdrop-blur-[20px] rounded-xl mx-1' : currentTheme === 'dark' ? 'hover:bg-black/30 hover:shadow-[0_2px_8px_rgba(6,182,212,0.2)]' : 'hover:bg-gray-100'}`}
                     onClick={openSettingsScreen}
                   >
                     <Settings className="w-4 h-4 mr-2" /> Settings
@@ -533,14 +533,14 @@ const App = () => {
                         className={`max-w-[75%] px-3 py-2 rounded-2xl break-words ${
                           message.sender === 'user'
                             ? isIOSGlass
-                              ? 'bg-gradient-to-r from-blue-500/70 to-purple-500/70 backdrop-blur-xl text-white shadow-[0_4px_16px_rgba(59,130,246,0.3)] ring-1 ring-white/20'
+                              ? 'bg-gradient-to-r from-blue-500/80 to-purple-600/80 backdrop-blur-[20px] text-white shadow-[0_8px_25px_rgba(59,130,246,0.4),inset_0_1px_0_rgba(255,255,255,0.3)] ring-1 ring-white/30'
                               : currentTheme === 'dark'
-                              ? 'bg-gradient-to-r from-cyan-500/60 to-blue-500/60 text-white shadow-[0_4px_16px_rgba(6,182,212,0.3)]'
+                              ? 'bg-gradient-to-r from-cyan-500/70 to-blue-500/70 text-white shadow-[0_8px_25px_rgba(6,182,212,0.4)]'
                               : 'bg-blue-500 text-white'
                             : isIOSGlass
-                            ? 'bg-white/15 backdrop-blur-xl text-slate-800 shadow-[0_4px_16px_rgba(31,38,135,0.2)] ring-1 ring-white/20'
+                            ? 'bg-white/25 backdrop-blur-[20px] text-slate-900 shadow-[0_8px_25px_rgba(0,0,0,0.1),inset_0_1px_0_rgba(255,255,255,0.4)] ring-1 ring-white/30'
                             : currentTheme === 'dark'
-                            ? 'bg-black/20 backdrop-blur-xl text-cyan-50 shadow-[0_4px_16px_rgba(6,182,212,0.2)] ring-1 ring-cyan-400/20'
+                            ? 'bg-black/30 backdrop-blur-[20px] text-cyan-50 shadow-[0_8px_25px_rgba(6,182,212,0.3)] ring-1 ring-cyan-400/25'
                             : 'bg-gray-100 text-gray-800'
                         }`}
                       >
@@ -552,7 +552,7 @@ const App = () => {
               ) : isListening && hasInteracted ? (
                 <div className="flex flex-col items-center justify-center flex-grow">
                   <div
-                    className={`p-6 rounded-full cursor-pointer transition-all duration-300 ease-in-out transform hover:scale-110 ${isIOSGlass ? 'bg-gradient-to-r from-blue-500/70 to-purple-500/70 backdrop-blur-xl text-white shadow-[0_8px_32px_rgba(59,130,246,0.4)] ring-2 ring-white/30' : currentTheme === 'dark' ? 'bg-gradient-to-r from-cyan-500/60 to-blue-500/60 text-white shadow-[0_8px_32px_rgba(6,182,212,0.4)] ring-2 ring-cyan-400/30' : 'bg-blue-500 text-white'} ${isListening ? 'animate-pulse-fast' : ''}`}
+                    className={`p-6 rounded-full cursor-pointer transition-all duration-300 ease-in-out transform hover:scale-110 liquid-glass-button ${isIOSGlass ? 'bg-gradient-to-r from-blue-500/80 to-purple-600/80 backdrop-blur-[25px] text-white shadow-[0_15px_45px_rgba(59,130,246,0.5),inset_0_2px_0_rgba(255,255,255,0.3)] ring-2 ring-white/40' : currentTheme === 'dark' ? 'bg-gradient-to-r from-cyan-500/70 to-blue-500/70 text-white shadow-[0_15px_45px_rgba(6,182,212,0.5)] ring-2 ring-cyan-400/40' : 'bg-blue-500 text-white'} ${isListening ? 'animate-pulse-fast liquid-glass-pulse' : ''}`}
                     onClick={handlePersonClick}
                   >
                     <Mic className="w-12 h-12" />
@@ -574,7 +574,7 @@ const App = () => {
                 <div className="flex flex-col items-center justify-center flex-grow">
                   <button
                     onClick={handlePersonClick}
-                    className={`p-6 rounded-full cursor-pointer transition-all duration-300 ease-in-out transform hover:scale-110 ${isIOSGlass ? 'bg-gradient-to-r from-blue-500/70 to-purple-500/70 backdrop-blur-xl hover:from-blue-600/80 hover:to-purple-600/80 text-white shadow-[0_8px_32px_rgba(59,130,246,0.4)] ring-2 ring-white/30' : currentTheme === 'dark' ? 'bg-gradient-to-r from-cyan-500/60 to-blue-500/60 hover:from-cyan-400/70 hover:to-blue-400/70 text-white shadow-[0_8px_32px_rgba(6,182,212,0.4)] ring-2 ring-cyan-400/30' : 'bg-blue-500 hover:bg-blue-600 text-white'}`}
+                    className={`p-6 rounded-full cursor-pointer transition-all duration-300 ease-in-out transform hover:scale-110 liquid-glass-button ${isIOSGlass ? 'bg-gradient-to-r from-blue-500/80 to-purple-600/80 backdrop-blur-[25px] hover:from-blue-600/90 hover:to-purple-700/90 text-white shadow-[0_15px_45px_rgba(59,130,246,0.5),inset_0_2px_0_rgba(255,255,255,0.3)] ring-2 ring-white/40 hover:shadow-[0_20px_60px_rgba(59,130,246,0.6)]' : currentTheme === 'dark' ? 'bg-gradient-to-r from-cyan-500/70 to-blue-500/70 hover:from-cyan-400/80 hover:to-blue-400/80 text-white shadow-[0_15px_45px_rgba(6,182,212,0.5)] ring-2 ring-cyan-400/40' : 'bg-blue-500 hover:bg-blue-600 text-white'}`}
                   >
                     <Headphones className="w-12 h-12" />
                   </button>
@@ -616,7 +616,7 @@ const App = () => {
                   {chatText.trim() && (
                     <button
                       onClick={handleChatSubmit}
-                      className={`p-1.5 rounded-full transition-all duration-200 transform hover:scale-110 focus:outline-none ${themeClasses.buttonPrimary}`}
+                      className={`p-1.5 rounded-full transition-all duration-200 transform hover:scale-110 focus:outline-none liquid-glass-send ${themeClasses.buttonPrimary}`}
                       aria-label="Send message"
                     >
                       <ArrowUp className="w-4 h-4" />
@@ -630,8 +630,82 @@ const App = () => {
       </div>
       {/* Custom Tailwind CSS for pulse animation */}
       <style>{`
-        .ios-glass {
-          --tw-backdrop-blur: blur(60px);
+        /* Enhanced Liquid Glass Effects */
+        .liquid-glass-button {
+          position: relative;
+          overflow: hidden;
+        }
+        
+        .liquid-glass-button::before {
+          content: '';
+          position: absolute;
+          top: -50%;
+          left: -50%;
+          width: 200%;
+          height: 200%;
+          background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+          transform: rotate(45deg);
+          transition: all 0.6s ease;
+          opacity: 0;
+        }
+        
+        .liquid-glass-button:hover::before {
+          opacity: 1;
+          transform: rotate(45deg) translate(50%, 50%);
+        }
+        
+        .liquid-glass-menu {
+          position: relative;
+        }
+        
+        .liquid-glass-menu::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+          border-radius: inherit;
+          pointer-events: none;
+        }
+        
+        .liquid-glass-send {
+          position: relative;
+          overflow: hidden;
+        }
+        
+        .liquid-glass-send::after {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: 0;
+          height: 0;
+          background: rgba(255, 255, 255, 0.3);
+          border-radius: 50%;
+          transform: translate(-50%, -50%);
+          transition: width 0.3s ease, height 0.3s ease;
+        }
+        
+        .liquid-glass-send:active::after {
+          width: 100px;
+          height: 100px;
+        }
+        
+        .liquid-glass-pulse {
+          animation: liquidPulse 2s infinite ease-in-out;
+        }
+        
+        @keyframes liquidPulse {
+          0%, 100% {
+            transform: scale(1);
+            box-shadow: 0 15px 45px rgba(59, 130, 246, 0.5), inset 0 2px 0 rgba(255, 255, 255, 0.3);
+          }
+          50% {
+            transform: scale(1.05);
+            box-shadow: 0 20px 60px rgba(59, 130, 246, 0.7), inset 0 2px 0 rgba(255, 255, 255, 0.4);
+          }
         }
         
         @keyframes pulse-fast {
@@ -684,31 +758,101 @@ const App = () => {
         }
         
         /* Enhanced glass morphism effects */
-        .glass-card {
+        .ios-glass {
+          --tw-backdrop-blur: blur(40px);
+        }
+        
+        /* Frosted glass effect */
+        .ios-glass *[class*="backdrop-blur"] {
+          backdrop-filter: blur(40px) saturate(180%);
+          -webkit-backdrop-filter: blur(40px) saturate(180%);
+        }
+        
+        /* Enhanced scrollbar for liquid glass */
+        .ios-glass ::-webkit-scrollbar {
+          width: 8px;
+        }
+        
+        .ios-glass ::-webkit-scrollbar-track {
           background: rgba(255, 255, 255, 0.1);
-          backdrop-filter: blur(20px);
+          border-radius: 10px;
+          backdrop-filter: blur(10px);
+        }
+        
+        .ios-glass ::-webkit-scrollbar-thumb {
+          background: linear-gradient(180deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1));
+          border-radius: 10px;
           border: 1px solid rgba(255, 255, 255, 0.2);
-          box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+          backdrop-filter: blur(10px);
         }
         
-        .glass-button {
+        .ios-glass ::-webkit-scrollbar-thumb:hover {
+          background: linear-gradient(180deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.2));
+        }
+        
+        /* Liquid glass shimmer effect */
+        @keyframes shimmer {
+          0% {
+            background-position: -200% 0;
+          }
+          100% {
+            background-position: 200% 0;
+          }
+        }
+        
+        .liquid-glass-button:hover {
+          background-image: linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.1),
+            transparent
+          );
+          background-size: 200% 100%;
+          animation: shimmer 1.5s infinite;
+        }
+        
+        /* Enhanced focus states */
+        .ios-glass input:focus,
+        .ios-glass textarea:focus {
+          outline: none;
+          box-shadow: 
+            inset 0 2px 4px rgba(0, 0, 0, 0.1),
+            0 1px 0 rgba(255, 255, 255, 0.4),
+            0 0 0 3px rgba(59, 130, 246, 0.3);
+          border-color: rgba(59, 130, 246, 0.5);
+        }
+        
+        /* Liquid glass card hover effects */
+        .ios-glass [class*="card"]:hover {
+          transform: translateY(-2px);
+          box-shadow: 
+            0 20px 60px rgba(0, 0, 0, 0.15),
+            inset 0 1px 0 rgba(255, 255, 255, 0.4),
+            0 0 0 1px rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Ambient lighting effect */
+        .liquid-glass-button {
           position: relative;
-          overflow: hidden;
         }
         
-        .glass-button::before {
+        .liquid-glass-button::after {
           content: '';
           position: absolute;
-          top: 0;
-          left: -100%;
-          width: 100%;
-          height: 100%;
-          background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-          transition: left 0.5s;
+          top: -50%;
+          left: -50%;
+          width: 200%;
+          height: 200%;
+          background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+          border-radius: 50%;
+          opacity: 0;
+          transition: opacity 0.3s ease;
+          pointer-events: none;
+          z-index: -1;
         }
         
-        .glass-button:hover::before {
-          left: 100%;
+        .liquid-glass-button:hover::after {
+          opacity: 1;
         }
       `}</style>
     </div>
