@@ -229,17 +229,17 @@ const App = () => {
   const getThemeClasses = () => {
     if (isIOSGlass) {
       return {
-        background: 'bg-gradient-to-br from-blue-400/20 via-purple-400/20 to-pink-400/20',
-        container: 'bg-white/10 backdrop-blur-xl border-white/20 shadow-2xl',
-        header: 'bg-white/5 backdrop-blur-md border-white/10',
+        background: 'bg-gradient-to-br from-slate-400/30 via-gray-500/20 to-slate-600/30',
+        container: 'bg-white/5 backdrop-blur-2xl border-white/10 shadow-2xl',
+        header: 'bg-white/3 backdrop-blur-xl border-white/5',
         content: 'bg-transparent',
-        text: 'text-gray-800',
-        textSecondary: 'text-gray-600',
-        input: 'bg-white/20 backdrop-blur-md border-white/30 text-gray-800 placeholder-gray-600',
-        button: 'bg-white/20 backdrop-blur-md hover:bg-white/30 text-gray-800',
-        buttonPrimary: 'bg-blue-500/80 backdrop-blur-md hover:bg-blue-600/80 text-white',
-        card: 'bg-white/10 backdrop-blur-md border-white/20',
-        menu: 'bg-white/10 backdrop-blur-xl border-white/20'
+        text: 'text-gray-900',
+        textSecondary: 'text-gray-700',
+        input: 'bg-white/8 backdrop-blur-xl border-white/15 text-gray-900 placeholder-gray-700',
+        button: 'bg-white/8 backdrop-blur-xl hover:bg-white/15 text-gray-900',
+        buttonPrimary: 'bg-blue-500/60 backdrop-blur-xl hover:bg-blue-600/70 text-white',
+        card: 'bg-white/5 backdrop-blur-xl border-white/10',
+        menu: 'bg-white/5 backdrop-blur-2xl border-white/10'
       };
     } else if (currentTheme === 'dark') {
       return {
@@ -363,6 +363,7 @@ const App = () => {
                   <div className="space-y-4 mb-4">
                     {businessSections.map((section) => (
                       <div key={section.id} className={`flex flex-col space-y-2 border rounded-xl p-3 ${isIOSGlass ? 'border-white/30' : currentTheme === 'dark' ? 'border-gray-600' : 'border-gray-200'}`}>
+                      <div key={section.id} className={`flex flex-col space-y-2 border rounded-xl p-3 ${isIOSGlass ? 'border-white/15' : currentTheme === 'dark' ? 'border-gray-600' : 'border-gray-200'}`}>
                         <div className="flex justify-between items-center">
                           <input
                             type="text"
@@ -408,6 +409,7 @@ const App = () => {
                   <button
                     onClick={saveBusinessDetails}
                     className={`w-full mt-4 flex items-center justify-center px-4 py-2 rounded-2xl text-sm font-medium transition-colors duration-200 ${isIOSGlass ? 'bg-green-500/80 backdrop-blur-md hover:bg-green-600/80 text-white' : currentTheme === 'dark' ? 'bg-green-700 text-white hover:bg-green-600' : 'bg-green-500 text-white hover:bg-green-600'}`}
+                    className={`w-full mt-4 flex items-center justify-center px-4 py-2 rounded-2xl text-sm font-medium transition-colors duration-200 ${isIOSGlass ? 'bg-green-500/60 backdrop-blur-xl hover:bg-green-600/70 text-white' : currentTheme === 'dark' ? 'bg-green-700 text-white hover:bg-green-600' : 'bg-green-500 text-white hover:bg-green-600'}`}
                   >
                     Save Business Details
                   </button>
@@ -467,11 +469,11 @@ const App = () => {
           <>
             <header className={`relative flex items-center justify-center p-4 border-b z-10 ${themeClasses.header}`}>
               {/* User/Business Toggle */}
-              <div className={`flex rounded-full p-1 shadow-inner ${isIOSGlass ? 'bg-white/20 backdrop-blur-md' : currentTheme === 'dark' ? 'bg-gray-700' : 'bg-gray-100'}`}>
+              <div className={`flex rounded-full p-1 shadow-inner ${isIOSGlass ? 'bg-white/8 backdrop-blur-xl' : currentTheme === 'dark' ? 'bg-gray-700' : 'bg-gray-100'}`}>
                 <button
                   onClick={() => handleModeToggle('user')}
                   className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                    isUserMode ? `${isIOSGlass ? 'bg-blue-500/80 backdrop-blur-md text-white shadow-md' : 'bg-blue-600 text-white shadow-md'}` : `${isIOSGlass ? 'text-gray-700 hover:bg-white/30' : currentTheme === 'dark' ? 'text-gray-300 hover:bg-gray-600' : 'text-gray-700 hover:bg-gray-200'}`
+                    isUserMode ? `${isIOSGlass ? 'bg-blue-500/60 backdrop-blur-xl text-white shadow-md' : 'bg-blue-600 text-white shadow-md'}` : `${isIOSGlass ? 'text-gray-800 hover:bg-white/15' : currentTheme === 'dark' ? 'text-gray-300 hover:bg-gray-600' : 'text-gray-700 hover:bg-gray-200'}`
                   }`}
                 >
                   User
@@ -479,7 +481,7 @@ const App = () => {
                 <button
                   onClick={() => handleModeToggle('business')}
                   className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                    !isUserMode ? `${isIOSGlass ? 'bg-blue-500/80 backdrop-blur-md text-white shadow-md' : 'bg-blue-600 text-white shadow-md'}` : `${isIOSGlass ? 'text-gray-700 hover:bg-white/30' : currentTheme === 'dark' ? 'text-gray-300 hover:bg-gray-600' : 'text-gray-700 hover:bg-gray-200'}`
+                    !isUserMode ? `${isIOSGlass ? 'bg-blue-500/60 backdrop-blur-xl text-white shadow-md' : 'bg-blue-600 text-white shadow-md'}` : `${isIOSGlass ? 'text-gray-800 hover:bg-white/15' : currentTheme === 'dark' ? 'text-gray-300 hover:bg-gray-600' : 'text-gray-700 hover:bg-gray-200'}`
                   }`}
                 >
                   Business
@@ -501,13 +503,14 @@ const App = () => {
                   <a
                     href="#"
                     className={`flex items-center px-4 py-2 transition-colors duration-150 ${themeClasses.text} ${isIOSGlass ? 'hover:bg-white/20' : currentTheme === 'dark' ? 'hover:bg-gray-600' : 'hover:bg-gray-100'}`}
+                    className={`flex items-center px-4 py-2 transition-colors duration-150 ${themeClasses.text} ${isIOSGlass ? 'hover:bg-white/10' : currentTheme === 'dark' ? 'hover:bg-gray-600' : 'hover:bg-gray-100'}`}
                     onClick={openProfileScreen}
                   >
                     <User className="w-4 h-4 mr-2" /> Profile
                   </a>
                   <a
                     href="#"
-                    className={`flex items-center px-4 py-2 transition-colors duration-150 ${themeClasses.text} ${isIOSGlass ? 'hover:bg-white/20' : currentTheme === 'dark' ? 'hover:bg-gray-600' : 'hover:bg-gray-100'}`}
+                    className={`flex items-center px-4 py-2 transition-colors duration-150 ${themeClasses.text} ${isIOSGlass ? 'hover:bg-white/10' : currentTheme === 'dark' ? 'hover:bg-gray-600' : 'hover:bg-gray-100'}`}
                     onClick={openSettingsScreen}
                   >
                     <Settings className="w-4 h-4 mr-2" /> Settings
@@ -530,12 +533,12 @@ const App = () => {
                         className={`max-w-[75%] px-3 py-2 rounded-2xl break-words ${
                           message.sender === 'user'
                             ? isIOSGlass
-                              ? 'bg-blue-500/80 backdrop-blur-md text-white'
+                              ? 'bg-blue-500/60 backdrop-blur-xl text-white'
                               : currentTheme === 'dark'
                               ? 'bg-blue-600 text-white'
                               : 'bg-blue-500 text-white'
                             : isIOSGlass
-                            ? 'bg-white/20 backdrop-blur-md text-gray-800'
+                            ? 'bg-white/10 backdrop-blur-xl text-gray-900'
                             : currentTheme === 'dark'
                             ? 'bg-gray-700 text-white'
                             : 'bg-gray-100 text-gray-800'
@@ -549,7 +552,7 @@ const App = () => {
               ) : isListening ? (
                 <div className="flex flex-col items-center justify-center flex-grow">
                   <div
-                    className={`p-6 rounded-full cursor-pointer transition-all duration-300 ease-in-out ${isIOSGlass ? 'bg-blue-500/80 backdrop-blur-md text-white' : currentTheme === 'dark' ? 'bg-blue-700 text-white' : 'bg-blue-500 text-white'} ${isListening ? 'animate-pulse-fast' : ''}`}
+                    className={`p-6 rounded-full cursor-pointer transition-all duration-300 ease-in-out ${isIOSGlass ? 'bg-blue-500/60 backdrop-blur-xl text-white' : currentTheme === 'dark' ? 'bg-blue-700 text-white' : 'bg-blue-500 text-white'} ${isListening ? 'animate-pulse-fast' : ''}`}
                     onClick={handlePersonClick}
                   >
                     <Mic className="w-12 h-12" />
@@ -570,7 +573,7 @@ const App = () => {
                 <div className="flex flex-col items-center justify-center flex-grow">
                   <button
                     onClick={handlePersonClick}
-                    className={`p-6 rounded-full cursor-pointer transition-all duration-300 ease-in-out ${isIOSGlass ? 'bg-blue-500/80 backdrop-blur-md hover:bg-blue-600/80 text-white' : currentTheme === 'dark' ? 'bg-blue-600 hover:bg-blue-700 text-white' : 'bg-blue-500 hover:bg-blue-600 text-white'} shadow-lg`}
+                    className={`p-6 rounded-full cursor-pointer transition-all duration-300 ease-in-out ${isIOSGlass ? 'bg-blue-500/60 backdrop-blur-xl hover:bg-blue-600/70 text-white' : currentTheme === 'dark' ? 'bg-blue-600 hover:bg-blue-700 text-white' : 'bg-blue-500 hover:bg-blue-600 text-white'} shadow-lg`}
                   >
                     <Headphones className="w-12 h-12" />
                   </button>
@@ -623,7 +626,7 @@ const App = () => {
       {/* Custom Tailwind CSS for pulse animation */}
       <style>{`
         .ios-glass {
-          --tw-backdrop-blur: blur(20px);
+          --tw-backdrop-blur: blur(40px);
         }
         
         @keyframes pulse-fast {
