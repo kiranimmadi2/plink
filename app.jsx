@@ -15,6 +15,7 @@ const App = () => {
   const [spokenText, setSpokenText] = useState('');
   const [chatText, setChatText] = useState('');
   const [messages, setMessages] = useState([]);
+  const [hasInteracted, setHasInteracted] = useState(false);
   const [businessSections, setBusinessSections] = useState([
     { id: 'name', label: 'Business Name', value: '', type: 'text' },
     { id: 'description', label: 'Description', value: '', type: 'textarea' },
@@ -97,12 +98,13 @@ const App = () => {
   // Handle chat input focus to expand
   const handleChatFocus = () => {
     setIsChatExpanded(true);
+    setHasInteracted(true);
     setIsListening(false); // Close listening mode if chat is focused
   };
 
   // Handle chat input blur to collapse, but only if not actively focused
   const handleChatBlur = (e) => {
-    if (!e.currentTarget.contains(e.relatedTarget) && chatText === '') {
+    if (!e.currentTarget.contains(e.relatedTarget) && chatText === '' && hasInteracted) {
       setIsChatExpanded(false);
     }
   };
@@ -192,6 +194,7 @@ const App = () => {
   // Handle person icon click for listening
   const handlePersonClick = () => {
     setIsListening(!isListening);
+    setHasInteracted(true);
     setIsChatExpanded(false); // Collapse chat if listening mode is activated
     setSpokenText(''); // Clear previous spoken text
   };
@@ -517,10 +520,10 @@ const App = () => {
             </header>
 
             {/* Main Content Area */}
-            <main className={`flex-grow flex flex-col justify-end p-4 transition-all duration-300 ease-in-out ${isChatExpanded || isListening ? 'pb-4' : 'justify-center'} ${themeClasses.content}`}>
+            <main className={`flex-grow flex flex-col p-4 transition-all duration-300 ease-in-out ${(isChatExpanded || isListening) && hasInteracted ? 'justify-end pb-4' : 'justify-center'} ${themeClasses.content}`}>
               {messages.length > 0 ? (
                 // Messages Display
-                <div className="w-full space-y-3 flex-grow overflow-y-auto pb-4">
+                <div className="w-full space-y-3 flex-grow overflow-y-auto pb-4 max-h-full">
                   {messages.map((message) => (
                     <div
                       key={message.id}
@@ -546,7 +549,7 @@ const App = () => {
                     </div>
                   ))}
                 </div>
-              ) : isListening ? (
+              ) : isListening && hasInteracted ? (
                 <div className="flex flex-col items-center justify-center flex-grow">
                   <div
                     className={`p-6 rounded-full cursor-pointer transition-all duration-300 ease-in-out ${isIOSGlass ? 'bg-blue-500/60 backdrop-blur-xl text-white' : currentTheme === 'dark' ? 'bg-blue-700 text-white' : 'bg-blue-500 text-white'} ${isListening ? 'animate-pulse-fast' : ''}`}
@@ -567,6 +570,7 @@ const App = () => {
                   />
                 </div>
               ) : (
+                // Default centered interface
                 <div className="flex flex-col items-center justify-center flex-grow">
                   <button
                     onClick={handlePersonClick}
@@ -582,7 +586,7 @@ const App = () => {
             </main>
 
             {/* Chat Input Section */}
-            <footer className={`p-4 border-t ${themeClasses.header}`}>
+            <footer className={`p-4 border-t transition-all duration-300 ${themeClasses.header} ${!hasInteracted ? 'opacity-60' : 'opacity-100'}`}>
               <div className="relative w-full">
                 <textarea
                   id="chat-input"
@@ -592,7 +596,7 @@ const App = () => {
                   onKeyPress={handleChatKeyPress}
                   placeholder="chat"
                   className={`w-full pl-4 pr-16 py-3 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 ease-in-out shadow-sm resize-none overflow-hidden ${
-                    isChatExpanded ? 'min-h-[6rem]' : 'h-12'} ${themeClasses.input}`}
+                    isChatExpanded && hasInteracted ? 'min-h-[6rem]' : 'h-12'} ${themeClasses.input}`}
                   onFocus={handleChatFocus}
                   onBlur={handleChatBlur}
                   rows={1}
@@ -600,6 +604,7 @@ const App = () => {
                 {/* Icons inside input */}
                 <div className="absolute right-3 top-3 flex items-center space-x-2">
                   <button
+                    onClick={() => setHasInteracted(true)}
                     className={`p-1 hover:text-blue-600 transition-colors duration-200 focus:outline-none ${themeClasses.textSecondary}`}
                     aria-label="Voice input"
                   >
