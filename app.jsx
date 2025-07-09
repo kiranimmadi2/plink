@@ -12,6 +12,8 @@ const App = () => {
   const [currentTheme, setCurrentTheme] = useState('light');
   const [isListening, setIsListening] = useState(false);
   const [spokenText, setSpokenText] = useState('');
+  const [chatText, setChatText] = useState('');
+  const [messages, setMessages] = useState([]);
   const [businessSections, setBusinessSections] = useState([
     { id: 'name', label: 'Business Name', value: '', type: 'text' },
     { id: 'description', label: 'Description', value: '', type: 'textarea' },
@@ -94,7 +96,7 @@ const App = () => {
 
   // Handle chat input blur to collapse, but only if not actively focused
   const handleChatBlur = (e) => {
-    if (!e.currentTarget.contains(e.relatedTarget) && chatInputRef.current.value === '') {
+    if (!e.currentTarget.contains(e.relatedTarget) && chatText === '') {
       setIsChatExpanded(false);
     }
   };
@@ -114,6 +116,40 @@ const App = () => {
       spokenInputRef.current.style.height = spokenInputRef.current.scrollHeight + 'px';
     }
   }, [spokenText, isListening]);
+
+  // Handle chat text submission
+  const handleChatSubmit = () => {
+    if (chatText.trim()) {
+      const newMessage = {
+        id: Date.now(),
+        text: chatText.trim(),
+        timestamp: new Date().toLocaleTimeString(),
+        sender: 'user'
+      };
+      setMessages(prev => [...prev, newMessage]);
+      setChatText('');
+      setIsChatExpanded(false);
+      
+      // Simulate AI response after a short delay
+      setTimeout(() => {
+        const aiResponse = {
+          id: Date.now() + 1,
+          text: `I understand you're looking for help with: "${chatText.trim()}". How can I assist you further?`,
+          timestamp: new Date().toLocaleTimeString(),
+          sender: 'ai'
+        };
+        setMessages(prev => [...prev, aiResponse]);
+      }, 1000);
+    }
+  };
+
+  // Handle Enter key press in chat input
+  const handleChatKeyPress = (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleChatSubmit();
+    }
+  };
 
   // Function to open the profile screen
   const openProfileScreen = () => {
@@ -421,7 +457,40 @@ const App = () => {
 
             {/* Main Content Area */}
             <main className={`flex-grow flex items-center justify-center p-6 text-center transition-all duration-300 ease-in-out ${isChatExpanded || isListening ? 'pb-20' : ''} ${currentTheme === 'dark' ? 'bg-gray-800' : 'bg-white'}`}>
-              {isListening ? (
+              {messages.length > 0 ? (
+                // Messages Display
+                <div className="w-full max-w-md space-y-4 max-h-96 overflow-y-auto">
+                  {messages.map((message) => (
+                    <div
+                      key={message.id}
+                      className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
+                    >
+                      <div
+                        className={`max-w-xs px-4 py-2 rounded-2xl ${
+                          message.sender === 'user'
+                            ? currentTheme === 'dark'
+                              ? 'bg-blue-600 text-white'
+                              : 'bg-blue-500 text-white'
+                            : currentTheme === 'dark'
+                            ? 'bg-gray-700 text-white'
+                            : 'bg-gray-100 text-gray-800'
+                        }`}
+                      >
+                        <p className="text-sm">{message.text}</p>
+                        <p className={`text-xs mt-1 ${
+                          message.sender === 'user'
+                            ? 'text-blue-100'
+                            : currentTheme === 'dark'
+                            ? 'text-gray-400'
+                            : 'text-gray-500'
+                        }`}>
+                          {message.timestamp}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : isListening ? (
                 <div className="flex flex-col items-center">
                   <div
                     className={`p-6 rounded-full cursor-pointer transition-all duration-300 ease-in-out ${
@@ -467,6 +536,9 @@ const App = () => {
                 <textarea
                   id="chat-input"
                   ref={chatInputRef}
+                  value={chatText}
+                  onChange={(e) => setChatText(e.target.value)}
+                  onKeyPress={handleChatKeyPress}
                   placeholder="chat"
                   className={`w-full pl-4 pr-12 py-3 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 ease-in-out shadow-sm resize-none overflow-hidden ${
                     isChatExpanded ? 'min-h-[7rem]' : 'h-12'
@@ -475,13 +547,29 @@ const App = () => {
                   onBlur={handleChatBlur}
                   rows={1}
                 />
-                {/* Microphone Icon inside input */}
-                <button
-                  className={`absolute right-3 top-1/2 -translate-y-1/2 p-1 hover:text-blue-600 transition-colors duration-200 focus:outline-none ${currentTheme === 'dark' ? 'text-gray-300' : 'text-gray-600'}`}
-                  aria-label="Voice input"
-                >
-                  <Mic className="w-5 h-5" />
-                </button>
+                {/* Icons inside input */}
+                <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center space-x-1">
+                  <button
+                    className={`p-1 hover:text-blue-600 transition-colors duration-200 focus:outline-none ${currentTheme === 'dark' ? 'text-gray-300' : 'text-gray-600'}`}
+                    aria-label="Voice input"
+                  >
+                    <Mic className="w-5 h-5" />
+                  </button>
+                  {(isChatExpanded || chatText.trim()) && (
+                    <button
+                      onClick={handleChatSubmit}
+                      className={`p-1 hover:text-blue-600 transition-colors duration-200 focus:outline-none ${
+                        chatText.trim() 
+                          ? currentTheme === 'dark' ? 'text-blue-400' : 'text-blue-600'
+                          : currentTheme === 'dark' ? 'text-gray-500' : 'text-gray-400'
+                      }`}
+                      disabled={!chatText.trim()}
+                      aria-label="Send message"
+                    >
+                      <MessageSquareText className="w-5 h-5" />
+                    </button>
+                  )}
+                </div>
               </div>
             </footer>
           </>
