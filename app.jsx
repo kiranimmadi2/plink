@@ -362,7 +362,6 @@ const App = () => {
                   <h4 className={`font-semibold mb-4 ${themeClasses.text}`}>Business Details</h4>
                   <div className="space-y-4 mb-4">
                     {businessSections.map((section) => (
-                      <div key={section.id} className={`flex flex-col space-y-2 border rounded-xl p-3 ${isIOSGlass ? 'border-white/30' : currentTheme === 'dark' ? 'border-gray-600' : 'border-gray-200'}`}>
                       <div key={section.id} className={`flex flex-col space-y-2 border rounded-xl p-3 ${isIOSGlass ? 'border-white/15' : currentTheme === 'dark' ? 'border-gray-600' : 'border-gray-200'}`}>
                         <div className="flex justify-between items-center">
                           <input
@@ -408,7 +407,6 @@ const App = () => {
                   </button>
                   <button
                     onClick={saveBusinessDetails}
-                    className={`w-full mt-4 flex items-center justify-center px-4 py-2 rounded-2xl text-sm font-medium transition-colors duration-200 ${isIOSGlass ? 'bg-green-500/80 backdrop-blur-md hover:bg-green-600/80 text-white' : currentTheme === 'dark' ? 'bg-green-700 text-white hover:bg-green-600' : 'bg-green-500 text-white hover:bg-green-600'}`}
                     className={`w-full mt-4 flex items-center justify-center px-4 py-2 rounded-2xl text-sm font-medium transition-colors duration-200 ${isIOSGlass ? 'bg-green-500/60 backdrop-blur-xl hover:bg-green-600/70 text-white' : currentTheme === 'dark' ? 'bg-green-700 text-white hover:bg-green-600' : 'bg-green-500 text-white hover:bg-green-600'}`}
                   >
                     Save Business Details
@@ -502,7 +500,6 @@ const App = () => {
                 <div className={`absolute top-16 right-4 rounded-xl shadow-lg py-2 w-48 z-20 border animate-fade-in ${themeClasses.menu}`}>
                   <a
                     href="#"
-                    className={`flex items-center px-4 py-2 transition-colors duration-150 ${themeClasses.text} ${isIOSGlass ? 'hover:bg-white/20' : currentTheme === 'dark' ? 'hover:bg-gray-600' : 'hover:bg-gray-100'}`}
                     className={`flex items-center px-4 py-2 transition-colors duration-150 ${themeClasses.text} ${isIOSGlass ? 'hover:bg-white/10' : currentTheme === 'dark' ? 'hover:bg-gray-600' : 'hover:bg-gray-100'}`}
                     onClick={openProfileScreen}
                   >
