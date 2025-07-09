@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Menu, User, Settings, Mic, MessageSquareText, ChevronLeft, Star, Palette, Headphones, Plus, X } from 'lucide-react';
+import { Menu, User, Settings, Mic, ArrowUp, ChevronLeft, Star, Palette, Headphones, Plus, X } from 'lucide-react';
 
 // Main App component
 const App = () => {
@@ -547,12 +547,14 @@ const App = () => {
                   {chatText.trim() && (
                     <button
                       onClick={handleChatSubmit}
-                      className={`p-1 transition-colors duration-200 focus:outline-none ${
-                        currentTheme === 'dark' ? 'text-blue-400 hover:text-blue-300' : 'text-blue-600 hover:text-blue-700'
+                      className={`p-1.5 rounded-full transition-all duration-200 focus:outline-none ${
+                        currentTheme === 'dark' 
+                          ? 'bg-blue-600 hover:bg-blue-700 text-white' 
+                          : 'bg-blue-500 hover:bg-blue-600 text-white'
                       }`}
                       aria-label="Send message"
                     >
-                      <MessageSquareText className="w-5 h-5" />
+                      <ArrowUp className="w-4 h-4" />
                     </button>
                   )}
                 </div>
