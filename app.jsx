@@ -123,7 +123,6 @@ const App = () => {
       const newMessage = {
         id: Date.now(),
         text: chatText.trim(),
-        timestamp: new Date().toLocaleTimeString(),
         sender: 'user'
       };
       setMessages(prev => [...prev, newMessage]);
@@ -135,7 +134,6 @@ const App = () => {
         const aiResponse = {
           id: Date.now() + 1,
           text: `I understand you're looking for help with: "${chatText.trim()}". How can I assist you further?`,
-          timestamp: new Date().toLocaleTimeString(),
           sender: 'ai'
         };
         setMessages(prev => [...prev, aiResponse]);
@@ -456,17 +454,17 @@ const App = () => {
             </header>
 
             {/* Main Content Area */}
-            <main className={`flex-grow flex items-center justify-center p-6 text-center transition-all duration-300 ease-in-out ${isChatExpanded || isListening ? 'pb-20' : ''} ${currentTheme === 'dark' ? 'bg-gray-800' : 'bg-white'}`}>
+            <main className={`flex-grow flex flex-col justify-end p-4 transition-all duration-300 ease-in-out ${isChatExpanded || isListening ? 'pb-4' : 'justify-center'} ${currentTheme === 'dark' ? 'bg-gray-800' : 'bg-white'}`}>
               {messages.length > 0 ? (
                 // Messages Display
-                <div className="w-full max-w-md space-y-4 max-h-96 overflow-y-auto">
+                <div className="w-full space-y-3 flex-grow overflow-y-auto pb-4">
                   {messages.map((message) => (
                     <div
                       key={message.id}
                       className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
                     >
                       <div
-                        className={`max-w-xs px-4 py-2 rounded-2xl ${
+                        className={`max-w-[75%] px-3 py-2 rounded-2xl break-words ${
                           message.sender === 'user'
                             ? currentTheme === 'dark'
                               ? 'bg-blue-600 text-white'
@@ -476,22 +474,13 @@ const App = () => {
                             : 'bg-gray-100 text-gray-800'
                         }`}
                       >
-                        <p className="text-sm">{message.text}</p>
-                        <p className={`text-xs mt-1 ${
-                          message.sender === 'user'
-                            ? 'text-blue-100'
-                            : currentTheme === 'dark'
-                            ? 'text-gray-400'
-                            : 'text-gray-500'
-                        }`}>
-                          {message.timestamp}
-                        </p>
+                        <p className="text-sm leading-relaxed">{message.text}</p>
                       </div>
                     </div>
                   ))}
                 </div>
               ) : isListening ? (
-                <div className="flex flex-col items-center">
+                <div className="flex flex-col items-center justify-center flex-grow">
                   <div
                     className={`p-6 rounded-full cursor-pointer transition-all duration-300 ease-in-out ${
                       currentTheme === 'dark' ? 'bg-blue-700 text-white' : 'bg-blue-500 text-white'
@@ -514,7 +503,7 @@ const App = () => {
                   />
                 </div>
               ) : (
-                <div className="flex flex-col items-center">
+                <div className="flex flex-col items-center justify-center flex-grow">
                   <button
                     onClick={handlePersonClick}
                     className={`p-6 rounded-full cursor-pointer transition-all duration-300 ease-in-out ${
@@ -531,8 +520,8 @@ const App = () => {
             </main>
 
             {/* Chat Input Section */}
-            <footer className={`p-4 border-t flex items-end justify-between ${currentTheme === 'dark' ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-100'}`}>
-              <div className={`relative flex-grow mr-3 transition-all duration-300 ease-in-out ${isChatExpanded ? 'w-full' : 'w-auto'}`}>
+            <footer className={`p-4 border-t ${currentTheme === 'dark' ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-100'}`}>
+              <div className="relative w-full">
                 <textarea
                   id="chat-input"
                   ref={chatInputRef}
@@ -540,30 +529,27 @@ const App = () => {
                   onChange={(e) => setChatText(e.target.value)}
                   onKeyPress={handleChatKeyPress}
                   placeholder="chat"
-                  className={`w-full pl-4 pr-12 py-3 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 ease-in-out shadow-sm resize-none overflow-hidden ${
-                    isChatExpanded ? 'min-h-[7rem]' : 'h-12'
+                  className={`w-full pl-4 pr-16 py-3 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 ease-in-out shadow-sm resize-none overflow-hidden ${
+                    isChatExpanded ? 'min-h-[6rem]' : 'h-12'
                   } ${currentTheme === 'dark' ? 'bg-gray-700 text-white placeholder-gray-400 border-gray-600' : 'bg-gray-100 text-gray-700 placeholder-gray-500'}`}
                   onFocus={handleChatFocus}
                   onBlur={handleChatBlur}
                   rows={1}
                 />
                 {/* Icons inside input */}
-                <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center space-x-1">
+                <div className="absolute right-3 top-3 flex items-center space-x-2">
                   <button
                     className={`p-1 hover:text-blue-600 transition-colors duration-200 focus:outline-none ${currentTheme === 'dark' ? 'text-gray-300' : 'text-gray-600'}`}
                     aria-label="Voice input"
                   >
                     <Mic className="w-5 h-5" />
                   </button>
-                  {(isChatExpanded || chatText.trim()) && (
+                  {chatText.trim() && (
                     <button
                       onClick={handleChatSubmit}
-                      className={`p-1 hover:text-blue-600 transition-colors duration-200 focus:outline-none ${
-                        chatText.trim() 
-                          ? currentTheme === 'dark' ? 'text-blue-400' : 'text-blue-600'
-                          : currentTheme === 'dark' ? 'text-gray-500' : 'text-gray-400'
+                      className={`p-1 transition-colors duration-200 focus:outline-none ${
+                        currentTheme === 'dark' ? 'text-blue-400 hover:text-blue-300' : 'text-blue-600 hover:text-blue-700'
                       }`}
-                      disabled={!chatText.trim()}
                       aria-label="Send message"
                     >
                       <MessageSquareText className="w-5 h-5" />
