@@ -96,6 +96,22 @@ const App = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  // Close menu when clicking outside
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+
+  // Handle logo click to go home
+  const handleLogoClick = () => {
+    setShowProfileScreen(false);
+    setShowSettingsScreen(false);
+    setIsMenuOpen(false);
+    setMessages([]);
+    setIsChatExpanded(false);
+    setIsListening(false);
+    setHasInteracted(false);
+  };
+
   // Handle chat input focus to expand
   const handleChatFocus = () => {
     setIsChatExpanded(true);
@@ -346,7 +362,7 @@ const App = () => {
               {isUserMode ? (
                 // Personalization Section for User Mode
                 <div className={`rounded-2xl p-4 shadow-sm ${themeClasses.card}`}>
-                  <h4 className={`font-semibold mb-4 ${themeClasses.text}`}>Personalization</h4>
+                  <h4 className={`font-semibold mb-4 ${themeClasses.text}`}>Personal Settings</h4>
                   <div className="space-y-4">
                     <div>
                       <label htmlFor="language" className={`block text-sm font-medium mb-1 ${themeClasses.textSecondary}`}>Language</label>
@@ -484,15 +500,23 @@ const App = () => {
           // Main App Content
           <>
             <header className={`relative flex items-center justify-center p-4 border-b z-10 ${themeClasses.header}`}>
+              {/* PLINK Logo */}
+              <button
+                onClick={handleLogoClick}
+                className={`absolute left-4 text-xl font-bold transition-all duration-300 transform hover:scale-110 focus:outline-none focus:ring-2 ${isIOSGlass ? 'focus:ring-blue-400/50 text-transparent bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text' : currentTheme === 'dark' ? 'focus:ring-cyan-400/50 text-transparent bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text' : 'focus:ring-blue-500 text-blue-600'}`}
+              >
+                PLINK
+              </button>
+
               {/* User/Business Toggle */}
               <div className={`flex rounded-full p-1 shadow-inner ${isIOSGlass ? 'bg-white/8 backdrop-blur-xl' : currentTheme === 'dark' ? 'bg-gray-700' : 'bg-gray-100'}`}>
                 <button
-                  onClick={() => handleModeToggle('user')}
+                  onClick={() => handleModeToggle('personal')}
                   className={`px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 transform hover:scale-105 ${
                     isUserMode ? `${isIOSGlass ? 'bg-gradient-to-r from-blue-500/80 to-purple-600/80 backdrop-blur-[20px] text-white shadow-[0_8px_25px_rgba(59,130,246,0.5),inset_0_1px_0_rgba(255,255,255,0.3)] ring-1 ring-white/40' : currentTheme === 'dark' ? 'bg-gradient-to-r from-cyan-500/70 to-blue-500/70 text-white shadow-[0_8px_25px_rgba(6,182,212,0.5)]' : 'bg-blue-600 text-white shadow-md'}` : `${isIOSGlass ? 'text-slate-800 hover:bg-white/20 hover:shadow-[0_4px_12px_rgba(0,0,0,0.1)] hover:backdrop-blur-[15px]' : currentTheme === 'dark' ? 'text-cyan-200 hover:bg-black/20 hover:shadow-[0_2px_8px_rgba(6,182,212,0.2)]' : 'text-gray-700 hover:bg-gray-200'}`
                   }`}
                 >
-                  User
+                  Personal
                 </button>
                 <button
                   onClick={() => handleModeToggle('business')}
@@ -515,53 +539,59 @@ const App = () => {
 
               {/* Dropdown Menu */}
               {isMenuOpen && (
-                <div className={`absolute top-16 right-4 rounded-2xl py-2 w-56 z-20 animate-fade-in transform transition-all duration-300 ${themeClasses.menu} liquid-glass-menu`}>
-                  {/* Wallet Section */}
-                  <div className={`flex items-center justify-between px-4 py-3 mb-2 mx-2 rounded-xl transition-all duration-200 ${isIOSGlass ? 'bg-white/15 backdrop-blur-[20px] border border-white/20' : currentTheme === 'dark' ? 'bg-black/20 backdrop-blur-[20px] border border-cyan-400/20' : 'bg-gray-50 border border-gray-200'}`}>
-                    <div className="flex items-center">
-                      <div className={`p-2 rounded-full mr-3 ${isIOSGlass ? 'bg-gradient-to-r from-green-400/60 to-emerald-500/60 backdrop-blur-[15px]' : currentTheme === 'dark' ? 'bg-gradient-to-r from-green-500/70 to-emerald-500/70' : 'bg-green-500'}`}>
-                        <Wallet className="w-4 h-4 text-white" />
-                      </div>
-                      <div>
-                        <p className={`text-xs font-medium ${themeClasses.textSecondary}`}>Wallet</p>
-                        <p className={`text-sm font-bold ${themeClasses.text}`}>${walletBalance.toFixed(2)}</p>
+                <>
+                  {/* Backdrop overlay */}
+                  <div 
+                    className="fixed inset-0 bg-black/20 backdrop-blur-sm z-15"
+                    onClick={closeMenu}
+                  ></div>
+                  
+                  <div className={`absolute top-16 right-4 rounded-2xl py-2 w-56 z-20 animate-fade-in transform transition-all duration-300 ${themeClasses.menu} liquid-glass-menu`}>
+                    {/* Wallet Section */}
+                    <div className={`flex items-center justify-between px-4 py-3 mb-2 mx-2 rounded-xl transition-all duration-200 ${isIOSGlass ? 'bg-white/15 backdrop-blur-[20px] border border-white/20' : currentTheme === 'dark' ? 'bg-black/20 backdrop-blur-[20px] border border-cyan-400/20' : 'bg-gray-50 border border-gray-200'}`}>
+                      <div className="flex items-center">
+                        <div className={`p-2 rounded-full mr-3 ${isIOSGlass ? 'bg-gradient-to-r from-green-400/60 to-emerald-500/60 backdrop-blur-[15px]' : currentTheme === 'dark' ? 'bg-gradient-to-r from-green-500/70 to-emerald-500/70' : 'bg-green-500'}`}>
+                          <Wallet className="w-4 h-4 text-white" />
+                        </div>
+                        <div>
+                          <p className={`text-xs font-medium ${themeClasses.textSecondary}`}>Wallet</p>
+                          <p className={`text-sm font-bold ${themeClasses.text}`}>${walletBalance.toFixed(2)}</p>
+                        </div>
                       </div>
                     </div>
+                    
+                    <button
+                      onClick={openProfileScreen}
+                      className={`w-full flex items-center px-4 py-3 transition-all duration-200 transform hover:scale-[1.02] ${themeClasses.text} ${isIOSGlass ? 'hover:bg-white/25 hover:shadow-[0_4px_12px_rgba(0,0,0,0.1)] hover:backdrop-blur-[20px] rounded-xl mx-1' : currentTheme === 'dark' ? 'hover:bg-black/30 hover:shadow-[0_2px_8px_rgba(6,182,212,0.2)]' : 'hover:bg-gray-100'}`}
+                    >
+                      <User className="w-4 h-4 mr-2" /> Profile
+                    </button>
+                    <button
+                      onClick={closeMenu}
+                      className={`w-full flex items-center px-4 py-3 transition-all duration-200 transform hover:scale-[1.02] ${themeClasses.text} ${isIOSGlass ? 'hover:bg-white/25 hover:shadow-[0_4px_12px_rgba(0,0,0,0.1)] hover:backdrop-blur-[20px] rounded-xl mx-1' : currentTheme === 'dark' ? 'hover:bg-black/30 hover:shadow-[0_2px_8px_rgba(6,182,212,0.2)]' : 'hover:bg-gray-100'}`}
+                    >
+                      <Heart className="w-4 h-4 mr-2" /> Favorites
+                    </button>
+                    <button
+                      onClick={closeMenu}
+                      className={`w-full flex items-center px-4 py-3 transition-all duration-200 transform hover:scale-[1.02] ${themeClasses.text} ${isIOSGlass ? 'hover:bg-white/25 hover:shadow-[0_4px_12px_rgba(0,0,0,0.1)] hover:backdrop-blur-[20px] rounded-xl mx-1' : currentTheme === 'dark' ? 'hover:bg-black/30 hover:shadow-[0_2px_8px_rgba(6,182,212,0.2)]' : 'hover:bg-gray-100'}`}
+                    >
+                      <UserPlus className="w-4 h-4 mr-2" /> Invite
+                    </button>
+                    <button
+                      onClick={openSettingsScreen}
+                      className={`w-full flex items-center px-4 py-3 transition-all duration-200 transform hover:scale-[1.02] ${themeClasses.text} ${isIOSGlass ? 'hover:bg-white/25 hover:shadow-[0_4px_12px_rgba(0,0,0,0.1)] hover:backdrop-blur-[20px] rounded-xl mx-1' : currentTheme === 'dark' ? 'hover:bg-black/30 hover:shadow-[0_2px_8px_rgba(6,182,212,0.2)]' : 'hover:bg-gray-100'}`}
+                    >
+                      <Settings className="w-4 h-4 mr-2" /> Settings
+                    </button>
+                    <button
+                      onClick={closeMenu}
+                      className={`w-full flex items-center px-4 py-3 transition-all duration-200 transform hover:scale-[1.02] ${themeClasses.text} ${isIOSGlass ? 'hover:bg-white/25 hover:shadow-[0_4px_12px_rgba(0,0,0,0.1)] hover:backdrop-blur-[20px] rounded-xl mx-1' : currentTheme === 'dark' ? 'hover:bg-black/30 hover:shadow-[0_2px_8px_rgba(6,182,212,0.2)]' : 'hover:bg-gray-100'}`}
+                    >
+                      <HelpCircle className="w-4 h-4 mr-2" /> FAQ
+                    </button>
                   </div>
-                  
-                  <a
-                    href="#"
-                    className={`flex items-center px-4 py-3 transition-all duration-200 transform hover:scale-[1.02] ${themeClasses.text} ${isIOSGlass ? 'hover:bg-white/25 hover:shadow-[0_4px_12px_rgba(0,0,0,0.1)] hover:backdrop-blur-[20px] rounded-xl mx-1' : currentTheme === 'dark' ? 'hover:bg-black/30 hover:shadow-[0_2px_8px_rgba(6,182,212,0.2)]' : 'hover:bg-gray-100'}`}
-                    onClick={openProfileScreen}
-                  >
-                    <User className="w-4 h-4 mr-2" /> Profile
-                  </a>
-                  <a
-                    href="#"
-                    className={`flex items-center px-4 py-3 transition-all duration-200 transform hover:scale-[1.02] ${themeClasses.text} ${isIOSGlass ? 'hover:bg-white/25 hover:shadow-[0_4px_12px_rgba(0,0,0,0.1)] hover:backdrop-blur-[20px] rounded-xl mx-1' : currentTheme === 'dark' ? 'hover:bg-black/30 hover:shadow-[0_2px_8px_rgba(6,182,212,0.2)]' : 'hover:bg-gray-100'}`}
-                  >
-                    <Heart className="w-4 h-4 mr-2" /> Favorites
-                  </a>
-                  <a
-                    href="#"
-                    className={`flex items-center px-4 py-3 transition-all duration-200 transform hover:scale-[1.02] ${themeClasses.text} ${isIOSGlass ? 'hover:bg-white/25 hover:shadow-[0_4px_12px_rgba(0,0,0,0.1)] hover:backdrop-blur-[20px] rounded-xl mx-1' : currentTheme === 'dark' ? 'hover:bg-black/30 hover:shadow-[0_2px_8px_rgba(6,182,212,0.2)]' : 'hover:bg-gray-100'}`}
-                  >
-                    <UserPlus className="w-4 h-4 mr-2" /> Invite
-                  </a>
-                  <a
-                    href="#"
-                    className={`flex items-center px-4 py-3 transition-all duration-200 transform hover:scale-[1.02] ${themeClasses.text} ${isIOSGlass ? 'hover:bg-white/25 hover:shadow-[0_4px_12px_rgba(0,0,0,0.1)] hover:backdrop-blur-[20px] rounded-xl mx-1' : currentTheme === 'dark' ? 'hover:bg-black/30 hover:shadow-[0_2px_8px_rgba(6,182,212,0.2)]' : 'hover:bg-gray-100'}`}
-                    onClick={openSettingsScreen}
-                  >
-                    <Settings className="w-4 h-4 mr-2" /> Settings
-                  </a>
-                  <a
-                    href="#"
-                    className={`flex items-center px-4 py-3 transition-all duration-200 transform hover:scale-[1.02] ${themeClasses.text} ${isIOSGlass ? 'hover:bg-white/25 hover:shadow-[0_4px_12px_rgba(0,0,0,0.1)] hover:backdrop-blur-[20px] rounded-xl mx-1' : currentTheme === 'dark' ? 'hover:bg-black/30 hover:shadow-[0_2px_8px_rgba(6,182,212,0.2)]' : 'hover:bg-gray-100'}`}
-                  >
-                    <HelpCircle className="w-4 h-4 mr-2" /> FAQ
-                  </a>
-                </div>
+                </>
               )}
             </header>
 
@@ -940,6 +970,20 @@ const App = () => {
         /* Wallet balance glow effect */
         .wallet-glow {
           text-shadow: 0 0 10px rgba(34, 197, 94, 0.5);
+        }
+        
+        /* PLINK logo gradient text effect */
+        .logo-gradient {
+          background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
+        
+        /* Menu backdrop blur */
+        .menu-backdrop {
+          backdrop-filter: blur(8px);
+          -webkit-backdrop-filter: blur(8px);
         }
       `}</style>
     </div>
