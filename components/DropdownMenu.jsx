@@ -47,11 +47,16 @@ const DropdownMenu = ({
       {/* Floating Menu */}
       <div 
         ref={menuRef}
-        className={`fixed top-20 right-4 left-4 sm:left-auto sm:w-64 rounded-2xl py-2 z-50 transform transition-all duration-300 ease-out ${
+        className={`fixed top-20 right-4 w-64 max-w-[calc(100vw-2rem)] rounded-2xl py-2 z-50 transform transition-all duration-300 ease-out ${
           isMenuOpen 
             ? 'opacity-100 scale-100 translate-y-0' 
             : 'opacity-0 scale-95 -translate-y-2'
         } ${themeClasses.menu}`}
+        style={{
+          left: 'auto',
+          right: '1rem',
+          maxWidth: 'calc(100vw - 2rem)'
+        }}
       >
         {/* Wallet Section */}
         <div className={`flex items-center justify-between px-4 py-3 mb-2 mx-2 rounded-xl transition-all duration-200 ${themeClasses.card}`}>
