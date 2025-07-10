@@ -36,18 +36,18 @@ const DropdownMenu = ({
     <>
       {/* Backdrop overlay */}
       <div 
-        className="fixed inset-0 bg-black/10 backdrop-blur-sm z-40 transition-opacity duration-300"
+        className="fixed inset-0 bg-black/20 backdrop-blur-md z-40 transition-all duration-300"
         onClick={closeMenu}
       />
       
       {/* Floating Menu */}
       <div 
         ref={menuRef}
-        className={`fixed top-20 right-4 rounded-2xl py-2 w-64 z-50 transform transition-all duration-300 ease-out ${
+        className={`fixed top-20 right-4 rounded-2xl py-2 w-64 z-50 transform transition-all duration-300 ease-out shadow-2xl ${
           isMenuOpen 
             ? 'opacity-100 scale-100 translate-y-0' 
             : 'opacity-0 scale-95 -translate-y-2'
-        } bg-white/18 backdrop-blur-[50px] border border-white/30 shadow-[0_20px_60px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(255,255,255,0.4)] ring-1 ring-white/25`}
+        } bg-white/25 backdrop-blur-[60px] border border-white/40 shadow-[0_25px_80px_rgba(0,0,0,0.15),inset_0_1px_0_rgba(255,255,255,0.5)] ring-1 ring-white/30`}
       >
         {/* Wallet Section */}
         <div className="flex items-center justify-between px-4 py-3 mb-2 mx-2 rounded-xl transition-all duration-200 bg-white/10 backdrop-blur-[30px] border border-white/15">
