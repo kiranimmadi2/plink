@@ -1,0 +1,52 @@
+.navbar {
+  position: relative;
+  z-index: 10;
+  background: var(--navbar-bg);
+}
+.navbar.dark { --navbar-bg: #232833; }
+.navbar.white { --navbar-bg: #fff; color: #232833; }
+
+.hamburger {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 20;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.menu-content {
+  background: var(--menu-bg);
+  color: var(--menu-color);
+  width: 320px;
+  height: 100vh;
+  padding: 2rem 1rem;
+  border-radius: 0 0 0 30px;
+  box-shadow: -4px 0 24px rgba(0,0,0,0.2);
+  position: relative;
+}
+.menu-content .close-btn {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.2rem;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+}
+.navbar.dark .menu-content {
+  --menu-bg: #252c36;
+  --menu-color: #fff;
+}
+.navbar.white .menu-content {
+  --menu-bg: #fff;
+  --menu-color: #232833;
+}
