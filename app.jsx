@@ -249,18 +249,18 @@ const App = () => {
   const getThemeClasses = () => {
     if (isIOSGlass) {
       return {
-        background: 'bg-gradient-to-br from-indigo-100/80 via-purple-50/60 to-pink-100/80 backdrop-blur-3xl',
-        backgroundOverlay: 'bg-gradient-to-br from-white/30 via-blue-50/20 to-purple-100/30 backdrop-blur-3xl',
-        container: 'bg-white/20 backdrop-blur-[40px] border border-white/30 shadow-[0_20px_60px_rgba(0,0,0,0.15),inset_0_1px_0_rgba(255,255,255,0.4)] ring-1 ring-white/20',
-        header: 'bg-white/15 backdrop-blur-[30px] border-b border-white/20 shadow-[inset_0_1px_0_rgba(255,255,255,0.3),0_1px_3px_rgba(0,0,0,0.1)]',
+        background: 'bg-gradient-to-br from-gray-200/60 via-slate-100/40 to-gray-300/50',
+        backgroundOverlay: 'bg-gradient-to-br from-white/40 via-gray-100/25 to-slate-200/35 backdrop-blur-3xl',
+        container: 'bg-white/25 backdrop-blur-[50px] border border-white/40 shadow-[0_25px_80px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(255,255,255,0.6)] ring-1 ring-white/30',
+        header: 'bg-white/20 backdrop-blur-[40px] border-b border-white/30 shadow-[inset_0_1px_0_rgba(255,255,255,0.5),0_1px_3px_rgba(0,0,0,0.08)]',
         content: 'bg-transparent',
-        text: 'text-slate-900 font-medium drop-shadow-[0_1px_2px_rgba(255,255,255,0.8)]',
-        textSecondary: 'text-slate-700 drop-shadow-[0_1px_1px_rgba(255,255,255,0.6)]',
-        input: 'bg-white/25 backdrop-blur-[25px] border border-white/40 text-slate-900 placeholder-slate-600 shadow-[inset_0_2px_4px_rgba(0,0,0,0.1),0_1px_0_rgba(255,255,255,0.4)] ring-1 ring-white/30 focus:ring-2 focus:ring-blue-400/50',
-        button: 'bg-white/20 backdrop-blur-[25px] hover:bg-white/30 text-slate-900 border border-white/40 shadow-[0_8px_25px_rgba(0,0,0,0.15),inset_0_1px_0_rgba(255,255,255,0.4)] ring-1 ring-white/30 hover:shadow-[0_12px_35px_rgba(0,0,0,0.2)] hover:ring-2 hover:ring-blue-400/30',
-        buttonPrimary: 'bg-gradient-to-r from-blue-500/80 to-purple-600/80 backdrop-blur-[25px] hover:from-blue-600/90 hover:to-purple-700/90 text-white font-semibold border border-white/40 shadow-[0_12px_35px_rgba(59,130,246,0.4),inset_0_1px_0_rgba(255,255,255,0.3)] ring-1 ring-white/40 hover:shadow-[0_16px_45px_rgba(59,130,246,0.5)]',
-        card: 'bg-white/18 backdrop-blur-[30px] border border-white/30 shadow-[0_15px_45px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(255,255,255,0.3)] ring-1 ring-white/25',
-        menu: 'bg-white/22 backdrop-blur-[35px] border border-white/35 shadow-[0_20px_60px_rgba(0,0,0,0.2),inset_0_1px_0_rgba(255,255,255,0.4)] ring-1 ring-white/30'
+        text: 'text-gray-800 font-medium drop-shadow-[0_1px_2px_rgba(255,255,255,0.9)]',
+        textSecondary: 'text-gray-600 drop-shadow-[0_1px_1px_rgba(255,255,255,0.7)]',
+        input: 'bg-white/30 backdrop-blur-[30px] border border-white/50 text-gray-800 placeholder-gray-500 shadow-[inset_0_2px_4px_rgba(0,0,0,0.08),0_1px_0_rgba(255,255,255,0.6)] ring-1 ring-white/40 focus:ring-2 focus:ring-gray-400/40',
+        button: 'bg-white/25 backdrop-blur-[30px] hover:bg-white/35 text-gray-800 border border-white/50 shadow-[0_8px_25px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(255,255,255,0.6)] ring-1 ring-white/40 hover:shadow-[0_12px_35px_rgba(0,0,0,0.15)] hover:ring-2 hover:ring-gray-400/30',
+        buttonPrimary: 'bg-white/35 backdrop-blur-[30px] hover:bg-white/45 text-gray-800 font-semibold border border-white/60 shadow-[0_12px_35px_rgba(0,0,0,0.15),inset_0_1px_0_rgba(255,255,255,0.7)] ring-1 ring-white/50 hover:shadow-[0_16px_45px_rgba(0,0,0,0.18)]',
+        card: 'bg-white/22 backdrop-blur-[35px] border border-white/40 shadow-[0_15px_45px_rgba(0,0,0,0.1),inset_0_1px_0_rgba(255,255,255,0.5)] ring-1 ring-white/35',
+        menu: 'bg-white/28 backdrop-blur-[40px] border border-white/45 shadow-[0_20px_60px_rgba(0,0,0,0.15),inset_0_1px_0_rgba(255,255,255,0.6)] ring-1 ring-white/40'
       };
     } else if (currentTheme === 'dark') {
       return {
@@ -305,9 +305,9 @@ const App = () => {
       
       {/* Floating Glass Orbs for Ambient Effect */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className={`absolute top-1/4 left-1/4 w-96 h-96 rounded-full ${isIOSGlass ? 'bg-gradient-to-br from-blue-200/20 to-purple-200/20' : currentTheme === 'dark' ? 'bg-gradient-to-br from-cyan-500/10 to-blue-500/10' : 'bg-gradient-to-br from-blue-200/15 to-indigo-200/15'} backdrop-blur-3xl animate-pulse`}></div>
-        <div className={`absolute top-3/4 right-1/4 w-80 h-80 rounded-full ${isIOSGlass ? 'bg-gradient-to-br from-purple-200/20 to-pink-200/20' : currentTheme === 'dark' ? 'bg-gradient-to-br from-purple-500/10 to-pink-500/10' : 'bg-gradient-to-br from-purple-200/15 to-pink-200/15'} backdrop-blur-3xl animate-pulse`} style={{animationDelay: '1s'}}></div>
-        <div className={`absolute top-1/2 right-1/3 w-64 h-64 rounded-full ${isIOSGlass ? 'bg-gradient-to-br from-indigo-200/20 to-blue-200/20' : currentTheme === 'dark' ? 'bg-gradient-to-br from-indigo-500/10 to-cyan-500/10' : 'bg-gradient-to-br from-indigo-200/15 to-blue-200/15'} backdrop-blur-3xl animate-pulse`} style={{animationDelay: '2s'}}></div>
+        <div className={`absolute top-1/4 left-1/4 w-96 h-96 rounded-full ${isIOSGlass ? 'bg-gradient-to-br from-white/15 to-gray-200/15' : currentTheme === 'dark' ? 'bg-gradient-to-br from-cyan-500/10 to-blue-500/10' : 'bg-gradient-to-br from-blue-200/15 to-indigo-200/15'} backdrop-blur-3xl animate-pulse`}></div>
+        <div className={`absolute top-3/4 right-1/4 w-80 h-80 rounded-full ${isIOSGlass ? 'bg-gradient-to-br from-gray-100/15 to-slate-200/15' : currentTheme === 'dark' ? 'bg-gradient-to-br from-purple-500/10 to-pink-500/10' : 'bg-gradient-to-br from-purple-200/15 to-pink-200/15'} backdrop-blur-3xl animate-pulse`} style={{animationDelay: '1s'}}></div>
+        <div className={`absolute top-1/2 right-1/3 w-64 h-64 rounded-full ${isIOSGlass ? 'bg-gradient-to-br from-slate-100/15 to-gray-300/15' : currentTheme === 'dark' ? 'bg-gradient-to-br from-indigo-500/10 to-cyan-500/10' : 'bg-gradient-to-br from-indigo-200/15 to-blue-200/15'} backdrop-blur-3xl animate-pulse`} style={{animationDelay: '2s'}}></div>
       </div>
       
       {/* Main App Container */}
@@ -503,7 +503,7 @@ const App = () => {
               {/* PLINK Logo */}
               <button
                 onClick={handleLogoClick}
-                className={`absolute left-4 text-xl font-bold transition-all duration-300 transform hover:scale-110 focus:outline-none focus:ring-2 ${isIOSGlass ? 'focus:ring-blue-400/50 text-transparent bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text' : currentTheme === 'dark' ? 'focus:ring-cyan-400/50 text-transparent bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text' : 'focus:ring-blue-500 text-blue-600'}`}
+                className={`absolute left-4 text-xl font-bold transition-all duration-300 transform hover:scale-110 focus:outline-none focus:ring-2 ${isIOSGlass ? 'focus:ring-gray-400/50 text-gray-700 drop-shadow-[0_2px_4px_rgba(255,255,255,0.8)]' : currentTheme === 'dark' ? 'focus:ring-cyan-400/50 text-transparent bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text' : 'focus:ring-blue-500 text-blue-600'}`}
               >
                 PLINK
               </button>
@@ -513,7 +513,7 @@ const App = () => {
                 <button
                   onClick={() => handleModeToggle('personal')}
                   className={`px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 transform hover:scale-105 ${
-                    isUserMode ? `${isIOSGlass ? 'bg-gradient-to-r from-blue-500/80 to-purple-600/80 backdrop-blur-[20px] text-white shadow-[0_8px_25px_rgba(59,130,246,0.5),inset_0_1px_0_rgba(255,255,255,0.3)] ring-1 ring-white/40' : currentTheme === 'dark' ? 'bg-gradient-to-r from-cyan-500/70 to-blue-500/70 text-white shadow-[0_8px_25px_rgba(6,182,212,0.5)]' : 'bg-blue-600 text-white shadow-md'}` : `${isIOSGlass ? 'text-slate-800 hover:bg-white/20 hover:shadow-[0_4px_12px_rgba(0,0,0,0.1)] hover:backdrop-blur-[15px]' : currentTheme === 'dark' ? 'text-cyan-200 hover:bg-black/20 hover:shadow-[0_2px_8px_rgba(6,182,212,0.2)]' : 'text-gray-700 hover:bg-gray-200'}`
+                    isUserMode ? `${isIOSGlass ? 'bg-white/40 backdrop-blur-[25px] text-gray-800 shadow-[0_8px_25px_rgba(0,0,0,0.15),inset_0_1px_0_rgba(255,255,255,0.7)] ring-1 ring-white/50' : currentTheme === 'dark' ? 'bg-gradient-to-r from-cyan-500/70 to-blue-500/70 text-white shadow-[0_8px_25px_rgba(6,182,212,0.5)]' : 'bg-blue-600 text-white shadow-md'}` : `${isIOSGlass ? 'text-gray-700 hover:bg-white/25 hover:shadow-[0_4px_12px_rgba(0,0,0,0.1)] hover:backdrop-blur-[20px]' : currentTheme === 'dark' ? 'text-cyan-200 hover:bg-black/20 hover:shadow-[0_2px_8px_rgba(6,182,212,0.2)]' : 'text-gray-700 hover:bg-gray-200'}`
                   }`}
                 >
                   Personal
@@ -521,7 +521,7 @@ const App = () => {
                 <button
                   onClick={() => handleModeToggle('business')}
                   className={`px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 transform hover:scale-105 ${
-                    !isUserMode ? `${isIOSGlass ? 'bg-gradient-to-r from-blue-500/80 to-purple-600/80 backdrop-blur-[20px] text-white shadow-[0_8px_25px_rgba(59,130,246,0.5),inset_0_1px_0_rgba(255,255,255,0.3)] ring-1 ring-white/40' : currentTheme === 'dark' ? 'bg-gradient-to-r from-cyan-500/70 to-blue-500/70 text-white shadow-[0_8px_25px_rgba(6,182,212,0.5)]' : 'bg-blue-600 text-white shadow-md'}` : `${isIOSGlass ? 'text-slate-800 hover:bg-white/20 hover:shadow-[0_4px_12px_rgba(0,0,0,0.1)] hover:backdrop-blur-[15px]' : currentTheme === 'dark' ? 'text-cyan-200 hover:bg-black/20 hover:shadow-[0_2px_8px_rgba(6,182,212,0.2)]' : 'text-gray-700 hover:bg-gray-200'}`
+                    !isUserMode ? `${isIOSGlass ? 'bg-white/40 backdrop-blur-[25px] text-gray-800 shadow-[0_8px_25px_rgba(0,0,0,0.15),inset_0_1px_0_rgba(255,255,255,0.7)] ring-1 ring-white/50' : currentTheme === 'dark' ? 'bg-gradient-to-r from-cyan-500/70 to-blue-500/70 text-white shadow-[0_8px_25px_rgba(6,182,212,0.5)]' : 'bg-blue-600 text-white shadow-md'}` : `${isIOSGlass ? 'text-gray-700 hover:bg-white/25 hover:shadow-[0_4px_12px_rgba(0,0,0,0.1)] hover:backdrop-blur-[20px]' : currentTheme === 'dark' ? 'text-cyan-200 hover:bg-black/20 hover:shadow-[0_2px_8px_rgba(6,182,212,0.2)]' : 'text-gray-700 hover:bg-gray-200'}`
                   }`}
                 >
                   Business
@@ -550,8 +550,8 @@ const App = () => {
                     {/* Wallet Section */}
                     <div className={`flex items-center justify-between px-4 py-3 mb-2 mx-2 rounded-xl transition-all duration-200 ${isIOSGlass ? 'bg-white/15 backdrop-blur-[20px] border border-white/20' : currentTheme === 'dark' ? 'bg-black/20 backdrop-blur-[20px] border border-cyan-400/20' : 'bg-gray-50 border border-gray-200'}`}>
                       <div className="flex items-center">
-                        <div className={`p-2 rounded-full mr-3 ${isIOSGlass ? 'bg-gradient-to-r from-green-400/60 to-emerald-500/60 backdrop-blur-[15px]' : currentTheme === 'dark' ? 'bg-gradient-to-r from-green-500/70 to-emerald-500/70' : 'bg-green-500'}`}>
-                          <Wallet className="w-4 h-4 text-white" />
+                        <div className={`p-2 rounded-full mr-3 ${isIOSGlass ? 'bg-white/30 backdrop-blur-[15px] border border-white/40' : currentTheme === 'dark' ? 'bg-gradient-to-r from-green-500/70 to-emerald-500/70' : 'bg-green-500'}`}>
+                          <Wallet className={`w-4 h-4 ${isIOSGlass ? 'text-green-600' : 'text-white'}`} />
                         </div>
                         <div>
                           <p className={`text-xs font-medium ${themeClasses.textSecondary}`}>Wallet</p>
@@ -562,31 +562,31 @@ const App = () => {
                     
                     <button
                       onClick={openProfileScreen}
-                      className={`w-full flex items-center px-4 py-3 transition-all duration-200 transform hover:scale-[1.02] ${themeClasses.text} ${isIOSGlass ? 'hover:bg-white/25 hover:shadow-[0_4px_12px_rgba(0,0,0,0.1)] hover:backdrop-blur-[20px] rounded-xl mx-1' : currentTheme === 'dark' ? 'hover:bg-black/30 hover:shadow-[0_2px_8px_rgba(6,182,212,0.2)]' : 'hover:bg-gray-100'}`}
+                      className={`w-full flex items-center px-4 py-3 transition-all duration-200 transform hover:scale-[1.02] ${themeClasses.text} ${isIOSGlass ? 'hover:bg-white/20 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] hover:backdrop-blur-[25px] rounded-xl mx-1' : currentTheme === 'dark' ? 'hover:bg-black/30 hover:shadow-[0_2px_8px_rgba(6,182,212,0.2)]' : 'hover:bg-gray-100'}`}
                     >
                       <User className="w-4 h-4 mr-2" /> Profile
                     </button>
                     <button
                       onClick={closeMenu}
-                      className={`w-full flex items-center px-4 py-3 transition-all duration-200 transform hover:scale-[1.02] ${themeClasses.text} ${isIOSGlass ? 'hover:bg-white/25 hover:shadow-[0_4px_12px_rgba(0,0,0,0.1)] hover:backdrop-blur-[20px] rounded-xl mx-1' : currentTheme === 'dark' ? 'hover:bg-black/30 hover:shadow-[0_2px_8px_rgba(6,182,212,0.2)]' : 'hover:bg-gray-100'}`}
+                      className={`w-full flex items-center px-4 py-3 transition-all duration-200 transform hover:scale-[1.02] ${themeClasses.text} ${isIOSGlass ? 'hover:bg-white/20 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] hover:backdrop-blur-[25px] rounded-xl mx-1' : currentTheme === 'dark' ? 'hover:bg-black/30 hover:shadow-[0_2px_8px_rgba(6,182,212,0.2)]' : 'hover:bg-gray-100'}`}
                     >
                       <Heart className="w-4 h-4 mr-2" /> Favorites
                     </button>
                     <button
                       onClick={closeMenu}
-                      className={`w-full flex items-center px-4 py-3 transition-all duration-200 transform hover:scale-[1.02] ${themeClasses.text} ${isIOSGlass ? 'hover:bg-white/25 hover:shadow-[0_4px_12px_rgba(0,0,0,0.1)] hover:backdrop-blur-[20px] rounded-xl mx-1' : currentTheme === 'dark' ? 'hover:bg-black/30 hover:shadow-[0_2px_8px_rgba(6,182,212,0.2)]' : 'hover:bg-gray-100'}`}
+                      className={`w-full flex items-center px-4 py-3 transition-all duration-200 transform hover:scale-[1.02] ${themeClasses.text} ${isIOSGlass ? 'hover:bg-white/20 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] hover:backdrop-blur-[25px] rounded-xl mx-1' : currentTheme === 'dark' ? 'hover:bg-black/30 hover:shadow-[0_2px_8px_rgba(6,182,212,0.2)]' : 'hover:bg-gray-100'}`}
                     >
                       <UserPlus className="w-4 h-4 mr-2" /> Invite
                     </button>
                     <button
                       onClick={openSettingsScreen}
-                      className={`w-full flex items-center px-4 py-3 transition-all duration-200 transform hover:scale-[1.02] ${themeClasses.text} ${isIOSGlass ? 'hover:bg-white/25 hover:shadow-[0_4px_12px_rgba(0,0,0,0.1)] hover:backdrop-blur-[20px] rounded-xl mx-1' : currentTheme === 'dark' ? 'hover:bg-black/30 hover:shadow-[0_2px_8px_rgba(6,182,212,0.2)]' : 'hover:bg-gray-100'}`}
+                      className={`w-full flex items-center px-4 py-3 transition-all duration-200 transform hover:scale-[1.02] ${themeClasses.text} ${isIOSGlass ? 'hover:bg-white/20 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] hover:backdrop-blur-[25px] rounded-xl mx-1' : currentTheme === 'dark' ? 'hover:bg-black/30 hover:shadow-[0_2px_8px_rgba(6,182,212,0.2)]' : 'hover:bg-gray-100'}`}
                     >
                       <Settings className="w-4 h-4 mr-2" /> Settings
                     </button>
                     <button
                       onClick={closeMenu}
-                      className={`w-full flex items-center px-4 py-3 transition-all duration-200 transform hover:scale-[1.02] ${themeClasses.text} ${isIOSGlass ? 'hover:bg-white/25 hover:shadow-[0_4px_12px_rgba(0,0,0,0.1)] hover:backdrop-blur-[20px] rounded-xl mx-1' : currentTheme === 'dark' ? 'hover:bg-black/30 hover:shadow-[0_2px_8px_rgba(6,182,212,0.2)]' : 'hover:bg-gray-100'}`}
+                      className={`w-full flex items-center px-4 py-3 transition-all duration-200 transform hover:scale-[1.02] ${themeClasses.text} ${isIOSGlass ? 'hover:bg-white/20 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] hover:backdrop-blur-[25px] rounded-xl mx-1' : currentTheme === 'dark' ? 'hover:bg-black/30 hover:shadow-[0_2px_8px_rgba(6,182,212,0.2)]' : 'hover:bg-gray-100'}`}
                     >
                       <HelpCircle className="w-4 h-4 mr-2" /> FAQ
                     </button>
@@ -609,12 +609,12 @@ const App = () => {
                         className={`max-w-[75%] px-3 py-2 rounded-2xl break-words ${
                           message.sender === 'user'
                             ? isIOSGlass
-                              ? 'bg-gradient-to-r from-blue-500/80 to-purple-600/80 backdrop-blur-[20px] text-white shadow-[0_8px_25px_rgba(59,130,246,0.4),inset_0_1px_0_rgba(255,255,255,0.3)] ring-1 ring-white/30'
+                              ? 'bg-white/35 backdrop-blur-[25px] text-gray-800 shadow-[0_8px_25px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(255,255,255,0.6)] ring-1 ring-white/40'
                               : currentTheme === 'dark'
                               ? 'bg-gradient-to-r from-cyan-500/70 to-blue-500/70 text-white shadow-[0_8px_25px_rgba(6,182,212,0.4)]'
                               : 'bg-blue-500 text-white'
                             : isIOSGlass
-                            ? 'bg-white/25 backdrop-blur-[20px] text-slate-900 shadow-[0_8px_25px_rgba(0,0,0,0.1),inset_0_1px_0_rgba(255,255,255,0.4)] ring-1 ring-white/30'
+                            ? 'bg-white/25 backdrop-blur-[25px] text-gray-800 shadow-[0_8px_25px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.5)] ring-1 ring-white/35'
                             : currentTheme === 'dark'
                             ? 'bg-black/30 backdrop-blur-[20px] text-cyan-50 shadow-[0_8px_25px_rgba(6,182,212,0.3)] ring-1 ring-cyan-400/25'
                             : 'bg-gray-100 text-gray-800'
@@ -629,6 +629,7 @@ const App = () => {
                 <div className="flex flex-col items-center justify-center flex-grow">
                   <div
                     className={`p-6 rounded-full cursor-pointer transition-all duration-300 ease-in-out transform hover:scale-110 liquid-glass-button ${isIOSGlass ? 'bg-gradient-to-r from-blue-500/80 to-purple-600/80 backdrop-blur-[25px] text-white shadow-[0_15px_45px_rgba(59,130,246,0.5),inset_0_2px_0_rgba(255,255,255,0.3)] ring-2 ring-white/40' : currentTheme === 'dark' ? 'bg-gradient-to-r from-cyan-500/70 to-blue-500/70 text-white shadow-[0_15px_45px_rgba(6,182,212,0.5)] ring-2 ring-cyan-400/40' : 'bg-blue-500 text-white'} ${isListening ? 'animate-pulse-fast liquid-glass-pulse' : ''}`}
+                    className={`p-6 rounded-full cursor-pointer transition-all duration-300 ease-in-out transform hover:scale-110 liquid-glass-button ${isIOSGlass ? 'bg-white/35 backdrop-blur-[30px] text-gray-700 shadow-[0_15px_45px_rgba(0,0,0,0.15),inset_0_2px_0_rgba(255,255,255,0.7)] ring-2 ring-white/50' : currentTheme === 'dark' ? 'bg-gradient-to-r from-cyan-500/70 to-blue-500/70 text-white shadow-[0_15px_45px_rgba(6,182,212,0.5)] ring-2 ring-cyan-400/40' : 'bg-blue-500 text-white'} ${isListening ? 'animate-pulse-fast liquid-glass-pulse' : ''}`}
                     onClick={handlePersonClick}
                   >
                     <Mic className="w-12 h-12" />
@@ -650,7 +651,7 @@ const App = () => {
                 <div className="flex flex-col items-center justify-center flex-grow">
                   <button
                     onClick={handlePersonClick}
-                    className={`p-6 rounded-full cursor-pointer transition-all duration-300 ease-in-out transform hover:scale-110 liquid-glass-button ${isIOSGlass ? 'bg-gradient-to-r from-blue-500/80 to-purple-600/80 backdrop-blur-[25px] hover:from-blue-600/90 hover:to-purple-700/90 text-white shadow-[0_15px_45px_rgba(59,130,246,0.5),inset_0_2px_0_rgba(255,255,255,0.3)] ring-2 ring-white/40 hover:shadow-[0_20px_60px_rgba(59,130,246,0.6)]' : currentTheme === 'dark' ? 'bg-gradient-to-r from-cyan-500/70 to-blue-500/70 hover:from-cyan-400/80 hover:to-blue-400/80 text-white shadow-[0_15px_45px_rgba(6,182,212,0.5)] ring-2 ring-cyan-400/40' : 'bg-blue-500 hover:bg-blue-600 text-white'}`}
+                    className={`p-6 rounded-full cursor-pointer transition-all duration-300 ease-in-out transform hover:scale-110 liquid-glass-button ${isIOSGlass ? 'bg-white/35 backdrop-blur-[30px] hover:bg-white/45 text-gray-700 shadow-[0_15px_45px_rgba(0,0,0,0.15),inset_0_2px_0_rgba(255,255,255,0.7)] ring-2 ring-white/50 hover:shadow-[0_20px_60px_rgba(0,0,0,0.18)]' : currentTheme === 'dark' ? 'bg-gradient-to-r from-cyan-500/70 to-blue-500/70 hover:from-cyan-400/80 hover:to-blue-400/80 text-white shadow-[0_15px_45px_rgba(6,182,212,0.5)] ring-2 ring-cyan-400/40' : 'bg-blue-500 hover:bg-blue-600 text-white'}`}
                   >
                     <Headphones className="w-12 h-12" />
                   </button>
@@ -684,7 +685,7 @@ const App = () => {
                 <div className="absolute right-3 top-3 flex items-center space-x-2">
                   <button
                     onClick={() => setHasInteracted(true)}
-                    className={`p-1.5 rounded-full transition-all duration-200 transform hover:scale-110 focus:outline-none ${isIOSGlass ? 'hover:bg-white/20 hover:text-blue-600 hover:shadow-[0_2px_8px_rgba(59,130,246,0.3)]' : currentTheme === 'dark' ? 'hover:bg-black/20 hover:text-cyan-400 hover:shadow-[0_2px_8px_rgba(6,182,212,0.3)]' : 'hover:text-blue-600'} ${themeClasses.textSecondary}`}
+                    className={`p-1.5 rounded-full transition-all duration-200 transform hover:scale-110 focus:outline-none ${isIOSGlass ? 'hover:bg-white/25 hover:text-gray-700 hover:shadow-[0_2px_8px_rgba(0,0,0,0.1)]' : currentTheme === 'dark' ? 'hover:bg-black/20 hover:text-cyan-400 hover:shadow-[0_2px_8px_rgba(6,182,212,0.3)]' : 'hover:text-blue-600'} ${themeClasses.textSecondary}`}
                     aria-label="Voice input"
                   >
                     <Mic className="w-5 h-5" />
@@ -841,8 +842,8 @@ const App = () => {
         
         /* Frosted glass effect */
         .ios-glass *[class*="backdrop-blur"] {
-          backdrop-filter: blur(40px) saturate(180%) brightness(110%);
-          -webkit-backdrop-filter: blur(40px) saturate(180%) brightness(110%);
+          backdrop-filter: blur(50px) saturate(120%) brightness(105%);
+          -webkit-backdrop-filter: blur(50px) saturate(120%) brightness(105%);
         }
         
         /* Enhanced background glass effect */
@@ -952,38 +953,31 @@ const App = () => {
         
         /* Enhanced background blur for better glass effect */
         .backdrop-blur-3xl {
-          backdrop-filter: blur(64px) saturate(180%) brightness(110%);
-          -webkit-backdrop-filter: blur(64px) saturate(180%) brightness(110%);
+          backdrop-filter: blur(64px) saturate(120%) brightness(105%);
+          -webkit-backdrop-filter: blur(64px) saturate(120%) brightness(105%);
         }
         
         /* Improved glass container effects */
         .liquid-glass-container {
-          background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
-          backdrop-filter: blur(40px) saturate(180%);
-          border: 1px solid rgba(255, 255, 255, 0.2);
+          background: linear-gradient(135deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.15));
+          backdrop-filter: blur(50px) saturate(120%);
+          border: 1px solid rgba(255, 255, 255, 0.4);
           box-shadow: 
-            0 8px 32px rgba(0, 0, 0, 0.1),
-            inset 0 1px 0 rgba(255, 255, 255, 0.2),
-            inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+            0 8px 32px rgba(0, 0, 0, 0.08),
+            inset 0 1px 0 rgba(255, 255, 255, 0.6),
+            inset 0 -1px 0 rgba(0, 0, 0, 0.05);
         }
         
-        /* Wallet balance glow effect */
-        .wallet-glow {
-          text-shadow: 0 0 10px rgba(34, 197, 94, 0.5);
-        }
-        
-        /* PLINK logo gradient text effect */
-        .logo-gradient {
-          background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-        }
-        
-        /* Menu backdrop blur */
-        .menu-backdrop {
-          backdrop-filter: blur(8px);
-          -webkit-backdrop-filter: blur(8px);
+        /* Enhanced glass morphism pulse animation */
+        @keyframes liquidPulse {
+          0%, 100% {
+            transform: scale(1);
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.15), inset 0 2px 0 rgba(255, 255, 255, 0.7);
+          }
+          50% {
+            transform: scale(1.05);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.18), inset 0 2px 0 rgba(255, 255, 255, 0.8);
+          }
         }
       `}</style>
     </div>
