@@ -1,5 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Menu, User, Settings, Mic, ArrowUp, ChevronLeft, Star, Palette, Headphones, Plus, X, Wallet, Heart, UserPlus, HelpCircle } from 'lucide-react';
+import Navbar from './components/Navbar';
+import DropdownMenu from './components/DropdownMenu';
+import MainContent from './components/MainContent';
+import ChatInput from './components/ChatInput';
+import { ChevronLeft, Star, Plus, X, Palette } from 'lucide-react';
 
 // Main App component
 const App = () => {
@@ -21,7 +25,6 @@ const App = () => {
     { id: 'name', label: 'Business Name', value: '', type: 'text' },
     { id: 'description', label: 'Description', value: '', type: 'textarea' },
   ]);
-  const chatInputRef = useRef(null);
   const spokenInputRef = useRef(null);
 
   // List of languages to populate the dropdown
@@ -69,7 +72,6 @@ const App = () => {
     { value: 'am', label: 'Amharic' },
     { value: 'zu', label: 'Zulu' },
     { value: 'af', label: 'Afrikaans' },
-    // Add more languages as needed
   ];
 
   // Apply theme class to the body element
@@ -96,7 +98,7 @@ const App = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  // Close menu when clicking outside
+  // Close menu
   const closeMenu = () => {
     setIsMenuOpen(false);
   };
@@ -111,28 +113,6 @@ const App = () => {
     setIsListening(false);
     setHasInteracted(false);
   };
-
-  // Handle chat input focus to expand
-  const handleChatFocus = () => {
-    setIsChatExpanded(true);
-    setHasInteracted(true);
-    setIsListening(false); // Close listening mode if chat is focused
-  };
-
-  // Handle chat input blur to collapse, but only if not actively focused
-  const handleChatBlur = (e) => {
-    if (!e.currentTarget.contains(e.relatedTarget) && chatText === '' && hasInteracted) {
-      setIsChatExpanded(false);
-    }
-  };
-
-  // Adjust textarea height dynamically based on content
-  useEffect(() => {
-    if (chatInputRef.current) {
-      chatInputRef.current.style.height = 'auto';
-      chatInputRef.current.style.height = chatInputRef.current.scrollHeight + 'px';
-    }
-  }, [isChatExpanded]);
 
   // Adjust spoken text area height dynamically
   useEffect(() => {
@@ -163,14 +143,6 @@ const App = () => {
         };
         setMessages(prev => [...prev, aiResponse]);
       }, 1000);
-    }
-  };
-
-  // Handle Enter key press in chat input
-  const handleChatKeyPress = (e) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      handleChatSubmit();
     }
   };
 
@@ -212,8 +184,8 @@ const App = () => {
   const handlePersonClick = () => {
     setIsListening(!isListening);
     setHasInteracted(true);
-    setIsChatExpanded(false); // Collapse chat if listening mode is activated
-    setSpokenText(''); // Clear previous spoken text
+    setIsChatExpanded(false);
+    setSpokenText('');
   };
 
   // Handle change for business section input
@@ -241,7 +213,6 @@ const App = () => {
   // Simulate saving business details
   const saveBusinessDetails = () => {
     console.log('Saving Business Details:', businessSections);
-    // In a real app, you would send this data to a backend
     alert('Business details saved! (Check console for data)');
   };
 
@@ -473,7 +444,7 @@ const App = () => {
                   <select
                     id="theme"
                     value={isIOSGlass ? 'ios-glass' : currentTheme}
-                    onChange={handleThemeChange} // Handle theme change
+                    onChange={handleThemeChange}
                     className={`w-full p-2 border rounded-xl focus:ring-blue-500 focus:border-blue-500 ${themeClasses.input}`}
                   >
                     <option value="light">Light</option>
@@ -483,7 +454,6 @@ const App = () => {
                   </select>
                 </div>
               </div>
-              {/* Add more settings options here */}
               <div className={`rounded-2xl p-4 shadow-sm ${themeClasses.card}`}>
                 <h4 className={`font-semibold mb-4 ${themeClasses.text}`}>
                   Account Settings
@@ -499,212 +469,51 @@ const App = () => {
         ) : (
           // Main App Content
           <>
-            <header className={`relative flex items-center justify-center p-4 border-b z-10 ${themeClasses.header}`}>
-              {/* PLINK Logo */}
-              <button
-                onClick={handleLogoClick}
-                className={`absolute left-4 text-xl font-bold transition-all duration-300 transform hover:scale-110 focus:outline-none focus:ring-2 ${isIOSGlass ? 'focus:ring-gray-400/50 text-gray-700 drop-shadow-[0_2px_4px_rgba(255,255,255,0.8)]' : currentTheme === 'dark' ? 'focus:ring-cyan-400/50 text-transparent bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text' : 'focus:ring-blue-500 text-blue-600'}`}
-              >
-                PLINK
-              </button>
+            <Navbar
+              isUserMode={isUserMode}
+              handleModeToggle={handleModeToggle}
+              isMenuOpen={isMenuOpen}
+              toggleMenu={toggleMenu}
+              handleLogoClick={handleLogoClick}
+              themeClasses={themeClasses}
+            />
 
-              {/* User/Business Toggle */}
-              <div className={`flex rounded-full p-1 shadow-inner ${isIOSGlass ? 'bg-white/8 backdrop-blur-xl' : currentTheme === 'dark' ? 'bg-gray-700' : 'bg-gray-100'}`}>
-                <button
-                  onClick={() => handleModeToggle('personal')}
-                  className={`px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 transform hover:scale-105 ${
-                    isUserMode ? `${isIOSGlass ? 'bg-white/30 backdrop-blur-[35px] text-gray-800 shadow-[0_8px_25px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(255,255,255,0.5)] ring-1 ring-white/35' : currentTheme === 'dark' ? 'bg-gradient-to-r from-cyan-500/70 to-blue-500/70 text-white shadow-[0_8px_25px_rgba(6,182,212,0.5)]' : 'bg-blue-600 text-white shadow-md'}` : `${isIOSGlass ? 'text-gray-700 hover:bg-white/15 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] hover:backdrop-blur-[30px]' : currentTheme === 'dark' ? 'text-cyan-200 hover:bg-black/20 hover:shadow-[0_2px_8px_rgba(6,182,212,0.2)]' : 'text-gray-700 hover:bg-gray-200'}`
-                  }`}
-                >
-                  Personal
-                </button>
-                <button
-                  onClick={() => handleModeToggle('business')}
-                  className={`px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 transform hover:scale-105 ${
-                    !isUserMode ? `${isIOSGlass ? 'bg-white/30 backdrop-blur-[35px] text-gray-800 shadow-[0_8px_25px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(255,255,255,0.5)] ring-1 ring-white/35' : currentTheme === 'dark' ? 'bg-gradient-to-r from-cyan-500/70 to-blue-500/70 text-white shadow-[0_8px_25px_rgba(6,182,212,0.5)]' : 'bg-blue-600 text-white shadow-md'}` : `${isIOSGlass ? 'text-gray-700 hover:bg-white/15 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] hover:backdrop-blur-[30px]' : currentTheme === 'dark' ? 'text-cyan-200 hover:bg-black/20 hover:shadow-[0_2px_8px_rgba(6,182,212,0.2)]' : 'text-gray-700 hover:bg-gray-200'}`
-                  }`}
-                >
-                  Business
-                </button>
-              </div>
+            <DropdownMenu
+              isMenuOpen={isMenuOpen}
+              closeMenu={closeMenu}
+              openProfileScreen={openProfileScreen}
+              openSettingsScreen={openSettingsScreen}
+              walletBalance={walletBalance}
+              themeClasses={themeClasses}
+            />
 
-              {/* Menu Icon */}
-              <button
-                onClick={toggleMenu}
-                className={`absolute right-4 p-2 rounded-full transition-all duration-300 transform hover:scale-110 focus:outline-none focus:ring-2 ${isIOSGlass ? 'focus:ring-blue-400/50' : currentTheme === 'dark' ? 'focus:ring-cyan-400/50' : 'focus:ring-blue-500'} ${themeClasses.button}`}
-                aria-label="Open menu"
-              >
-                <Menu className="w-6 h-6" />
-              </button>
+            <MainContent
+              messages={messages}
+              isListening={isListening}
+              hasInteracted={hasInteracted}
+              isChatExpanded={isChatExpanded}
+              handlePersonClick={handlePersonClick}
+              spokenText={spokenText}
+              setSpokenText={setSpokenText}
+              spokenInputRef={spokenInputRef}
+              themeClasses={themeClasses}
+            />
 
-              {/* Dropdown Menu */}
-              {isMenuOpen && (
-                <>
-                  {/* Backdrop overlay - Fixed positioning */}
-                  <div 
-                    className="fixed inset-0 bg-black/10 backdrop-blur-sm z-40"
-                    onClick={closeMenu}
-                  ></div>
-                  
-                  <div className={`absolute top-16 right-4 rounded-2xl py-2 w-56 z-50 animate-fade-in transform transition-all duration-300 ${themeClasses.menu} liquid-glass-menu`}>
-                    {/* Wallet Section */}
-                    <div className={`flex items-center justify-between px-4 py-3 mb-2 mx-2 rounded-xl transition-all duration-200 ${isIOSGlass ? 'bg-white/10 backdrop-blur-[30px] border border-white/15' : currentTheme === 'dark' ? 'bg-black/20 backdrop-blur-[20px] border border-cyan-400/20' : 'bg-gray-50 border border-gray-200'}`}>
-                      <div className="flex items-center">
-                        <div className={`p-2 rounded-full mr-3 ${isIOSGlass ? 'bg-white/20 backdrop-blur-[25px] border border-white/25' : currentTheme === 'dark' ? 'bg-gradient-to-r from-green-500/70 to-emerald-500/70' : 'bg-green-500'}`}>
-                          <Wallet className={`w-4 h-4 ${isIOSGlass ? 'text-green-600' : 'text-white'}`} />
-                        </div>
-                        <div>
-                          <p className={`text-xs font-medium ${themeClasses.textSecondary}`}>Wallet</p>
-                          <p className={`text-sm font-bold ${themeClasses.text}`}>${walletBalance.toFixed(2)}</p>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    <button
-                      onClick={openProfileScreen}
-                      className={`w-full flex items-center px-4 py-3 transition-all duration-200 transform hover:scale-[1.02] ${themeClasses.text} ${isIOSGlass ? 'hover:bg-white/15 hover:shadow-[0_4px_12px_rgba(0,0,0,0.06)] hover:backdrop-blur-[35px] rounded-xl mx-1' : currentTheme === 'dark' ? 'hover:bg-black/30 hover:shadow-[0_2px_8px_rgba(6,182,212,0.2)]' : 'hover:bg-gray-100'}`}
-                    >
-                      <User className="w-4 h-4 mr-2" /> Profile
-                    </button>
-                    <button
-                      onClick={closeMenu}
-                      className={`w-full flex items-center px-4 py-3 transition-all duration-200 transform hover:scale-[1.02] ${themeClasses.text} ${isIOSGlass ? 'hover:bg-white/15 hover:shadow-[0_4px_12px_rgba(0,0,0,0.06)] hover:backdrop-blur-[35px] rounded-xl mx-1' : currentTheme === 'dark' ? 'hover:bg-black/30 hover:shadow-[0_2px_8px_rgba(6,182,212,0.2)]' : 'hover:bg-gray-100'}`}
-                    >
-                      <Heart className="w-4 h-4 mr-2" /> Favorites
-                    </button>
-                    <button
-                      onClick={closeMenu}
-                      className={`w-full flex items-center px-4 py-3 transition-all duration-200 transform hover:scale-[1.02] ${themeClasses.text} ${isIOSGlass ? 'hover:bg-white/15 hover:shadow-[0_4px_12px_rgba(0,0,0,0.06)] hover:backdrop-blur-[35px] rounded-xl mx-1' : currentTheme === 'dark' ? 'hover:bg-black/30 hover:shadow-[0_2px_8px_rgba(6,182,212,0.2)]' : 'hover:bg-gray-100'}`}
-                    >
-                      <UserPlus className="w-4 h-4 mr-2" /> Invite
-                    </button>
-                    <button
-                      onClick={openSettingsScreen}
-                      className={`w-full flex items-center px-4 py-3 transition-all duration-200 transform hover:scale-[1.02] ${themeClasses.text} ${isIOSGlass ? 'hover:bg-white/15 hover:shadow-[0_4px_12px_rgba(0,0,0,0.06)] hover:backdrop-blur-[35px] rounded-xl mx-1' : currentTheme === 'dark' ? 'hover:bg-black/30 hover:shadow-[0_2px_8px_rgba(6,182,212,0.2)]' : 'hover:bg-gray-100'}`}
-                    >
-                      <Settings className="w-4 h-4 mr-2" /> Settings
-                    </button>
-                    <button
-                      onClick={closeMenu}
-                      className={`w-full flex items-center px-4 py-3 transition-all duration-200 transform hover:scale-[1.02] ${themeClasses.text} ${isIOSGlass ? 'hover:bg-white/15 hover:shadow-[0_4px_12px_rgba(0,0,0,0.06)] hover:backdrop-blur-[35px] rounded-xl mx-1' : currentTheme === 'dark' ? 'hover:bg-black/30 hover:shadow-[0_2px_8px_rgba(6,182,212,0.2)]' : 'hover:bg-gray-100'}`}
-                    >
-                      <HelpCircle className="w-4 h-4 mr-2" /> FAQ
-                    </button>
-                  </div>
-                </>
-              )}
-            </header>
-
-            {/* Main Content Area */}
-            <main className={`flex-grow flex flex-col p-4 transition-all duration-300 ease-in-out ${(isChatExpanded || isListening) && hasInteracted ? 'justify-end pb-4' : 'justify-center'} ${themeClasses.content}`}>
-              {messages.length > 0 ? (
-                // Messages Display
-                <div className="w-full space-y-3 flex-grow overflow-y-auto pb-4 max-h-full">
-                  {messages.map((message) => (
-                    <div
-                      key={message.id}
-                      className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
-                    >
-                      <div
-                        className={`max-w-[75%] px-3 py-2 rounded-2xl break-words ${
-                          message.sender === 'user'
-                            ? isIOSGlass
-                              ? 'bg-white/25 backdrop-blur-[35px] text-gray-800 shadow-[0_8px_25px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.4)] ring-1 ring-white/30'
-                              : currentTheme === 'dark'
-                              ? 'bg-gradient-to-r from-cyan-500/70 to-blue-500/70 text-white shadow-[0_8px_25px_rgba(6,182,212,0.4)]'
-                              : 'bg-blue-500 text-white'
-                            : isIOSGlass
-                            ? 'bg-white/15 backdrop-blur-[35px] text-gray-800 shadow-[0_8px_25px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.3)] ring-1 ring-white/25'
-                            : currentTheme === 'dark'
-                            ? 'bg-black/30 backdrop-blur-[20px] text-cyan-50 shadow-[0_8px_25px_rgba(6,182,212,0.3)] ring-1 ring-cyan-400/25'
-                            : 'bg-gray-100 text-gray-800'
-                        }`}
-                      >
-                        <p className="text-sm leading-relaxed">{message.text}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              ) : isListening && hasInteracted ? (
-                <div className="flex flex-col items-center justify-center flex-grow">
-                  <div
-                    className={`p-6 rounded-full cursor-pointer transition-all duration-300 ease-in-out transform hover:scale-110 liquid-glass-button ${isIOSGlass ? 'bg-white/25 backdrop-blur-[40px] text-gray-700 shadow-[0_15px_45px_rgba(0,0,0,0.12),inset_0_2px_0_rgba(255,255,255,0.5)] ring-2 ring-white/35' : currentTheme === 'dark' ? 'bg-gradient-to-r from-cyan-500/70 to-blue-500/70 text-white shadow-[0_15px_45px_rgba(6,182,212,0.5)] ring-2 ring-cyan-400/40' : 'bg-blue-500 text-white'} ${isListening ? 'animate-pulse-fast liquid-glass-pulse' : ''}`}
-                    onClick={handlePersonClick}
-                  >
-                    <Mic className="w-12 h-12" />
-                  </div>
-                  <p className={`mt-4 text-lg font-medium ${themeClasses.text}`}>
-                    Listening...
-                  </p>
-                  <textarea
-                    ref={spokenInputRef}
-                    placeholder="Say something..."
-                    value={spokenText}
-                    onChange={(e) => setSpokenText(e.target.value)}
-                    className={`mt-4 w-full max-w-xs p-3 border rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 ease-in-out ${themeClasses.input}`}
-                    rows={3}
-                  />
-                </div>
-              ) : (
-                // Default centered interface
-                <div className="flex flex-col items-center justify-center flex-grow">
-                  <button
-                    onClick={handlePersonClick}
-                    className={`p-6 rounded-full cursor-pointer transition-all duration-300 ease-in-out transform hover:scale-110 liquid-glass-button ${isIOSGlass ? 'bg-white/25 backdrop-blur-[40px] hover:bg-white/35 text-gray-700 shadow-[0_15px_45px_rgba(0,0,0,0.12),inset_0_2px_0_rgba(255,255,255,0.5)] ring-2 ring-white/35 hover:shadow-[0_20px_60px_rgba(0,0,0,0.15)]' : currentTheme === 'dark' ? 'bg-gradient-to-r from-cyan-500/70 to-blue-500/70 hover:from-cyan-400/80 hover:to-blue-400/80 text-white shadow-[0_15px_45px_rgba(6,182,212,0.5)] ring-2 ring-cyan-400/40' : 'bg-blue-500 hover:bg-blue-600 text-white'}`}
-                  >
-                    <Headphones className="w-12 h-12" />
-                  </button>
-                  <h1 className={`mt-6 text-3xl font-semibold tracking-wide ${themeClasses.text}`}>
-                    Find Your Need.
-                  </h1>
-                </div>
-              )}
-            </main>
-
-            {/* Chat Input Section */}
-            <footer className={`p-4 border-t transition-all duration-300 ${themeClasses.header} ${!hasInteracted ? 'opacity-60' : 'opacity-100'}`}>
-              <div className="relative w-full">
-                <textarea
-                  id="chat-input"
-                  ref={chatInputRef}
-                  value={chatText}
-                  onChange={(e) => setChatText(e.target.value)}
-                  onKeyPress={handleChatKeyPress}
-                  placeholder="chat"
-                  className={`w-full pl-4 pr-16 py-3 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 ease-in-out shadow-sm resize-none overflow-hidden ${
-                    isChatExpanded && hasInteracted ? 'min-h-[6rem]' : 'h-12'} ${themeClasses.input}`}
-                  style={{
-                    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
-                  }}
-                  onFocus={handleChatFocus}
-                  onBlur={handleChatBlur}
-                  rows={1}
-                />
-                {/* Icons inside input */}
-                <div className="absolute right-3 top-3 flex items-center space-x-2">
-                  <button
-                    onClick={() => setHasInteracted(true)}
-                    className={`p-1.5 rounded-full transition-all duration-200 transform hover:scale-110 focus:outline-none ${isIOSGlass ? 'hover:bg-white/25 hover:text-gray-700 hover:shadow-[0_2px_8px_rgba(0,0,0,0.1)]' : currentTheme === 'dark' ? 'hover:bg-black/20 hover:text-cyan-400 hover:shadow-[0_2px_8px_rgba(6,182,212,0.3)]' : 'hover:text-blue-600'} ${themeClasses.textSecondary}`}
-                    aria-label="Voice input"
-                  >
-                    <Mic className="w-5 h-5" />
-                  </button>
-                  {chatText.trim() && (
-                    <button
-                      onClick={handleChatSubmit}
-                      className={`p-1.5 rounded-full transition-all duration-200 transform hover:scale-110 focus:outline-none liquid-glass-send ${isIOSGlass ? 'bg-white/30 backdrop-blur-[35px] hover:bg-white/40 text-gray-700 shadow-[0_8px_25px_rgba(0,0,0,0.1),inset_0_1px_0_rgba(255,255,255,0.5)] ring-1 ring-white/30' : themeClasses.buttonPrimary}`}
-                      aria-label="Send message"
-                    >
-                      <ArrowUp className="w-4 h-4" />
-                    </button>
-                  )}
-                </div>
-              </div>
-            </footer>
+            <ChatInput
+              chatText={chatText}
+              setChatText={setChatText}
+              isChatExpanded={isChatExpanded}
+              setIsChatExpanded={setIsChatExpanded}
+              hasInteracted={hasInteracted}
+              setHasInteracted={setHasInteracted}
+              handleChatSubmit={handleChatSubmit}
+              themeClasses={themeClasses}
+            />
           </>
         )}
       </div>
-      {/* Custom Tailwind CSS for pulse animation */}
+
+      {/* Enhanced CSS Styles */}
       <style>{`
         /* Enhanced Liquid Glass Effects */
         .liquid-glass-button {
@@ -730,60 +539,6 @@ const App = () => {
           transform: rotate(45deg) translate(50%, 50%);
         }
         
-        .liquid-glass-menu {
-          position: relative;
-        }
-        
-        .liquid-glass-menu::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
-          border-radius: inherit;
-          pointer-events: none;
-        }
-        
-        .liquid-glass-send {
-          position: relative;
-          overflow: hidden;
-        }
-        
-        .liquid-glass-send::after {
-          content: '';
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          width: 0;
-          height: 0;
-          background: rgba(255, 255, 255, 0.3);
-          border-radius: 50%;
-          transform: translate(-50%, -50%);
-          transition: width 0.3s ease, height 0.3s ease;
-        }
-        
-        .liquid-glass-send:active::after {
-          width: 100px;
-          height: 100px;
-        }
-        
-        .liquid-glass-pulse {
-          animation: liquidPulse 2s infinite ease-in-out;
-        }
-        
-        @keyframes liquidPulse {
-          0%, 100% {
-            transform: scale(1);
-            box-shadow: 0 15px 45px rgba(59, 130, 246, 0.5), inset 0 2px 0 rgba(255, 255, 255, 0.3);
-          }
-          50% {
-            transform: scale(1.05);
-            box-shadow: 0 20px 60px rgba(59, 130, 246, 0.7), inset 0 2px 0 rgba(255, 255, 255, 0.4);
-          }
-        }
-        
         @keyframes pulse-fast {
           0%, 100% {
             transform: scale(1);
@@ -796,21 +551,6 @@ const App = () => {
         }
         .animate-pulse-fast {
           animation: pulse-fast 1s infinite cubic-bezier(0.4, 0, 0.6, 1);
-        }
-        
-        @keyframes ripple {
-          0% {
-            transform: scale(0);
-            opacity: 1;
-          }
-          100% {
-            transform: scale(4);
-            opacity: 0;
-          }
-        }
-        
-        .animate-ripple {
-          animation: ripple 0.6s linear;
         }
         
         /* Custom scrollbar for glass effect */
@@ -850,132 +590,18 @@ const App = () => {
           background-attachment: fixed;
         }
         
-        /* Floating orbs animation */
-        @keyframes float {
-          0%, 100% {
-            transform: translateY(0px) rotate(0deg);
-          }
-          33% {
-            transform: translateY(-20px) rotate(120deg);
-          }
-          66% {
-            transform: translateY(10px) rotate(240deg);
-          }
-        }
-        
-        /* Enhanced scrollbar for liquid glass */
-        .ios-glass ::-webkit-scrollbar {
-          width: 8px;
-        }
-        
-        .ios-glass ::-webkit-scrollbar-track {
-          background: rgba(255, 255, 255, 0.1);
-          border-radius: 10px;
-          backdrop-filter: blur(10px);
-        }
-        
-        .ios-glass ::-webkit-scrollbar-thumb {
-          background: linear-gradient(180deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1));
-          border-radius: 10px;
-          border: 1px solid rgba(255, 255, 255, 0.2);
-          backdrop-filter: blur(10px);
-        }
-        
-        .ios-glass ::-webkit-scrollbar-thumb:hover {
-          background: linear-gradient(180deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.2));
-        }
-        
-        /* Liquid glass shimmer effect */
-        @keyframes shimmer {
-          0% {
-            background-position: -200% 0;
-          }
-          100% {
-            background-position: 200% 0;
-          }
-        }
-        
-        .liquid-glass-button:hover {
-          background-image: linear-gradient(
-            90deg,
-            transparent,
-            rgba(255, 255, 255, 0.1),
-            transparent
-          );
-          background-size: 200% 100%;
-          animation: shimmer 1.5s infinite;
-        }
-        
-        /* Enhanced focus states */
-        .ios-glass input:focus,
-        .ios-glass textarea:focus {
-          outline: none;
-          box-shadow: 
-            inset 0 2px 4px rgba(0, 0, 0, 0.1),
-            0 1px 0 rgba(255, 255, 255, 0.4),
-            0 0 0 3px rgba(59, 130, 246, 0.3);
-          border-color: rgba(59, 130, 246, 0.5);
-        }
-        
-        /* Liquid glass card hover effects */
-        .ios-glass [class*="card"]:hover {
-          transform: translateY(-2px);
-          box-shadow: 
-            0 20px 60px rgba(0, 0, 0, 0.15),
-            inset 0 1px 0 rgba(255, 255, 255, 0.4),
-            0 0 0 1px rgba(255, 255, 255, 0.1);
-        }
-        
-        /* Ambient lighting effect */
-        .liquid-glass-button {
-          position: relative;
-        }
-        
-        .liquid-glass-button::after {
-          content: '';
-          position: absolute;
-          top: -50%;
-          left: -50%;
-          width: 200%;
-          height: 200%;
-          background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
-          border-radius: 50%;
-          opacity: 0;
-          transition: opacity 0.3s ease;
-          pointer-events: none;
-          z-index: -1;
-        }
-        
-        .liquid-glass-button:hover::after {
-          opacity: 1;
-        }
-        
         /* Enhanced background blur for better glass effect */
         .backdrop-blur-3xl {
           backdrop-filter: blur(80px) saturate(130%) brightness(110%);
           -webkit-backdrop-filter: blur(80px) saturate(130%) brightness(110%);
         }
         
-        /* Improved glass container effects */
-        .liquid-glass-container {
-          background: linear-gradient(135deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.15));
-          backdrop-filter: blur(50px) saturate(120%);
-          border: 1px solid rgba(255, 255, 255, 0.4);
-          box-shadow: 
-            0 8px 32px rgba(0, 0, 0, 0.08),
-            inset 0 1px 0 rgba(255, 255, 255, 0.6),
-            inset 0 -1px 0 rgba(0, 0, 0, 0.05);
-        }
-        
-        /* Enhanced glass morphism pulse animation */
-        @keyframes liquidPulse {
-          0%, 100% {
-            transform: scale(1);
-            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.15), inset 0 2px 0 rgba(255, 255, 255, 0.7);
-          }
-          50% {
-            transform: scale(1.05);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.18), inset 0 2px 0 rgba(255, 255, 255, 0.8);
+        /* Responsive design improvements */
+        @media (max-width: 640px) {
+          .fixed.top-20.right-4 {
+            right: 1rem;
+            left: 1rem;
+            width: auto;
           }
         }
       `}</style>
