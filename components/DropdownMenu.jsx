@@ -36,30 +36,34 @@ const DropdownMenu = ({
     <>
       {/* Backdrop overlay */}
       <div 
-        className="fixed inset-0 bg-black/20 backdrop-blur-md z-40 transition-all duration-300"
+        className={`fixed inset-0 z-40 transition-all duration-300 ${
+          themeClasses.background === 'bg-gray-900' 
+            ? 'bg-black/50' 
+            : 'bg-black/20 backdrop-blur-md'
+        }`}
         onClick={closeMenu}
       />
       
       {/* Floating Menu */}
       <div 
         ref={menuRef}
-        className={`fixed top-20 right-4 rounded-2xl py-2 w-64 z-50 transform transition-all duration-300 ease-out shadow-2xl ${
+        className={`fixed top-20 right-4 rounded-2xl py-2 w-64 z-50 transform transition-all duration-300 ease-out ${
           isMenuOpen 
             ? 'opacity-100 scale-100 translate-y-0' 
             : 'opacity-0 scale-95 -translate-y-2'
-        } bg-white/25 backdrop-blur-[60px] border border-white/40 shadow-[0_25px_80px_rgba(0,0,0,0.15),inset_0_1px_0_rgba(255,255,255,0.5)] ring-1 ring-white/30`}
+        } ${themeClasses.menu}`}
       >
         {/* Wallet Section */}
-        <div className="flex items-center justify-between px-4 py-3 mb-2 mx-2 rounded-xl transition-all duration-200 bg-white/10 backdrop-blur-[30px] border border-white/15">
+        <div className={`flex items-center justify-between px-4 py-3 mb-2 mx-2 rounded-xl transition-all duration-200 ${themeClasses.card}`}>
           <div className="flex items-center">
-            <div className="p-2 rounded-full mr-3 bg-white/20 backdrop-blur-[25px] border border-white/25">
+            <div className={`p-2 rounded-full mr-3 ${themeClasses.button}`}>
               <Wallet className="w-4 h-4 text-green-600" />
             </div>
             <div>
-              <p className="text-xs font-medium text-gray-700 drop-shadow-[0_1px_1px_rgba(255,255,255,0.6)]">
+              <p className={`text-xs font-medium ${themeClasses.textSecondary}`}>
                 Wallet
               </p>
-              <p className="text-sm font-bold text-gray-800 drop-shadow-[0_1px_2px_rgba(255,255,255,0.8)]">
+              <p className={`text-sm font-bold ${themeClasses.text}`}>
                 ${walletBalance.toFixed(2)}
               </p>
             </div>
@@ -72,26 +76,31 @@ const DropdownMenu = ({
             icon={User}
             label="Profile"
             onClick={openProfileScreen}
+            themeClasses={themeClasses}
           />
           <MenuButton
             icon={Heart}
             label="Favorites"
             onClick={closeMenu}
+            themeClasses={themeClasses}
           />
           <MenuButton
             icon={UserPlus}
             label="Invite"
             onClick={closeMenu}
+            themeClasses={themeClasses}
           />
           <MenuButton
             icon={Settings}
             label="Settings"
             onClick={openSettingsScreen}
+            themeClasses={themeClasses}
           />
           <MenuButton
             icon={HelpCircle}
             label="FAQ"
             onClick={closeMenu}
+            themeClasses={themeClasses}
           />
         </div>
       </div>
@@ -99,10 +108,10 @@ const DropdownMenu = ({
   );
 };
 
-const MenuButton = ({ icon: Icon, label, onClick }) => (
+const MenuButton = ({ icon: Icon, label, onClick, themeClasses }) => (
   <button
     onClick={onClick}
-    className="w-full flex items-center px-4 py-3 transition-all duration-200 transform hover:scale-[1.02] text-gray-800 font-medium drop-shadow-[0_1px_2px_rgba(255,255,255,0.8)] hover:bg-white/15 hover:shadow-[0_4px_12px_rgba(0,0,0,0.06)] hover:backdrop-blur-[35px] rounded-xl mx-1"
+    className={`w-full flex items-center px-4 py-3 transition-all duration-200 rounded-xl mx-1 ${themeClasses.text} hover:${themeClasses.button.replace('bg-', 'hover:bg-')}`}
   >
     <Icon className="w-4 h-4 mr-3" />
     {label}

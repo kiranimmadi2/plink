@@ -235,18 +235,18 @@ const App = () => {
       };
     } else if (currentTheme === 'dark') {
       return {
-        background: 'bg-gradient-to-br from-slate-950/90 via-indigo-950/80 to-purple-950/90 backdrop-blur-3xl',
-        backgroundOverlay: 'bg-gradient-to-br from-black/40 via-indigo-950/30 to-purple-950/40 backdrop-blur-3xl',
-        container: 'bg-black/40 backdrop-blur-[40px] border border-cyan-400/30 shadow-[0_20px_60px_rgba(6,182,212,0.3),inset_0_1px_0_rgba(6,182,212,0.2)] ring-1 ring-cyan-400/20',
-        header: 'bg-black/30 backdrop-blur-[30px] border-b border-cyan-400/25 shadow-[inset_0_1px_0_rgba(6,182,212,0.2),0_1px_3px_rgba(6,182,212,0.1)]',
+        background: 'bg-gray-900',
+        backgroundOverlay: 'bg-gray-900',
+        container: 'bg-gray-800 border-gray-700 shadow-2xl',
+        header: 'bg-gray-800 border-gray-700',
         content: 'bg-transparent',
-        text: 'text-cyan-50 font-medium drop-shadow-[0_0_8px_rgba(6,182,212,0.4)]',
-        textSecondary: 'text-cyan-200 drop-shadow-[0_0_4px_rgba(6,182,212,0.3)]',
-        input: 'bg-black/35 backdrop-blur-[25px] border border-cyan-400/40 text-cyan-50 placeholder-cyan-300/70 shadow-[inset_0_2px_4px_rgba(0,0,0,0.4),0_1px_0_rgba(6,182,212,0.2)] ring-1 ring-cyan-400/30 focus:ring-2 focus:ring-cyan-400/60',
-        button: 'bg-black/30 backdrop-blur-[25px] hover:bg-black/40 text-cyan-50 border border-cyan-400/40 shadow-[0_8px_25px_rgba(6,182,212,0.3),inset_0_1px_0_rgba(6,182,212,0.2)] ring-1 ring-cyan-400/30 hover:shadow-[0_12px_35px_rgba(6,182,212,0.4)] hover:ring-2 hover:ring-cyan-400/50',
-        buttonPrimary: 'bg-gradient-to-r from-cyan-500/70 to-blue-500/70 backdrop-blur-[25px] hover:from-cyan-400/80 hover:to-blue-400/80 text-white font-semibold border border-cyan-400/50 shadow-[0_12px_35px_rgba(6,182,212,0.5),inset_0_1px_0_rgba(6,182,212,0.3)] ring-1 ring-cyan-400/40 hover:shadow-[0_16px_45px_rgba(6,182,212,0.6)]',
-        card: 'bg-black/25 backdrop-blur-[30px] border border-cyan-400/30 shadow-[0_15px_45px_rgba(6,182,212,0.2),inset_0_1px_0_rgba(6,182,212,0.15)] ring-1 ring-cyan-400/25',
-        menu: 'bg-black/35 backdrop-blur-[35px] border border-cyan-400/35 shadow-[0_20px_60px_rgba(6,182,212,0.3),inset_0_1px_0_rgba(6,182,212,0.2)] ring-1 ring-cyan-400/30'
+        text: 'text-white',
+        textSecondary: 'text-gray-400',
+        input: 'bg-gray-700 border-gray-600 text-white placeholder-gray-400 focus:border-gray-500 focus:ring-1 focus:ring-gray-500',
+        button: 'bg-gray-700 hover:bg-gray-600 text-white border-gray-600',
+        buttonPrimary: 'bg-green-600 hover:bg-green-700 text-white border-green-600',
+        card: 'bg-gray-750 border-gray-700',
+        menu: 'bg-gray-800 border-gray-700 shadow-2xl'
       };
     } else {
       return {

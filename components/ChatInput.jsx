@@ -53,9 +53,9 @@ const ChatInput = ({
           onFocus={handleChatFocus}
           onBlur={handleChatBlur}
           placeholder="chat"
-          className={`w-full pl-4 pr-16 py-3 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 ease-in-out shadow-sm resize-none overflow-hidden ${
+          className={`w-full pl-4 pr-16 py-3 rounded-2xl focus:outline-none transition-all duration-300 ease-in-out shadow-sm resize-none overflow-hidden ${
             isChatExpanded && hasInteracted ? 'min-h-[6rem]' : 'h-12'
-          }`}
+          } ${themeClasses.input}`}
         />
 
         {/* Input Icons */}
@@ -63,7 +63,7 @@ const ChatInput = ({
           {chatText.trim() && (
             <button
               onClick={handleChatSubmit}
-              className="p-1.5 rounded-full transition-all duration-200 transform hover:scale-110 focus:outline-none bg-white/30 backdrop-blur-[35px] hover:bg-white/40 text-gray-700 shadow-[0_8px_25px_rgba(0,0,0,0.1),inset_0_1px_0_rgba(255,255,255,0.5)] ring-1 ring-white/30"
+              className={`p-1.5 rounded-full transition-all duration-200 transform hover:scale-110 focus:outline-none ${themeClasses.buttonPrimary}`}
               aria-label="Send message"
             >
               <ArrowUp className="w-4 h-4" />
