@@ -249,18 +249,18 @@ const App = () => {
   const getThemeClasses = () => {
     if (isIOSGlass) {
       return {
-        background: 'bg-gradient-to-br from-gray-200/60 via-slate-100/40 to-gray-300/50',
-        backgroundOverlay: 'bg-gradient-to-br from-white/40 via-gray-100/25 to-slate-200/35 backdrop-blur-3xl',
-        container: 'bg-white/25 backdrop-blur-[50px] border border-white/40 shadow-[0_25px_80px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(255,255,255,0.6)] ring-1 ring-white/30',
-        header: 'bg-white/20 backdrop-blur-[40px] border-b border-white/30 shadow-[inset_0_1px_0_rgba(255,255,255,0.5),0_1px_3px_rgba(0,0,0,0.08)]',
+        background: 'bg-gradient-to-br from-gray-400/30 via-gray-500/20 to-gray-600/30',
+        backgroundOverlay: 'bg-gradient-to-br from-gray-300/10 via-gray-400/5 to-gray-500/10 backdrop-blur-3xl',
+        container: 'bg-white/5 backdrop-blur-[60px] border border-white/10 shadow-[0_25px_80px_rgba(0,0,0,0.3)] ring-1 ring-white/5',
+        header: 'bg-white/3 backdrop-blur-[60px] border-b border-white/8 shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]',
         content: 'bg-transparent',
-        text: 'text-gray-800 font-medium drop-shadow-[0_1px_2px_rgba(255,255,255,0.9)]',
-        textSecondary: 'text-gray-600 drop-shadow-[0_1px_1px_rgba(255,255,255,0.7)]',
-        input: 'bg-white/30 backdrop-blur-[30px] border border-white/50 text-gray-800 placeholder-gray-500 shadow-[inset_0_2px_4px_rgba(0,0,0,0.08),0_1px_0_rgba(255,255,255,0.6)] ring-1 ring-white/40 focus:ring-2 focus:ring-gray-400/40',
-        button: 'bg-white/25 backdrop-blur-[30px] hover:bg-white/35 text-gray-800 border border-white/50 shadow-[0_8px_25px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(255,255,255,0.6)] ring-1 ring-white/40 hover:shadow-[0_12px_35px_rgba(0,0,0,0.15)] hover:ring-2 hover:ring-gray-400/30',
-        buttonPrimary: 'bg-white/35 backdrop-blur-[30px] hover:bg-white/45 text-gray-800 font-semibold border border-white/60 shadow-[0_12px_35px_rgba(0,0,0,0.15),inset_0_1px_0_rgba(255,255,255,0.7)] ring-1 ring-white/50 hover:shadow-[0_16px_45px_rgba(0,0,0,0.18)]',
-        card: 'bg-white/22 backdrop-blur-[35px] border border-white/40 shadow-[0_15px_45px_rgba(0,0,0,0.1),inset_0_1px_0_rgba(255,255,255,0.5)] ring-1 ring-white/35',
-        menu: 'bg-white/28 backdrop-blur-[40px] border border-white/45 shadow-[0_20px_60px_rgba(0,0,0,0.15),inset_0_1px_0_rgba(255,255,255,0.6)] ring-1 ring-white/40'
+        text: 'text-gray-900 font-medium',
+        textSecondary: 'text-gray-700',
+        input: 'bg-white/8 backdrop-blur-[60px] border border-white/15 text-gray-900 placeholder-gray-600 shadow-[inset_0_2px_4px_rgba(0,0,0,0.1)] ring-1 ring-white/10 focus:ring-2 focus:ring-white/20',
+        button: 'bg-white/8 backdrop-blur-[60px] hover:bg-white/12 text-gray-900 border border-white/15 shadow-[0_8px_25px_rgba(0,0,0,0.2)] ring-1 ring-white/10 hover:shadow-[0_12px_35px_rgba(0,0,0,0.25)]',
+        buttonPrimary: 'bg-white/12 backdrop-blur-[60px] hover:bg-white/18 text-gray-900 font-semibold border border-white/20 shadow-[0_12px_35px_rgba(0,0,0,0.25)] ring-1 ring-white/15',
+        card: 'bg-white/6 backdrop-blur-[60px] border border-white/12 shadow-[0_15px_45px_rgba(0,0,0,0.2)] ring-1 ring-white/8',
+        menu: 'bg-white/8 backdrop-blur-[60px] border border-white/15 shadow-[0_20px_60px_rgba(0,0,0,0.3)] ring-1 ring-white/10'
       };
     } else if (currentTheme === 'dark') {
       return {
@@ -300,14 +300,14 @@ const App = () => {
   return (
     <div className={`min-h-screen flex items-center justify-center p-4 font-sans relative overflow-hidden ${themeClasses.text}`}>
       {/* Enhanced Liquid Glass Background */}
-      <div className={`fixed inset-0 ${themeClasses.background}`}></div>
-      <div className={`fixed inset-0 ${themeClasses.backgroundOverlay}`}></div>
+      <div className="fixed inset-0 bg-gradient-to-br from-gray-400/20 via-gray-500/15 to-gray-600/20"></div>
+      <div className="fixed inset-0 bg-gradient-to-br from-gray-300/5 via-gray-400/3 to-gray-500/5 backdrop-blur-3xl"></div>
       
       {/* Floating Glass Orbs for Ambient Effect */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className={`absolute top-1/4 left-1/4 w-96 h-96 rounded-full ${isIOSGlass ? 'bg-gradient-to-br from-white/15 to-gray-200/15' : currentTheme === 'dark' ? 'bg-gradient-to-br from-cyan-500/10 to-blue-500/10' : 'bg-gradient-to-br from-blue-200/15 to-indigo-200/15'} backdrop-blur-3xl animate-pulse`}></div>
-        <div className={`absolute top-3/4 right-1/4 w-80 h-80 rounded-full ${isIOSGlass ? 'bg-gradient-to-br from-gray-100/15 to-slate-200/15' : currentTheme === 'dark' ? 'bg-gradient-to-br from-purple-500/10 to-pink-500/10' : 'bg-gradient-to-br from-purple-200/15 to-pink-200/15'} backdrop-blur-3xl animate-pulse`} style={{animationDelay: '1s'}}></div>
-        <div className={`absolute top-1/2 right-1/3 w-64 h-64 rounded-full ${isIOSGlass ? 'bg-gradient-to-br from-slate-100/15 to-gray-300/15' : currentTheme === 'dark' ? 'bg-gradient-to-br from-indigo-500/10 to-cyan-500/10' : 'bg-gradient-to-br from-indigo-200/15 to-blue-200/15'} backdrop-blur-3xl animate-pulse`} style={{animationDelay: '2s'}}></div>
+        <div className={`absolute top-1/4 left-1/4 w-96 h-96 rounded-full ${isIOSGlass ? 'bg-gradient-to-br from-white/3 to-gray-200/3' : currentTheme === 'dark' ? 'bg-gradient-to-br from-cyan-500/10 to-blue-500/10' : 'bg-gradient-to-br from-blue-200/15 to-indigo-200/15'} backdrop-blur-3xl animate-pulse`}></div>
+        <div className={`absolute top-3/4 right-1/4 w-80 h-80 rounded-full ${isIOSGlass ? 'bg-gradient-to-br from-gray-100/3 to-slate-200/3' : currentTheme === 'dark' ? 'bg-gradient-to-br from-purple-500/10 to-pink-500/10' : 'bg-gradient-to-br from-purple-200/15 to-pink-200/15'} backdrop-blur-3xl animate-pulse`} style={{animationDelay: '1s'}}></div>
+        <div className={`absolute top-1/2 right-1/3 w-64 h-64 rounded-full ${isIOSGlass ? 'bg-gradient-to-br from-slate-100/3 to-gray-300/3' : currentTheme === 'dark' ? 'bg-gradient-to-br from-indigo-500/10 to-cyan-500/10' : 'bg-gradient-to-br from-indigo-200/15 to-blue-200/15'} backdrop-blur-3xl animate-pulse`} style={{animationDelay: '2s'}}></div>
       </div>
       
       {/* Main App Container */}
@@ -548,9 +548,9 @@ const App = () => {
                   
                   <div className={`absolute top-16 right-4 rounded-2xl py-2 w-56 z-20 animate-fade-in transform transition-all duration-300 ${themeClasses.menu} liquid-glass-menu`}>
                     {/* Wallet Section */}
-                    <div className={`flex items-center justify-between px-4 py-3 mb-2 mx-2 rounded-xl transition-all duration-200 ${isIOSGlass ? 'bg-white/15 backdrop-blur-[20px] border border-white/20' : currentTheme === 'dark' ? 'bg-black/20 backdrop-blur-[20px] border border-cyan-400/20' : 'bg-gray-50 border border-gray-200'}`}>
+                    <div className={`flex items-center justify-between px-4 py-3 mb-2 mx-2 rounded-xl transition-all duration-200 ${isIOSGlass ? 'bg-white/4 backdrop-blur-[60px] border border-white/8' : currentTheme === 'dark' ? 'bg-black/20 backdrop-blur-[20px] border border-cyan-400/20' : 'bg-gray-50 border border-gray-200'}`}>
                       <div className="flex items-center">
-                        <div className={`p-2 rounded-full mr-3 ${isIOSGlass ? 'bg-white/30 backdrop-blur-[15px] border border-white/40' : currentTheme === 'dark' ? 'bg-gradient-to-r from-green-500/70 to-emerald-500/70' : 'bg-green-500'}`}>
+                        <div className={`p-2 rounded-full mr-3 ${isIOSGlass ? 'bg-white/8 backdrop-blur-[60px] border border-white/15' : currentTheme === 'dark' ? 'bg-gradient-to-r from-green-500/70 to-emerald-500/70' : 'bg-green-500'}`}>
                           <Wallet className={`w-4 h-4 ${isIOSGlass ? 'text-green-600' : 'text-white'}`} />
                         </div>
                         <div>
@@ -562,31 +562,31 @@ const App = () => {
                     
                     <button
                       onClick={openProfileScreen}
-                      className={`w-full flex items-center px-4 py-3 transition-all duration-200 transform hover:scale-[1.02] ${themeClasses.text} ${isIOSGlass ? 'hover:bg-white/20 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] hover:backdrop-blur-[25px] rounded-xl mx-1' : currentTheme === 'dark' ? 'hover:bg-black/30 hover:shadow-[0_2px_8px_rgba(6,182,212,0.2)]' : 'hover:bg-gray-100'}`}
+                      className={`w-full flex items-center px-4 py-3 transition-all duration-200 transform hover:scale-[1.02] ${themeClasses.text} ${isIOSGlass ? 'hover:bg-white/6 hover:backdrop-blur-[60px] rounded-xl mx-1' : currentTheme === 'dark' ? 'hover:bg-black/30 hover:shadow-[0_2px_8px_rgba(6,182,212,0.2)]' : 'hover:bg-gray-100'}`}
                     >
                       <User className="w-4 h-4 mr-2" /> Profile
                     </button>
                     <button
                       onClick={closeMenu}
-                      className={`w-full flex items-center px-4 py-3 transition-all duration-200 transform hover:scale-[1.02] ${themeClasses.text} ${isIOSGlass ? 'hover:bg-white/20 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] hover:backdrop-blur-[25px] rounded-xl mx-1' : currentTheme === 'dark' ? 'hover:bg-black/30 hover:shadow-[0_2px_8px_rgba(6,182,212,0.2)]' : 'hover:bg-gray-100'}`}
+                      className={`w-full flex items-center px-4 py-3 transition-all duration-200 transform hover:scale-[1.02] ${themeClasses.text} ${isIOSGlass ? 'hover:bg-white/6 hover:backdrop-blur-[60px] rounded-xl mx-1' : currentTheme === 'dark' ? 'hover:bg-black/30 hover:shadow-[0_2px_8px_rgba(6,182,212,0.2)]' : 'hover:bg-gray-100'}`}
                     >
                       <Heart className="w-4 h-4 mr-2" /> Favorites
                     </button>
                     <button
                       onClick={closeMenu}
-                      className={`w-full flex items-center px-4 py-3 transition-all duration-200 transform hover:scale-[1.02] ${themeClasses.text} ${isIOSGlass ? 'hover:bg-white/20 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] hover:backdrop-blur-[25px] rounded-xl mx-1' : currentTheme === 'dark' ? 'hover:bg-black/30 hover:shadow-[0_2px_8px_rgba(6,182,212,0.2)]' : 'hover:bg-gray-100'}`}
+                      className={`w-full flex items-center px-4 py-3 transition-all duration-200 transform hover:scale-[1.02] ${themeClasses.text} ${isIOSGlass ? 'hover:bg-white/6 hover:backdrop-blur-[60px] rounded-xl mx-1' : currentTheme === 'dark' ? 'hover:bg-black/30 hover:shadow-[0_2px_8px_rgba(6,182,212,0.2)]' : 'hover:bg-gray-100'}`}
                     >
                       <UserPlus className="w-4 h-4 mr-2" /> Invite
                     </button>
                     <button
                       onClick={openSettingsScreen}
-                      className={`w-full flex items-center px-4 py-3 transition-all duration-200 transform hover:scale-[1.02] ${themeClasses.text} ${isIOSGlass ? 'hover:bg-white/20 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] hover:backdrop-blur-[25px] rounded-xl mx-1' : currentTheme === 'dark' ? 'hover:bg-black/30 hover:shadow-[0_2px_8px_rgba(6,182,212,0.2)]' : 'hover:bg-gray-100'}`}
+                      className={`w-full flex items-center px-4 py-3 transition-all duration-200 transform hover:scale-[1.02] ${themeClasses.text} ${isIOSGlass ? 'hover:bg-white/6 hover:backdrop-blur-[60px] rounded-xl mx-1' : currentTheme === 'dark' ? 'hover:bg-black/30 hover:shadow-[0_2px_8px_rgba(6,182,212,0.2)]' : 'hover:bg-gray-100'}`}
                     >
                       <Settings className="w-4 h-4 mr-2" /> Settings
                     </button>
                     <button
                       onClick={closeMenu}
-                      className={`w-full flex items-center px-4 py-3 transition-all duration-200 transform hover:scale-[1.02] ${themeClasses.text} ${isIOSGlass ? 'hover:bg-white/20 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] hover:backdrop-blur-[25px] rounded-xl mx-1' : currentTheme === 'dark' ? 'hover:bg-black/30 hover:shadow-[0_2px_8px_rgba(6,182,212,0.2)]' : 'hover:bg-gray-100'}`}
+                      className={`w-full flex items-center px-4 py-3 transition-all duration-200 transform hover:scale-[1.02] ${themeClasses.text} ${isIOSGlass ? 'hover:bg-white/6 hover:backdrop-blur-[60px] rounded-xl mx-1' : currentTheme === 'dark' ? 'hover:bg-black/30 hover:shadow-[0_2px_8px_rgba(6,182,212,0.2)]' : 'hover:bg-gray-100'}`}
                     >
                       <HelpCircle className="w-4 h-4 mr-2" /> FAQ
                     </button>
@@ -609,12 +609,12 @@ const App = () => {
                         className={`max-w-[75%] px-3 py-2 rounded-2xl break-words ${
                           message.sender === 'user'
                             ? isIOSGlass
-                              ? 'bg-white/35 backdrop-blur-[25px] text-gray-800 shadow-[0_8px_25px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(255,255,255,0.6)] ring-1 ring-white/40'
+                              ? 'bg-white/12 backdrop-blur-[60px] text-gray-900 shadow-[0_8px_25px_rgba(0,0,0,0.2)] ring-1 ring-white/15'
                               : currentTheme === 'dark'
                               ? 'bg-gradient-to-r from-cyan-500/70 to-blue-500/70 text-white shadow-[0_8px_25px_rgba(6,182,212,0.4)]'
                               : 'bg-blue-500 text-white'
                             : isIOSGlass
-                            ? 'bg-white/25 backdrop-blur-[25px] text-gray-800 shadow-[0_8px_25px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.5)] ring-1 ring-white/35'
+                            ? 'bg-white/8 backdrop-blur-[60px] text-gray-900 shadow-[0_8px_25px_rgba(0,0,0,0.15)] ring-1 ring-white/10'
                             : currentTheme === 'dark'
                             ? 'bg-black/30 backdrop-blur-[20px] text-cyan-50 shadow-[0_8px_25px_rgba(6,182,212,0.3)] ring-1 ring-cyan-400/25'
                             : 'bg-gray-100 text-gray-800'
@@ -651,7 +651,7 @@ const App = () => {
                 <div className="flex flex-col items-center justify-center flex-grow">
                   <button
                     onClick={handlePersonClick}
-                    className={`p-6 rounded-full cursor-pointer transition-all duration-300 ease-in-out transform hover:scale-110 liquid-glass-button ${isIOSGlass ? 'bg-white/35 backdrop-blur-[30px] hover:bg-white/45 text-gray-700 shadow-[0_15px_45px_rgba(0,0,0,0.15),inset_0_2px_0_rgba(255,255,255,0.7)] ring-2 ring-white/50 hover:shadow-[0_20px_60px_rgba(0,0,0,0.18)]' : currentTheme === 'dark' ? 'bg-gradient-to-r from-cyan-500/70 to-blue-500/70 hover:from-cyan-400/80 hover:to-blue-400/80 text-white shadow-[0_15px_45px_rgba(6,182,212,0.5)] ring-2 ring-cyan-400/40' : 'bg-blue-500 hover:bg-blue-600 text-white'}`}
+                    className={`p-6 rounded-full cursor-pointer transition-all duration-300 ease-in-out transform hover:scale-110 liquid-glass-button ${isIOSGlass ? 'bg-white/12 backdrop-blur-[60px] hover:bg-white/18 text-gray-900 shadow-[0_15px_45px_rgba(0,0,0,0.25)] ring-2 ring-white/15' : currentTheme === 'dark' ? 'bg-gradient-to-r from-cyan-500/70 to-blue-500/70 hover:from-cyan-400/80 hover:to-blue-400/80 text-white shadow-[0_15px_45px_rgba(6,182,212,0.5)] ring-2 ring-cyan-400/40' : 'bg-blue-500 hover:bg-blue-600 text-white'}`}
                   >
                     <Headphones className="w-12 h-12" />
                   </button>
