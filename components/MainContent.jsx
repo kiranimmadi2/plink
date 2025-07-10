@@ -21,8 +21,8 @@ const MainContent = ({
         // Messages Display
         <div className="w-full space-y-3 flex-grow overflow-y-auto pb-4 max-h-full">
           {messages.map((message) => (
-                  ? `${themeClasses.buttonPrimary} ${themeClasses.text}`
-                  : `${themeClasses.card} ${themeClasses.text}`
+            <div
+              key={message.id || Math.random()}
               className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
             >
               <div
