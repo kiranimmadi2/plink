@@ -21,13 +21,19 @@ const Navbar = ({
 
       {/* Center Toggle - Absolute Center */}
       <div className="absolute left-1/2 transform -translate-x-1/2">
-        <div className={`flex rounded-full p-1 ${themeClasses.card}`}>
+        <div className={`flex rounded-full p-1 shadow-inner ${
+          themeClasses.background.includes('ios-glass') || themeClasses.background.includes('white') 
+            ? 'bg-white/8 backdrop-blur-xl' 
+            : themeClasses.card
+        }`}>
           <button
             onClick={() => handleModeToggle('personal')}
             className={`px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 transform hover:scale-105 ${
               isUserMode 
-                ? `${themeClasses.buttonPrimary}` 
-                : `${themeClasses.textSecondary} hover:${themeClasses.button.replace('bg-', 'hover:bg-')}`
+                ? themeClasses.background.includes('ios-glass') 
+                  ? 'bg-white/30 backdrop-blur-[35px] text-gray-800 shadow-[0_8px_25px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(255,255,255,0.5)] ring-1 ring-white/35' 
+                  : themeClasses.buttonPrimary
+                : `${themeClasses.textSecondary} hover:bg-white/15 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] hover:backdrop-blur-[30px]`
             }`}
           >
             Personal
@@ -36,8 +42,10 @@ const Navbar = ({
             onClick={() => handleModeToggle('business')}
             className={`px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 transform hover:scale-105 ${
               !isUserMode 
-                ? `${themeClasses.buttonPrimary}` 
-                : `${themeClasses.textSecondary} hover:${themeClasses.button.replace('bg-', 'hover:bg-')}`
+                ? themeClasses.background.includes('ios-glass') 
+                  ? 'bg-white/30 backdrop-blur-[35px] text-gray-800 shadow-[0_8px_25px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(255,255,255,0.5)] ring-1 ring-white/35' 
+                  : themeClasses.buttonPrimary
+                : `${themeClasses.textSecondary} hover:bg-white/15 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] hover:backdrop-blur-[30px]`
             }`}
           >
             Business

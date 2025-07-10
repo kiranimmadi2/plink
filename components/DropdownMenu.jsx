@@ -47,7 +47,7 @@ const DropdownMenu = ({
       {/* Floating Menu */}
       <div 
         ref={menuRef}
-        className={`fixed top-20 right-4 rounded-2xl py-2 w-64 z-50 transform transition-all duration-300 ease-out ${
+        className={`fixed top-20 right-4 left-4 sm:left-auto sm:w-64 rounded-2xl py-2 z-50 transform transition-all duration-300 ease-out ${
           isMenuOpen 
             ? 'opacity-100 scale-100 translate-y-0' 
             : 'opacity-0 scale-95 -translate-y-2'

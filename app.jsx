@@ -598,10 +598,28 @@ const App = () => {
         
         /* Responsive design improvements */
         @media (max-width: 640px) {
-          .fixed.top-20.right-4 {
+          .fixed.top-20.right-4.left-4 {
             right: 1rem;
             left: 1rem;
             width: auto;
+          }
+          
+          .sm\\:left-auto {
+            left: auto;
+          }
+          
+          .sm\\:w-64 {
+            width: 16rem;
+          }
+        }
+        
+        @media (min-width: 640px) {
+          .sm\\:left-auto {
+            left: auto;
+          }
+          
+          .sm\\:w-64 {
+            width: 16rem;
           }
         }
       `}</style>
