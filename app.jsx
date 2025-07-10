@@ -10,7 +10,7 @@ const App = () => {
   const [showSettingsScreen, setShowSettingsScreen] = useState(false);
   const [hasUpgradedPlan, setHasUpgradedPlan] = useState(false);
   const [currentTheme, setCurrentTheme] = useState('light');
-  const [isIOSGlass, setIsIOSGlass] = useState(false);
+  const [isIOSGlass, setIsIOSGlass] = useState(true);
   const [isListening, setIsListening] = useState(false);
   const [spokenText, setSpokenText] = useState('');
   const [chatText, setChatText] = useState('');
@@ -499,17 +499,17 @@ const App = () => {
         ) : (
           // Main App Content
           <>
-            <header className={`relative flex items-center justify-center p-4 border-b z-10 ${themeClasses.header}`}>
+            <header className={`relative flex items-center justify-between p-4 border-b z-10 ${themeClasses.header}`}>
               {/* PLINK Logo */}
               <button
                 onClick={handleLogoClick}
-                className={`absolute left-4 text-xl font-bold transition-all duration-300 transform hover:scale-110 focus:outline-none focus:ring-2 ${isIOSGlass ? 'focus:ring-gray-400/50 text-gray-700 drop-shadow-[0_2px_4px_rgba(255,255,255,0.8)]' : currentTheme === 'dark' ? 'focus:ring-cyan-400/50 text-transparent bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text' : 'focus:ring-blue-500 text-blue-600'}`}
+                className={`text-xl font-bold transition-all duration-300 transform hover:scale-110 focus:outline-none focus:ring-2 flex-shrink-0 ${isIOSGlass ? 'focus:ring-gray-400/50 text-gray-700 drop-shadow-[0_2px_4px_rgba(255,255,255,0.8)]' : currentTheme === 'dark' ? 'focus:ring-cyan-400/50 text-transparent bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text' : 'focus:ring-blue-500 text-blue-600'}`}
               >
                 PLINK
               </button>
 
               {/* User/Business Toggle */}
-              <div className={`flex rounded-full p-1 shadow-inner ${isIOSGlass ? 'bg-white/8 backdrop-blur-xl' : currentTheme === 'dark' ? 'bg-gray-700' : 'bg-gray-100'}`}>
+              <div className={`flex rounded-full p-1 shadow-inner flex-shrink-0 ${isIOSGlass ? 'bg-white/8 backdrop-blur-xl' : currentTheme === 'dark' ? 'bg-gray-700' : 'bg-gray-100'}`}>
                 <button
                   onClick={() => handleModeToggle('personal')}
                   className={`px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 transform hover:scale-105 ${
@@ -531,7 +531,7 @@ const App = () => {
               {/* Menu Icon */}
               <button
                 onClick={toggleMenu}
-                className={`absolute right-4 p-2 rounded-full transition-all duration-300 transform hover:scale-110 focus:outline-none focus:ring-2 ${isIOSGlass ? 'focus:ring-blue-400/50' : currentTheme === 'dark' ? 'focus:ring-cyan-400/50' : 'focus:ring-blue-500'} ${themeClasses.button}`}
+                className={`p-2 rounded-full transition-all duration-300 transform hover:scale-110 focus:outline-none focus:ring-2 flex-shrink-0 ${isIOSGlass ? 'focus:ring-blue-400/50' : currentTheme === 'dark' ? 'focus:ring-cyan-400/50' : 'focus:ring-blue-500'} ${themeClasses.button}`}
                 aria-label="Open menu"
               >
                 <Menu className="w-6 h-6" />
@@ -546,7 +546,7 @@ const App = () => {
                     onClick={closeMenu}
                   ></div>
                   
-                  <div className={`absolute top-16 right-4 rounded-2xl py-2 w-56 z-50 animate-fade-in transform transition-all duration-300 ${themeClasses.menu} liquid-glass-menu`}>
+                  <div className={`absolute top-16 right-0 rounded-2xl py-2 w-56 z-50 animate-fade-in transform transition-all duration-300 ${themeClasses.menu} liquid-glass-menu`}>
                     {/* Wallet Section */}
                     <div className={`flex items-center justify-between px-4 py-3 mb-2 mx-2 rounded-xl transition-all duration-200 ${isIOSGlass ? 'bg-white/10 backdrop-blur-[30px] border border-white/15' : currentTheme === 'dark' ? 'bg-black/20 backdrop-blur-[20px] border border-cyan-400/20' : 'bg-gray-50 border border-gray-200'}`}>
                       <div className="flex items-center">
