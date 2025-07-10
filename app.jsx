@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Menu, User, Settings, Mic, ArrowUp, ChevronLeft, Star, Palette, Headphones, Plus, X } from 'lucide-react';
+import { Menu, User, Settings, Mic, ArrowUp, ChevronLeft, Star, Palette, Headphones, Plus, X, Wallet, Heart, UserPlus, HelpCircle } from 'lucide-react';
 
 // Main App component
 const App = () => {
@@ -16,6 +16,7 @@ const App = () => {
   const [chatText, setChatText] = useState('');
   const [messages, setMessages] = useState([]);
   const [hasInteracted, setHasInteracted] = useState(false);
+  const [walletBalance, setWalletBalance] = useState(1250.75);
   const [businessSections, setBusinessSections] = useState([
     { id: 'name', label: 'Business Name', value: '', type: 'text' },
     { id: 'description', label: 'Description', value: '', type: 'textarea' },
@@ -232,7 +233,8 @@ const App = () => {
   const getThemeClasses = () => {
     if (isIOSGlass) {
       return {
-        background: 'bg-gradient-to-br from-slate-100 via-blue-50 to-purple-50',
+        background: 'bg-gradient-to-br from-indigo-100/80 via-purple-50/60 to-pink-100/80 backdrop-blur-3xl',
+        backgroundOverlay: 'bg-gradient-to-br from-white/30 via-blue-50/20 to-purple-100/30 backdrop-blur-3xl',
         container: 'bg-white/20 backdrop-blur-[40px] border border-white/30 shadow-[0_20px_60px_rgba(0,0,0,0.15),inset_0_1px_0_rgba(255,255,255,0.4)] ring-1 ring-white/20',
         header: 'bg-white/15 backdrop-blur-[30px] border-b border-white/20 shadow-[inset_0_1px_0_rgba(255,255,255,0.3),0_1px_3px_rgba(0,0,0,0.1)]',
         content: 'bg-transparent',
@@ -246,7 +248,8 @@ const App = () => {
       };
     } else if (currentTheme === 'dark') {
       return {
-        background: 'bg-gradient-to-br from-slate-950 via-gray-950 to-black',
+        background: 'bg-gradient-to-br from-slate-950/90 via-indigo-950/80 to-purple-950/90 backdrop-blur-3xl',
+        backgroundOverlay: 'bg-gradient-to-br from-black/40 via-indigo-950/30 to-purple-950/40 backdrop-blur-3xl',
         container: 'bg-black/40 backdrop-blur-[40px] border border-cyan-400/30 shadow-[0_20px_60px_rgba(6,182,212,0.3),inset_0_1px_0_rgba(6,182,212,0.2)] ring-1 ring-cyan-400/20',
         header: 'bg-black/30 backdrop-blur-[30px] border-b border-cyan-400/25 shadow-[inset_0_1px_0_rgba(6,182,212,0.2),0_1px_3px_rgba(6,182,212,0.1)]',
         content: 'bg-transparent',
@@ -260,7 +263,8 @@ const App = () => {
       };
     } else {
       return {
-        background: 'bg-gradient-to-br from-blue-50 to-indigo-100',
+        background: 'bg-gradient-to-br from-blue-50/80 via-indigo-100/60 to-purple-100/80 backdrop-blur-2xl',
+        backgroundOverlay: 'bg-gradient-to-br from-white/20 via-blue-50/15 to-indigo-100/25 backdrop-blur-2xl',
         container: 'bg-white border-gray-200',
         header: 'bg-white border-gray-100',
         content: 'bg-white',
@@ -278,9 +282,20 @@ const App = () => {
   const themeClasses = getThemeClasses();
 
   return (
-    <div className={`min-h-screen flex items-center justify-center p-4 font-sans ${themeClasses.background} ${themeClasses.text}`}>
+    <div className={`min-h-screen flex items-center justify-center p-4 font-sans relative overflow-hidden ${themeClasses.text}`}>
+      {/* Enhanced Liquid Glass Background */}
+      <div className={`fixed inset-0 ${themeClasses.background}`}></div>
+      <div className={`fixed inset-0 ${themeClasses.backgroundOverlay}`}></div>
+      
+      {/* Floating Glass Orbs for Ambient Effect */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className={`absolute top-1/4 left-1/4 w-96 h-96 rounded-full ${isIOSGlass ? 'bg-gradient-to-br from-blue-200/20 to-purple-200/20' : currentTheme === 'dark' ? 'bg-gradient-to-br from-cyan-500/10 to-blue-500/10' : 'bg-gradient-to-br from-blue-200/15 to-indigo-200/15'} backdrop-blur-3xl animate-pulse`}></div>
+        <div className={`absolute top-3/4 right-1/4 w-80 h-80 rounded-full ${isIOSGlass ? 'bg-gradient-to-br from-purple-200/20 to-pink-200/20' : currentTheme === 'dark' ? 'bg-gradient-to-br from-purple-500/10 to-pink-500/10' : 'bg-gradient-to-br from-purple-200/15 to-pink-200/15'} backdrop-blur-3xl animate-pulse`} style={{animationDelay: '1s'}}></div>
+        <div className={`absolute top-1/2 right-1/3 w-64 h-64 rounded-full ${isIOSGlass ? 'bg-gradient-to-br from-indigo-200/20 to-blue-200/20' : currentTheme === 'dark' ? 'bg-gradient-to-br from-indigo-500/10 to-cyan-500/10' : 'bg-gradient-to-br from-indigo-200/15 to-blue-200/15'} backdrop-blur-3xl animate-pulse`} style={{animationDelay: '2s'}}></div>
+      </div>
+      
       {/* Main App Container */}
-      <div className={`relative w-full max-w-sm rounded-3xl shadow-xl overflow-hidden flex flex-col min-h-[calc(100vh-2rem)] max-h-[calc(100vh-2rem)] md:min-h-[600px] md:max-h-[800px] border ${themeClasses.container}`}>
+      <div className={`relative w-full max-w-sm rounded-3xl shadow-xl overflow-hidden flex flex-col min-h-[calc(100vh-2rem)] max-h-[calc(100vh-2rem)] md:min-h-[600px] md:max-h-[800px] border ${themeClasses.container} z-10`}>
 
         {/* Conditional Rendering for Profile Screen, Settings Screen, or Main App */}
         {showProfileScreen ? (
@@ -500,7 +515,20 @@ const App = () => {
 
               {/* Dropdown Menu */}
               {isMenuOpen && (
-                <div className={`absolute top-16 right-4 rounded-2xl py-2 w-48 z-20 animate-fade-in transform transition-all duration-300 ${themeClasses.menu} liquid-glass-menu`}>
+                <div className={`absolute top-16 right-4 rounded-2xl py-2 w-56 z-20 animate-fade-in transform transition-all duration-300 ${themeClasses.menu} liquid-glass-menu`}>
+                  {/* Wallet Section */}
+                  <div className={`flex items-center justify-between px-4 py-3 mb-2 mx-2 rounded-xl transition-all duration-200 ${isIOSGlass ? 'bg-white/15 backdrop-blur-[20px] border border-white/20' : currentTheme === 'dark' ? 'bg-black/20 backdrop-blur-[20px] border border-cyan-400/20' : 'bg-gray-50 border border-gray-200'}`}>
+                    <div className="flex items-center">
+                      <div className={`p-2 rounded-full mr-3 ${isIOSGlass ? 'bg-gradient-to-r from-green-400/60 to-emerald-500/60 backdrop-blur-[15px]' : currentTheme === 'dark' ? 'bg-gradient-to-r from-green-500/70 to-emerald-500/70' : 'bg-green-500'}`}>
+                        <Wallet className="w-4 h-4 text-white" />
+                      </div>
+                      <div>
+                        <p className={`text-xs font-medium ${themeClasses.textSecondary}`}>Wallet</p>
+                        <p className={`text-sm font-bold ${themeClasses.text}`}>${walletBalance.toFixed(2)}</p>
+                      </div>
+                    </div>
+                  </div>
+                  
                   <a
                     href="#"
                     className={`flex items-center px-4 py-3 transition-all duration-200 transform hover:scale-[1.02] ${themeClasses.text} ${isIOSGlass ? 'hover:bg-white/25 hover:shadow-[0_4px_12px_rgba(0,0,0,0.1)] hover:backdrop-blur-[20px] rounded-xl mx-1' : currentTheme === 'dark' ? 'hover:bg-black/30 hover:shadow-[0_2px_8px_rgba(6,182,212,0.2)]' : 'hover:bg-gray-100'}`}
@@ -511,9 +539,27 @@ const App = () => {
                   <a
                     href="#"
                     className={`flex items-center px-4 py-3 transition-all duration-200 transform hover:scale-[1.02] ${themeClasses.text} ${isIOSGlass ? 'hover:bg-white/25 hover:shadow-[0_4px_12px_rgba(0,0,0,0.1)] hover:backdrop-blur-[20px] rounded-xl mx-1' : currentTheme === 'dark' ? 'hover:bg-black/30 hover:shadow-[0_2px_8px_rgba(6,182,212,0.2)]' : 'hover:bg-gray-100'}`}
+                  >
+                    <Heart className="w-4 h-4 mr-2" /> Favorites
+                  </a>
+                  <a
+                    href="#"
+                    className={`flex items-center px-4 py-3 transition-all duration-200 transform hover:scale-[1.02] ${themeClasses.text} ${isIOSGlass ? 'hover:bg-white/25 hover:shadow-[0_4px_12px_rgba(0,0,0,0.1)] hover:backdrop-blur-[20px] rounded-xl mx-1' : currentTheme === 'dark' ? 'hover:bg-black/30 hover:shadow-[0_2px_8px_rgba(6,182,212,0.2)]' : 'hover:bg-gray-100'}`}
+                  >
+                    <UserPlus className="w-4 h-4 mr-2" /> Invite
+                  </a>
+                  <a
+                    href="#"
+                    className={`flex items-center px-4 py-3 transition-all duration-200 transform hover:scale-[1.02] ${themeClasses.text} ${isIOSGlass ? 'hover:bg-white/25 hover:shadow-[0_4px_12px_rgba(0,0,0,0.1)] hover:backdrop-blur-[20px] rounded-xl mx-1' : currentTheme === 'dark' ? 'hover:bg-black/30 hover:shadow-[0_2px_8px_rgba(6,182,212,0.2)]' : 'hover:bg-gray-100'}`}
                     onClick={openSettingsScreen}
                   >
                     <Settings className="w-4 h-4 mr-2" /> Settings
+                  </a>
+                  <a
+                    href="#"
+                    className={`flex items-center px-4 py-3 transition-all duration-200 transform hover:scale-[1.02] ${themeClasses.text} ${isIOSGlass ? 'hover:bg-white/25 hover:shadow-[0_4px_12px_rgba(0,0,0,0.1)] hover:backdrop-blur-[20px] rounded-xl mx-1' : currentTheme === 'dark' ? 'hover:bg-black/30 hover:shadow-[0_2px_8px_rgba(6,182,212,0.2)]' : 'hover:bg-gray-100'}`}
+                  >
+                    <HelpCircle className="w-4 h-4 mr-2" /> FAQ
                   </a>
                 </div>
               )}
@@ -760,12 +806,31 @@ const App = () => {
         /* Enhanced glass morphism effects */
         .ios-glass {
           --tw-backdrop-blur: blur(40px);
+          background-attachment: fixed;
         }
         
         /* Frosted glass effect */
         .ios-glass *[class*="backdrop-blur"] {
-          backdrop-filter: blur(40px) saturate(180%);
-          -webkit-backdrop-filter: blur(40px) saturate(180%);
+          backdrop-filter: blur(40px) saturate(180%) brightness(110%);
+          -webkit-backdrop-filter: blur(40px) saturate(180%) brightness(110%);
+        }
+        
+        /* Enhanced background glass effect */
+        body {
+          background-attachment: fixed;
+        }
+        
+        /* Floating orbs animation */
+        @keyframes float {
+          0%, 100% {
+            transform: translateY(0px) rotate(0deg);
+          }
+          33% {
+            transform: translateY(-20px) rotate(120deg);
+          }
+          66% {
+            transform: translateY(10px) rotate(240deg);
+          }
         }
         
         /* Enhanced scrollbar for liquid glass */
@@ -853,6 +918,28 @@ const App = () => {
         
         .liquid-glass-button:hover::after {
           opacity: 1;
+        }
+        
+        /* Enhanced background blur for better glass effect */
+        .backdrop-blur-3xl {
+          backdrop-filter: blur(64px) saturate(180%) brightness(110%);
+          -webkit-backdrop-filter: blur(64px) saturate(180%) brightness(110%);
+        }
+        
+        /* Improved glass container effects */
+        .liquid-glass-container {
+          background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+          backdrop-filter: blur(40px) saturate(180%);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          box-shadow: 
+            0 8px 32px rgba(0, 0, 0, 0.1),
+            inset 0 1px 0 rgba(255, 255, 255, 0.2),
+            inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Wallet balance glow effect */
+        .wallet-glow {
+          text-shadow: 0 0 10px rgba(34, 197, 94, 0.5);
         }
       `}</style>
     </div>
