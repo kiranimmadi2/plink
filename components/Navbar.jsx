@@ -54,24 +54,26 @@ const Navbar = ({
       </div>
 
       {/* Hamburger Menu - Fixed Right */}
-      <button
+      {/* Transparent Sliding Window Trigger */}
+      <div
         onClick={toggleMenu}
-        className={`p-2 rounded-full transition-all duration-300 transform hover:scale-110 focus:outline-none z-50 relative ${themeClasses.button}`}
+        className={`w-8 h-8 rounded-full cursor-pointer transition-all duration-300 transform hover:scale-110 focus:outline-none z-50 relative ${
+          themeClasses.background.includes('ios-glass')
+            ? 'bg-white/15 backdrop-blur-[40px] border border-white/30 shadow-[0_8px_25px_rgba(0,0,0,0.08)] ring-1 ring-white/25 hover:bg-white/25'
+            : themeClasses.button
+        }`}
         aria-label={isMenuOpen ? "Close menu" : "Open menu"}
       >
-        <div className="relative w-6 h-6">
-          <Menu 
-            className={`absolute inset-0 w-6 h-6 transition-all duration-300 ${
-              isMenuOpen ? 'opacity-0 rotate-180 scale-75' : 'opacity-100 rotate-0 scale-100'
-            }`} 
-          />
-          <X 
-            className={`absolute inset-0 w-6 h-6 transition-all duration-300 ${
-              isMenuOpen ? 'opacity-100 rotate-0 scale-100' : 'opacity-0 rotate-180 scale-75'
-            }`} 
-          />
+        <div className="flex items-center justify-center w-full h-full">
+          <div className={`w-1 h-1 rounded-full transition-all duration-300 ${
+            isMenuOpen 
+              ? 'opacity-0 scale-0' 
+              : themeClasses.background.includes('ios-glass')
+                ? 'bg-gray-800 opacity-60'
+                : 'bg-current opacity-60'
+          }`}></div>
         </div>
-      </button>
+      </div>
     </header>
   );
 };

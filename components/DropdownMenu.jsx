@@ -51,37 +51,57 @@ const DropdownMenu = ({
       {/* Side Menu - slides in from right */}
       <div 
         ref={menuRef}
-        className={`absolute top-16 right-4 w-56 transform transition-all duration-300 ease-in-out ${
+        className={`fixed top-0 right-0 w-80 h-full transform transition-all duration-500 ease-out ${
           isMenuOpen 
             ? 'translate-x-0 opacity-100' 
             : 'translate-x-full opacity-0'
         } ${
           themeClasses.background.includes('ios-glass')
-            ? 'bg-white/25 backdrop-blur-[60px] border border-white/30 shadow-[0_25px_80px_rgba(0,0,0,0.15),inset_0_1px_0_rgba(255,255,255,0.5)] ring-1 ring-white/30'
+            ? 'bg-white/20 backdrop-blur-[80px] border-l border-white/25 shadow-[-25px_0_80px_rgba(0,0,0,0.15)]'
             : themeClasses.menu
-        } rounded-2xl shadow-2xl z-50`}
+        } shadow-2xl z-50`}
       >
+        {/* Menu Header with Close Button */}
+        <div className={`flex items-center justify-between p-6 border-b ${
+          themeClasses.background.includes('ios-glass')
+            ? 'border-white/20'
+            : 'border-gray-200'
+        }`}>
+          <h3 className={`text-lg font-semibold ${themeClasses.text}`}>Menu</h3>
+          <button
+            onClick={closeMenu}
+            className={`p-2 rounded-full transition-all duration-200 hover:scale-110 ${
+              themeClasses.background.includes('ios-glass')
+                ? 'bg-white/15 backdrop-blur-[40px] border border-white/30 hover:bg-white/25'
+                : themeClasses.button
+            }`}
+            aria-label="Close menu"
+          >
+            <X className="w-5 h-5" />
+          </button>
+        </div>
+
         {/* Menu Content */}
-        <div className="flex flex-col py-2">
+        <div className="flex flex-col py-4">
           {/* Wallet Section */}
-          <div className={`flex items-center justify-between px-4 py-3 mx-3 my-2 rounded-xl transition-all duration-200 ${
+          <div className={`flex items-center justify-between px-6 py-4 mx-4 my-3 rounded-xl transition-all duration-200 ${
             themeClasses.background.includes('ios-glass')
-              ? 'bg-white/20 backdrop-blur-[40px] border border-white/25 shadow-[0_8px_25px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.4)] ring-1 ring-white/20'
+              ? 'bg-white/15 backdrop-blur-[60px] border border-white/20 shadow-[0_12px_35px_rgba(0,0,0,0.08)] ring-1 ring-white/15'
               : themeClasses.card
           }`}>
             <div className="flex items-center">
-              <div className={`p-2 rounded-full mr-3 ${
+              <div className={`p-3 rounded-full mr-4 ${
                 themeClasses.background.includes('ios-glass')
-                  ? 'bg-white/15 backdrop-blur-[30px] border border-white/20'
+                  ? 'bg-white/20 backdrop-blur-[40px] border border-white/25'
                   : themeClasses.button
               }`}>
-                <Wallet className="w-5 h-5 text-green-600" />
+                <Wallet className="w-6 h-6 text-green-600" />
               </div>
               <div>
-                <p className={`text-xs font-medium ${themeClasses.textSecondary}`}>
+                <p className={`text-sm font-medium ${themeClasses.textSecondary}`}>
                   Wallet
                 </p>
-                <p className={`text-sm font-bold ${themeClasses.text}`}>
+                <p className={`text-lg font-bold ${themeClasses.text}`}>
                   ${walletBalance.toFixed(2)}
                 </p>
               </div>
@@ -89,8 +109,8 @@ const DropdownMenu = ({
           </div>
           
           {/* Menu Items */}
-          <div className="px-1">
-            <div className="space-y-1">
+          <div className="px-2">
+            <div className="space-y-2">
               <MenuButton
                 icon={User}
                 label="Profile"
@@ -132,14 +152,14 @@ const DropdownMenu = ({
 const MenuButton = ({ icon: Icon, label, onClick, themeClasses }) => (
   <button
     onClick={onClick}
-    className={`w-full flex items-center px-4 py-2.5 transition-all duration-200 rounded-lg mx-2 group ${themeClasses.text} ${
+    className={`w-full flex items-center px-6 py-4 transition-all duration-200 rounded-xl mx-4 group ${themeClasses.text} ${
       themeClasses.background.includes('ios-glass')
-        ? 'hover:bg-white/15 hover:backdrop-blur-[40px] hover:border hover:border-white/20 hover:shadow-[0_8px_20px_rgba(0,0,0,0.08)]'
+        ? 'hover:bg-white/12 hover:backdrop-blur-[50px] hover:shadow-[0_12px_30px_rgba(0,0,0,0.08)] hover:ring-1 hover:ring-white/20'
         : `hover:${themeClasses.card}`
     }`}
   >
-    <Icon className="w-4 h-4 mr-3 transition-transform duration-200 group-hover:scale-110" />
-    <span className="font-medium text-sm">{label}</span>
+    <Icon className="w-5 h-5 mr-4 transition-transform duration-200 group-hover:scale-110" />
+    <span className="font-medium text-base">{label}</span>
   </button>
 );
 
