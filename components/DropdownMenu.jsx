@@ -49,28 +49,16 @@ const DropdownMenu = ({
       {/* Side Menu - slides in from right */}
       <div 
         ref={menuRef}
-        className={`absolute top-0 right-0 h-full w-64 max-w-[65%] transform transition-all duration-300 ease-in-out ${
+        className={`absolute top-16 right-4 w-56 transform transition-all duration-300 ease-in-out ${
           isMenuOpen 
             ? 'translate-x-0 opacity-100' 
             : 'translate-x-full opacity-0'
-        } ${themeClasses.menu} rounded-l-3xl shadow-2xl z-50`}
+        } ${themeClasses.menu} rounded-2xl shadow-2xl z-50`}
       >
-        {/* Menu Header with Close Button */}
-        <div className={`flex items-center justify-between p-4 border-b ${themeClasses.header}`}>
-          <h3 className={`text-lg font-semibold ${themeClasses.text}`}>Menu</h3>
-          <button
-            onClick={closeMenu}
-            className={`p-2 rounded-full transition-all duration-200 transform hover:scale-110 focus:outline-none ${themeClasses.button}`}
-            aria-label="Close menu"
-          >
-            <X className="w-5 h-5" />
-          </button>
-        </div>
-
         {/* Menu Content */}
-        <div className="flex flex-col h-full pb-4">
+        <div className="flex flex-col py-2">
           {/* Wallet Section */}
-          <div className={`flex items-center justify-between px-4 py-4 mx-4 mt-4 rounded-xl transition-all duration-200 ${themeClasses.card}`}>
+          <div className={`flex items-center justify-between px-4 py-3 mx-3 my-2 rounded-xl transition-all duration-200 ${themeClasses.card}`}>
             <div className="flex items-center">
               <div className={`p-2 rounded-full mr-3 ${themeClasses.button}`}>
                 <Wallet className="w-5 h-5 text-green-600" />
@@ -79,7 +67,7 @@ const DropdownMenu = ({
                 <p className={`text-xs font-medium ${themeClasses.textSecondary}`}>
                   Wallet
                 </p>
-                <p className={`text-lg font-bold ${themeClasses.text}`}>
+                <p className={`text-sm font-bold ${themeClasses.text}`}>
                   ${walletBalance.toFixed(2)}
                 </p>
               </div>
@@ -87,8 +75,8 @@ const DropdownMenu = ({
           </div>
           
           {/* Menu Items */}
-          <div className="flex-grow px-2 mt-4">
-            <div className="space-y-2">
+          <div className="px-1">
+            <div className="space-y-1">
               <MenuButton
                 icon={User}
                 label="Profile"
@@ -130,10 +118,10 @@ const DropdownMenu = ({
 const MenuButton = ({ icon: Icon, label, onClick, themeClasses }) => (
   <button
     onClick={onClick}
-    className={`w-full flex items-center px-4 py-3 transition-all duration-200 rounded-xl mx-2 group ${themeClasses.text} hover:${themeClasses.card}`}
+    className={`w-full flex items-center px-4 py-2.5 transition-all duration-200 rounded-lg mx-2 group ${themeClasses.text} hover:${themeClasses.card}`}
   >
-    <Icon className="w-5 h-5 mr-3 transition-transform duration-200 group-hover:scale-110" />
-    <span className="font-medium">{label}</span>
+    <Icon className="w-4 h-4 mr-3 transition-transform duration-200 group-hover:scale-110" />
+    <span className="font-medium text-sm">{label}</span>
   </button>
 );
 
