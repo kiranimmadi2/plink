@@ -49,7 +49,7 @@ const DropdownMenu = ({
       {/* Side Menu - slides in from right */}
       <div 
         ref={menuRef}
-        className={`absolute top-0 right-0 h-full w-80 max-w-[85%] transform transition-all duration-300 ease-in-out ${
+        className={`absolute top-0 right-0 h-full w-64 max-w-[65%] transform transition-all duration-300 ease-in-out ${
           isMenuOpen 
             ? 'translate-x-0 opacity-100' 
             : 'translate-x-full opacity-0'
