@@ -449,7 +449,7 @@ const App = () => {
                   >
                     <option value="light">Light</option>
                     <option value="dark">Dark</option>
-                    <option value="ios-glass">iOS Glass</option>
+                    <option value="ios-glass">Transparent</option>
                     <option value="system">System Default</option>
                   </select>
                 </div>
