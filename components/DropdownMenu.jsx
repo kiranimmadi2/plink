@@ -51,15 +51,15 @@ const DropdownMenu = ({
       {/* Side Menu - slides in from right */}
       <div 
         ref={menuRef}
-        className={`fixed top-0 right-0 w-80 h-full transform transition-all duration-500 ease-out ${
+        className={`absolute top-16 right-4 w-56 transform transition-all duration-300 ease-out rounded-2xl ${
           isMenuOpen 
             ? 'translate-x-0 opacity-100' 
             : 'translate-x-full opacity-0'
         } ${
           themeClasses.background.includes('ios-glass')
-            ? 'bg-white/20 backdrop-blur-[80px] border-l border-white/25 shadow-[-25px_0_80px_rgba(0,0,0,0.15)]'
+            ? 'bg-white/25 backdrop-blur-[60px] border border-white/30 shadow-[0_25px_80px_rgba(0,0,0,0.15)] ring-1 ring-white/25'
             : themeClasses.menu
-        } shadow-2xl z-50`}
+        } shadow-2xl z-40 max-w-[65%] sm:max-w-none`}
       >
         {/* Menu Header with Close Button */}
         <div className={`flex items-center justify-between p-6 border-b ${
