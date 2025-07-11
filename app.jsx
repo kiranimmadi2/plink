@@ -282,7 +282,7 @@ const App = () => {
       </div>
       
       {/* Main App Container */}
-      <div className={`relative w-full max-w-sm rounded-3xl shadow-xl overflow-hidden flex flex-col min-h-[calc(100vh-2rem)] max-h-[calc(100vh-2rem)] md:min-h-[600px] md:max-h-[800px] border ${themeClasses.container} z-10`}>
+      <div className={`relative w-full max-w-sm rounded-3xl shadow-xl flex flex-col min-h-[calc(100vh-2rem)] max-h-[calc(100vh-2rem)] md:min-h-[600px] md:max-h-[800px] border ${themeClasses.container} z-10 overflow-hidden`}>
 
         {/* Conditional Rendering for Profile Screen, Settings Screen, or Main App */}
         {showProfileScreen ? (

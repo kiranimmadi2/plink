@@ -56,7 +56,7 @@ const Navbar = ({
       {/* Hamburger Menu - Fixed Right */}
       <button
         onClick={toggleMenu}
-        className={`p-2 rounded-full transition-all duration-300 transform hover:scale-110 focus:outline-none ${themeClasses.button}`}
+        className={`p-2 rounded-full transition-all duration-300 transform hover:scale-110 focus:outline-none z-50 relative ${themeClasses.button}`}
         aria-label={isMenuOpen ? "Close menu" : "Open menu"}
       >
         <div className="relative w-6 h-6">
