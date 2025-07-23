@@ -37,7 +37,8 @@ import { StackNavigationProp } from '@react-navigation/stack';
 
 import { GlassCard, NeonButton, AnimatedInput, LoadingOverlay } from '@/components';
 import { theme } from '@/themes';
-import { authService, validationService } from '@/services';
+import { validationService } from '@/services';
+// Note: Using Firebase auth service from root services folder
 import { AuthStackParamList, LoginCredentials } from '@/types';
 import { stringHelpers } from '@/utils';
 
@@ -120,14 +121,16 @@ export const LoginScreen: React.FC = () => {
     setIsLoading(true);
     
     try {
-      const response = await authService.login(credentials);
+      // Import mock auth service for email/password login
+      const { authService: mockAuthService } = require('@/services');
+      const response = await mockAuthService.login(credentials);
       
       if (response.success) {
         console.log('[LoginScreen] Login successful');
         Alert.alert(
           'Welcome Back!',
           `Hello ${response.user?.name || 'User'}! Login successful.`,
-          [{ text: 'Continue', onPress: () => navigation.replace('Main' as any) }]
+          [{ text: 'Continue', onPress: () => navigation.navigate('Main' as any) }]
         );
       } else {
         console.log('[LoginScreen] Login failed:', response.error);
@@ -166,7 +169,7 @@ export const LoginScreen: React.FC = () => {
       setIsLoading(true);
 
       // Import cross-platform auth service
-      const authService = require('../../services/authService').default;
+      const authService = require('../../../services/authService').default;
       
       // Wait a moment for the service to initialize if needed
       await new Promise(resolve => setTimeout(resolve, 100));
@@ -182,7 +185,7 @@ export const LoginScreen: React.FC = () => {
         Alert.alert(
           'Welcome!',
           `Hello ${userName}! Google sign-in successful.`,
-          [{ text: 'Continue', onPress: () => navigation.replace('Main' as any) }]
+          [{ text: 'Continue', onPress: () => navigation.navigate('Main' as any) }]
         );
       } else {
         throw new Error('Authentication failed');
