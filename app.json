@@ -6,7 +6,7 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "userInterfaceStyle": "dark",
-    "platforms": ["ios", "android", "web"],
+    "platforms": ["android", "web"],
     "splash": {
       "resizeMode": "contain",
       "backgroundColor": "#0A0A0A"
@@ -14,16 +14,29 @@
     "assetBundlePatterns": [
       "**/*"
     ],
-    "ios": {
-      "supportsTablet": false
-    },
     "android": {
       "adaptiveIcon": {
         "backgroundColor": "#0A0A0A"
-      }
+      },
+      "googleServicesFile": "./android/app/google-services.json",
+      "package": "com.supperios"
     },
     "web": {
-      "bundler": "metro"
-    }
+      "bundler": "metro",
+      "config": {
+        "firebase": {
+          "apiKey": "AIzaSyD2uVhZHFHManM-TLc0McOODr8v0Wt7o4U",
+          "authDomain": "supper-8cb60.firebaseapp.com",
+          "projectId": "supper-8cb60",
+          "storageBucket": "supper-8cb60.firebasestorage.app",
+          "messagingSenderId": "936008982768",
+          "appId": "1:936008982768:web:332d1fccff91c0f5e9e235"
+        }
+      }
+    },
+    "plugins": [
+      "@react-native-firebase/app",
+      "@react-native-google-signin/google-signin"
+    ]
   }
 }

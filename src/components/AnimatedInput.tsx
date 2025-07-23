@@ -32,6 +32,7 @@ import Animated, {
   withTiming,
   interpolate,
 } from 'react-native-reanimated';
+import { interpolateColor } from 'react-native-reanimated';
 import * as Haptics from 'expo-haptics';
 import { theme } from '@/themes';
 
@@ -65,16 +66,19 @@ export const AnimatedInput: React.FC<AnimatedInputProps> = ({
 
   const focusAnimation = useSharedValue(0);
   const labelAnimation = useSharedValue(value ? 1 : 0);
+  // Import interpolateColor from react-native-reanimated
+  // (add this to your imports if not already present)
+  // import { interpolateColor } from 'react-native-reanimated';
 
   const animatedContainerStyle = useAnimatedStyle(() => ({
-    borderColor: interpolate(
+    borderColor: interpolateColor(
       focusAnimation.value,
       [0, 1],
       [
-        theme.colors.glass.border as any,
-        theme.colors.neon.blue as any,
+        theme.colors.glass.border,
+        theme.colors.neon.blue,
       ]
-    ),
+    ) as any,
     shadowOpacity: interpolate(focusAnimation.value, [0, 1], [0, 0.3]),
   }));
 
@@ -87,14 +91,6 @@ export const AnimatedInput: React.FC<AnimatedInputProps> = ({
         scale: interpolate(labelAnimation.value, [0, 1], [1, 0.85]),
       },
     ],
-    color: interpolate(
-      focusAnimation.value,
-      [0, 1],
-      [
-        theme.colors.text.secondary as any,
-        theme.colors.neon.blue as any,
-      ]
-    ),
   }));
 
   const handleFocus = () => {

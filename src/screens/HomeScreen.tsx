@@ -10,8 +10,11 @@ import {
     KeyboardAvoidingView,
     SafeAreaView,
     FlatList,
+    Alert,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 import { theme } from '@/themes';
 
 const { width } = Dimensions.get('window');
@@ -23,9 +26,52 @@ const initialMessages = [
 ];
 
 export const HomeScreen: React.FC = () => {
+    const navigation = useNavigation<StackNavigationProp<any>>();
     const [input, setInput] = useState('');
     const [messages, setMessages] = useState(initialMessages);
     const scrollRef = useRef<FlatList>(null);
+
+    // Handle sign out functionality (cross-platform)
+    const handleSignOut = async () => {
+        try {
+            // Import cross-platform auth service
+            const authService = require('../../services/authService').default;
+            
+            // Sign out using the auth service
+            await authService.signOut();
+            
+            console.log('[HomeScreen] User signed out successfully');
+            
+            // Navigate back to Auth flow
+            navigation.reset({
+                index: 0,
+                routes: [{ name: 'Auth' }],
+            });
+            
+        } catch (error) {
+            console.error('[HomeScreen] Sign-Out Error:', error);
+            Alert.alert('Error', 'Failed to sign out. Please try again.');
+        }
+    };
+
+    // Confirm sign out with user
+    const confirmSignOut = () => {
+        Alert.alert(
+            'Sign Out',
+            'Are you sure you want to sign out?',
+            [
+                {
+                    text: 'Cancel',
+                    style: 'cancel',
+                },
+                {
+                    text: 'Sign Out',
+                    style: 'destructive',
+                    onPress: handleSignOut,
+                },
+            ]
+        );
+    };
 
     const handleSend = () => {
         if (!input.trim()) return;
@@ -62,8 +108,8 @@ export const HomeScreen: React.FC = () => {
             {/* Static Navbar */}
             <View style={styles.navbar}>
                 <Text style={styles.logo}>🌐 Connect</Text>
-                <TouchableOpacity style={styles.menuButton}>
-                    <Text style={styles.menuText}>☰</Text>
+                <TouchableOpacity style={styles.menuButton} onPress={confirmSignOut}>
+                    <Text style={styles.menuText}>⚙️</Text>
                 </TouchableOpacity>
             </View>
 

@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "936008982768",
+    "project_id": "supper-8cb60",
+    "storage_bucket": "supper-8cb60.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:936008982768:android:5e145b4a76675a40e9e235",
+        "android_client_info": {
+          "package_name": "com.supperios"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "936008982768-htlfcbthj1crbpbvh13pn75f2jegc9ia.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2uVhZHFHManM-TLc0McOODr8v0Wt7o4U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "936008982768-htlfcbthj1crbpbvh13pn75f2jegc9ia.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:936008982768:android:332d1fccff91c0f5e9e235",
+        "android_client_info": {
+          "package_name": "com.supperplink"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "936008982768-htlfcbthj1crbpbvh13pn75f2jegc9ia.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2uVhZHFHManM-TLc0McOODr8v0Wt7o4U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "936008982768-htlfcbthj1crbpbvh13pn75f2jegc9ia.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

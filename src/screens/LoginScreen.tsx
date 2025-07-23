@@ -146,13 +146,72 @@ export const LoginScreen: React.FC = () => {
     navigation.navigate('ForgotPassword', { email: credentials.email });
   };
 
-  const handleSocialLogin = (provider: string) => {
+  const handleSocialLogin = async (provider: string) => {
     console.log('[LoginScreen] Social login attempted:', provider);
-    Alert.alert(
-      'Social Login',
-      `${stringHelpers.capitalize(provider)} login will be implemented in a future phase.`,
-      [{ text: 'OK' }]
-    );
+    
+    if (provider === 'google') {
+      await handleGoogleSignIn();
+    } else {
+      Alert.alert(
+        'Social Login',
+        `${stringHelpers.capitalize(provider)} login will be implemented in a future phase.`,
+        [{ text: 'OK' }]
+      );
+    }
+  };
+
+  // Handle Google Sign-In with Firebase (Cross-platform)
+  const handleGoogleSignIn = async () => {
+    try {
+      setIsLoading(true);
+
+      // Import cross-platform auth service
+      const authService = require('../../services/authService').default;
+      
+      // Wait a moment for the service to initialize if needed
+      await new Promise(resolve => setTimeout(resolve, 100));
+      
+      // Sign in with Google (works on both web and native)
+      const result = await authService.signInWithGoogle();
+      
+      if (result.success && result.user) {
+        const userName = result.user.displayName || result.user.email?.split('@')[0] || 'User';
+        
+        console.log('[LoginScreen] Google sign-in successful:', result.user.email);
+        
+        Alert.alert(
+          'Welcome!',
+          `Hello ${userName}! Google sign-in successful.`,
+          [{ text: 'Continue', onPress: () => navigation.replace('Main' as any) }]
+        );
+      } else {
+        throw new Error('Authentication failed');
+      }
+      
+    } catch (error: any) {
+      console.error('[LoginScreen] Google Sign-In Error:', error);
+      
+      // Handle different types of errors
+      if (error?.code === 'auth/popup-closed-by-user') {
+        // User closed the popup - don't show error
+        return;
+      } else if (error?.code === 'auth/cancelled-popup-request') {
+        // Multiple popup requests - don't show error
+        return;
+      } else if (error?.code === 'auth/network-request-failed') {
+        Alert.alert('Network Error', 'Please check your internet connection and try again.');
+      } else if (error?.code === 'auth/too-many-requests') {
+        Alert.alert('Too Many Attempts', 'Please wait a moment before trying again.');
+      } else if (error?.code === 'auth/user-disabled') {
+        Alert.alert('Account Disabled', 'This account has been disabled. Please contact support.');
+      } else if (error?.message?.includes('not initialized')) {
+        Alert.alert('Configuration Error', 'Authentication service is still loading. Please wait and try again.');
+      } else {
+        Alert.alert('Sign-In Failed', `Unable to sign in with Google. ${error?.message || 'Please try again.'}`);
+      }
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const navigateToRegister = () => {

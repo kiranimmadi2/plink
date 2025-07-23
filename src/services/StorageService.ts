@@ -78,7 +78,7 @@ export class StorageService {
     try {
       console.log('[StorageService] Getting all keys');
       const keys = await AsyncStorage.getAllKeys();
-      return keys;
+      return keys as string[]; // Type assertion for mutable array
     } catch (error) {
       console.error('[StorageService] Error getting keys:', error);
       return [];
@@ -111,7 +111,7 @@ export class StorageService {
   async multiSet(keyValuePairs: Array<[string, any]>): Promise<boolean> {
     try {
       console.log('[StorageService] Setting multiple items:', keyValuePairs.length);
-      const stringPairs = keyValuePairs.map(([key, value]) => [
+      const stringPairs: [string, string][] = keyValuePairs.map(([key, value]) => [
         key,
         JSON.stringify(value),
       ]);

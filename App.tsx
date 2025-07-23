@@ -12,7 +12,7 @@
  * @phase 1 - Foundation & Authentication UI
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import 'react-native-reanimated';
 
 import { StatusBar } from 'expo-status-bar';
@@ -20,8 +20,13 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { RootNavigator } from '@/navigation/RootNavigator';
 
+// Initialize Firebase and Google Sign-In (cross-platform)
+import './services/authService'; // This will initialize Firebase for the current platform
+
 export default function App() {
   console.log('[App] Application starting...');
+  
+  // Firebase is automatically initialized via the import above
   
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
