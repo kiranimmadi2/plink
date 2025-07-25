@@ -10,6 +10,7 @@ import {
   Animated,
   Image,
 } from 'react-native';
+import { router } from 'expo-router';
 import { X } from 'lucide-react-native';
 import { useMenuModal } from '@/hooks/useModal';
 import { useDrawer } from '@/hooks/useDrawer';
@@ -20,6 +21,7 @@ import MenuModal from '@/components/MenuModal';
 import AnimatedNavbarDrawer from '@/components/AnimatedNavbarDrawer';
 import AnimatedMenuButton from '@/components/AnimatedMenuButton';
 import { useTheme } from '@/context/ThemeContext';
+import { useAuth } from '@/context/AuthContext';
 
 // Enhanced hook for chat functionality with modal state
 function useSimpleChat() {
@@ -85,9 +87,14 @@ const { width, height } = Dimensions.get('window');
 
 export default function HomeScreen() {
   const { theme } = useTheme();
+  const { user, isAuthenticated, logout } = useAuth();
   const chat = useSimpleChat();
   const menuModal = useMenuModal();
   const navbarDrawer = useDrawer(); // New animated drawer hook
+
+  const handleLogout = async () => {
+    await logout();
+  };
 
   return (
     <ScreenLayout>
@@ -117,12 +124,52 @@ export default function HomeScreen() {
           {/* Main Content */}
           <View style={styles.content}>
             <View style={styles.welcomeContainer}>
-              <Text style={[styles.welcomeTitle, { color: theme.colors.text }]}>
-                Welcome to PLINK
-              </Text>
-              <Text style={[styles.welcomeSubtitle, { color: theme.colors.text, opacity: 0.7 }]}>
-                Your global communication hub with beautiful animations
-              </Text>
+              {isAuthenticated && user ? (
+                <>
+                  <Text style={[styles.welcomeTitle, { color: theme.colors.text }]}>
+                    Welcome back, {user.displayName || 'User'}!
+                  </Text>
+                  <Text style={[styles.welcomeSubtitle, { color: theme.colors.text, opacity: 0.7 }]}>
+                    {user.email}
+                  </Text>
+                  
+                  {/* User Actions */}
+                  <View style={styles.testButtonsContainer}>
+                    <TouchableOpacity
+                      style={[styles.testButton, { backgroundColor: '#ef4444' }]}
+                      onPress={handleLogout}
+                    >
+                      <Text style={styles.testButtonText}>Sign Out</Text>
+                    </TouchableOpacity>
+                  </View>
+                </>
+              ) : (
+                <>
+                  <Text style={[styles.welcomeTitle, { color: theme.colors.text }]}>
+                    Welcome to PLINK
+                  </Text>
+                  <Text style={[styles.welcomeSubtitle, { color: theme.colors.text, opacity: 0.7 }]}>
+                    Your global communication hub with beautiful animations
+                  </Text>
+                  
+                  {/* Authentication Buttons */}
+                  <View style={styles.testButtonsContainer}>
+                    <TouchableOpacity
+                      style={[styles.testButton, { backgroundColor: '#3b82f6' }]}
+                      onPress={() => router.push('/auth')}
+                    >
+                      <Text style={styles.testButtonText}>Sign Up / Login</Text>
+                    </TouchableOpacity>
+                    
+                    <TouchableOpacity
+                      style={[styles.testButton, { backgroundColor: '#10b981' }]}
+                      onPress={() => router.push('/login')}
+                    >
+                      <Text style={styles.testButtonText}>Quick Google Login</Text>
+                    </TouchableOpacity>
+                  </View>
+                </>
+              )}
             </View>
           </View>
 
@@ -190,9 +237,12 @@ export default function HomeScreen() {
       <AnimatedNavbarDrawer
         visible={navbarDrawer.isVisible}
         onClose={navbarDrawer.close}
-        userInfo={{
-          name: 'PLINK User',
-          email: 'user@plink.app'
+        userInfo={user ? {
+          name: user.displayName || 'User',
+          email: user.email || 'No email'
+        } : {
+          name: 'Guest User',
+          email: 'Not signed in'
         }}
       />
     </ScreenLayout>
@@ -243,6 +293,27 @@ const styles = StyleSheet.create({
     fontSize: 18,
     textAlign: 'center',
     lineHeight: 24,
+  },
+  testButtonsContainer: {
+    marginTop: 30,
+    gap: 15,
+    width: '100%',
+  },
+  testButton: {
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+    borderRadius: 25,
+    alignItems: 'center',
+    elevation: 3,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+  },
+  testButtonText: {
+    color: '#ffffff',
+    fontSize: 16,
+    fontWeight: '600',
   },
   chatSection: {
     position: 'absolute',

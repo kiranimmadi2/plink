@@ -5,12 +5,16 @@
  * @developer Dhyan Bhandari
  */
 
+// Import polyfills for Firebase to work correctly in React Native
+import 'react-native-url-polyfill/auto';
+
 import { useEffect } from 'react';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useFrameworkReady } from '@/hooks/useFrameworkReady';
 import ThemeProvider from '@/context/ThemeContext';
 import { useTheme } from '@/context/ThemeContext';
+import { AuthProvider } from '@/context/AuthContext';
 import { LinearGradient } from 'expo-linear-gradient';
 import { StyleSheet, View, Animated, Easing, Dimensions } from 'react-native';
 import { useRef } from 'react';
@@ -94,14 +98,18 @@ export default function RootLayout() {
   useFrameworkReady();
 
   return (
-    <ThemeProvider>
-      <AppBackground />
-      <Stack screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="(main-tabs)" />
-        <Stack.Screen name="NotFoundScreen" />
-      </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
+    <AuthProvider>
+      <ThemeProvider>
+        <AppBackground />
+        <Stack screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="(tabs)" />
+          <Stack.Screen name="login" />
+          <Stack.Screen name="auth" />
+          <Stack.Screen name="NotFoundScreen" />
+        </Stack>
+        <StatusBar style="auto" />
+      </ThemeProvider>
+    </AuthProvider>
   );
 }
 

@@ -8,17 +8,13 @@
     "scheme": "plink",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
-    "platforms": ["ios", "android", "web"],
-    "ios": {
-      "supportsTablet": true,
-      "bundleIdentifier": "com.plink.app"
-    },
+    "platforms": ["android", "web"],
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#3b82f6"
       },
-      "package": "com.plink.app"
+      "package": "com.supperplink"
     },
     "web": {
       "bundler": "metro",
@@ -29,6 +25,12 @@
       "expo-router",
       "expo-font",
       "expo-web-browser",
+      [
+        "@react-native-google-signin/google-signin",
+        {
+          "iosUrlScheme": "com.googleusercontent.apps.936008982768-htlfcbthj1crbpbvh13pn75f2jegc9ia"
+        }
+      ],
       [
         "expo-splash-screen",
         {
